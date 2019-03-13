@@ -1,0 +1,11 @@
+export const BtnEndCall = () => require('../../assets/images/btn_endcall.png');
+export const BtnMute = () => require('../../assets/images/btn_mute.png');
+export const BtnSpeaker = () => require('../../assets/images/btn_speaker.png');
+export const BtnSwitchCamera = () => require('../../assets/images/btn_switch_camera.png');
+export const BtnVideo = () => require('../../assets/images/btn_video.png');
+export const EnableCamera = () => require('../../assets/images/enable_camera.png');
+export const DisableCamera = () => require('../../assets/images/disable_camera.png');
+export const EnablePhotoflash = () => require('../../assets/images/enable_photoflash.png');
+export const DisablePhotoflash = () => require('../../assets/images/disable_photoflash.png');
+export const IconMuted = () => require('../../assets/images/icon_muted.png');
+export const IconSpeaker = () => require('../../assets/images/icon_speaker.png');

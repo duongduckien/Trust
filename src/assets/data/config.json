@@ -1,3 +1,14 @@
 {
-    "apiBase": "abc.com"
+    "apiBase": "abc.com",
+    "appId": "40fed2eba392458e8425a96f77d49f4f",
+    "devices": {
+        "iphoneX": {
+            "width": 375,
+            "height": 812
+        },
+        "iphoneXR": {
+            "width": 414,
+            "height": 896
+        }
+    }
 }
