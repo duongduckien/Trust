@@ -10,5 +10,12 @@
             "width": 414,
             "height": 896
         }
+    },
+    "videoEncoderConfig": {
+        "width": 720,
+        "height": 1280,
+        "bitrate": 1200,
+        "frameRate": 15,
+        "orientationMode": 0
     }
 }

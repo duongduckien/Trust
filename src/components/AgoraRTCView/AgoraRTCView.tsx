@@ -80,8 +80,6 @@ export class AgoraRTCView extends Component<IProps, IState> {
 
     componentWillMount() {
 
-        // console.log(Agora);
-
         // Set init config
         const config = {
             appid: configData['appId'],
