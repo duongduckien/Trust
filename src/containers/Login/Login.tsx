@@ -9,8 +9,8 @@ import { Actions } from 'react-native-router-flux';
 import { strings } from '../../utilities/i18n';
 
 // Components
-import { Logo } from '../../components/Logo';
-import { EmailLogin } from '../../components/EmailLogin';
+import Logo from '../../components/Logo';
+import EmailLogin from '../../components/EmailLogin';
 
 // Styles
 import { styleSheet, styles } from './styles';
