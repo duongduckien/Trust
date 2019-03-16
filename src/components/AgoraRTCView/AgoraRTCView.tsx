@@ -39,9 +39,6 @@ if (!Agora) {
 }
 
 const {
-    FPS30,
-    FixedLandscape,
-    Host,
     AudioProfileDefault,
     AudioScenarioDefault,
 } = Agora;
@@ -55,7 +52,19 @@ interface IProps {
     uid: number;
 }
 
-export class AgoraRTCView extends Component<IProps> {
+interface IState {
+    peerIds: any;
+    joinSucceed: boolean;
+    isSpeak: boolean;
+    isMute: boolean;
+    isCameraTorch: boolean;
+    disableVideo: boolean;
+    hideButton: boolean;
+    visible: boolean;
+    selectedUid: any;
+}
+
+export class AgoraRTCView extends Component<IProps, IState> {
 
     state = {
         peerIds: [],
@@ -70,52 +79,64 @@ export class AgoraRTCView extends Component<IProps> {
     };
 
     componentWillMount() {
+
+        // console.log(Agora);
+
+        // Set init config
         const config = {
             appid: configData['appId'],
             channelProfile: this.props.channelProfile,
             videoProfile: this.props.videoProfile,
             clientRole: this.props.clientRole,
             videoEncoderConfig: {
-                width: 360,
-                height: 480,
-                bitrate: 1,
-                frameRate: FPS30,
-                orientationMode: FixedLandscape,
+                width: configData['videoEncoderConfig']['width'],
+                height: configData['videoEncoderConfig']['height'],
+                bitrate: configData['videoEncoderConfig']['bitrate'],
+                frameRate: configData['videoEncoderConfig']['frameRate'],
+                orientationMode: configData['videoEncoderConfig']['orientationMode'],
             },
             audioProfile: AudioProfileDefault,
             audioScenario: AudioScenarioDefault
         };
+
         RtcEngine.on('firstRemoteVideoDecoded', (data: any) => {
-            console.log('[RtcEngine] onFirstRemoteVideoDecoded', data);
+            // console.log('[RtcEngine] onFirstRemoteVideoDecoded', data);
         });
+
         RtcEngine.on('userJoined', (data: any) => {
-            console.log('[RtcEngine] onUserJoined', data);
-            const { peerIds } = this.state;
+            // console.log('[RtcEngine] onUserJoined', data);
+            const peerIds = this.state.peerIds;
+
             if (peerIds.indexOf(data.uid) === -1) {
                 this.setState({
                     peerIds: [...peerIds, data.uid]
                 })
             }
         });
+
         RtcEngine.on('userOffline', (data: any) => {
-            console.log('[RtcEngine] onUserOffline', data);
+            // console.log('[RtcEngine] onUserOffline', data);
             this.setState({
                 peerIds: this.state.peerIds.filter(uid => uid !== data.uid)
             })
         });
+
         RtcEngine.on('joinChannelSuccess', (data: any) => {
-            console.log('[RtcEngine] onJoinChannelSuccess', data);
+            // console.log('[RtcEngine] onJoinChannelSuccess', data);
             RtcEngine.startPreview();
             this.setState({
                 joinSucceed: true
             })
         });
+
         RtcEngine.on('audioVolumeIndication', (data: any) => {
-            console.log('[RtcEngine] onAudioVolumeIndication', data);
+            // console.log('[RtcEngine] onAudioVolumeIndication', data);
         });
+
         RtcEngine.on('clientRoleChanged', (data: any) => {
-            console.log("[RtcEngine] onClientRoleChanged", data);
-        })
+            // console.log("[RtcEngine] onClientRoleChanged", data);
+        });
+
         RtcEngine.on('error', (data: any) => {
             if (data.error === 17) {
                 RtcEngine.leaveChannel().then(() => {
@@ -123,10 +144,10 @@ export class AgoraRTCView extends Component<IProps> {
                     this.props.onCancel(data);
                 });
             }
-        })
-        console.log("[CONFIG]", JSON.stringify(config));
-        console.log("[CONFIG.encoderConfig", config.videoEncoderConfig);
+        });
+        
         RtcEngine.init(config);
+
     }
 
     componentDidMount() {
@@ -155,7 +176,17 @@ export class AgoraRTCView extends Component<IProps> {
     }
 
     switchCamera() {
-        RtcEngine.switchCamera();
+        RtcEngine.switchCamera().then((res: any) => {
+            console.log(res);
+        }).catch((err: any) => {
+            console.log(err);
+        });
+
+        // RtcEngine.setCameraZoomFactor(1.0).then((res: any) => {
+        //     console.log(res);
+        // }).catch((err: any) => {
+        //     console.log(err);
+        // });
     }
 
     toggleAllRemoteAudioStreams() {
@@ -311,11 +342,13 @@ export class AgoraRTCView extends Component<IProps> {
                 style={styleSheet.container}
             >
                 <AgoraView style={styleSheet.localView} showLocalVideo={true} />
+                
                 <View style={styleSheet.absView}>
                     <Text>channelName: {this.props.channelName}, peers: {this.state.peerIds.length}</Text>
                     {this.agoraPeerViews(this.state)}
                     {this.buttonsView(this.state)}
                 </View>
+
                 {this.modalView(this.state)}
             </TouchableOpacity>
         );
