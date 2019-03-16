@@ -17,6 +17,12 @@ import { mainStyles } from '../../styles';
 // Components
 import AgoraRTCView from '../../components/AgoraRTCView';
 
+// Config
+import configData from '../../assets/data/config.json';
+
+// Languages
+import { strings } from '../../utilities/i18n';
+
 interface IProps {
 
 }
@@ -42,7 +48,7 @@ export class HomeScreen extends Component<IProps, IState> {
             channelProfile: 1,
             videoProfile: 40,
             clientRole: 1,
-            uid: 123456,
+            uid: configData['uid'],
             swapWidthAndHeight: true,
             channelName: 'channelTest'
         };
@@ -145,7 +151,7 @@ export class HomeScreen extends Component<IProps, IState> {
                     style={styleSheet.button}
                     onPress={() => this.joinChannel()}
                 >
-                    <Text style={{ color: "#fff" }}>join room</Text>
+                    <Text style={{ color: "#fff" }}>{strings('VIDEO_CALL')}</Text>
                 </TouchableOpacity>
             </View>
         );

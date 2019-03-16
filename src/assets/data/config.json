@@ -17,5 +17,6 @@
         "bitrate": 1200,
         "frameRate": 15,
         "orientationMode": 0
-    }
+    },
+    "uid": 2
 }
