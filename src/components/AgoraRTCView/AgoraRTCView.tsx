@@ -19,7 +19,7 @@ import {
     DisablePhotoflash,
     IconMuted,
     IconSpeaker,
-} from '../Button/Button';
+} from '../Images/Images';
 
 // Styles
 import { styleSheet, styles } from './styles';

@@ -29,6 +29,10 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  // Delay splash screen
+  [NSThread sleepForTimeInterval:3.0];
+  
   return YES;
 }
 
