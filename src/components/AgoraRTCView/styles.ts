@@ -44,6 +44,18 @@ export const styleSheet = StyleSheet.create({
         backgroundColor: '#fff', 
         justifyContent: 'center', 
         alignItems: 'center',
+    },
+    cancel: { 
+        alignSelf: 'center', 
+        marginBottom: -10,
+    },
+    cancelImg: { 
+        width: 60, 
+        height: 60,
+    },
+    flashImg: { 
+        width: 40, 
+        height: 40,
     }
 });
 

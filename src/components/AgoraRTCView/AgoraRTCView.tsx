@@ -33,11 +33,9 @@ import configData from '../../assets/data/config.json';
 const helper = new Helper();
 
 const { Agora } = NativeModules;
-
 if (!Agora) {
-    throw new Error("Agora load failed in react-native, please check ur compiler environments");
+    throw new Error("Agora load failed in react-native");
 }
-
 const {
     AudioProfileDefault,
     AudioScenarioDefault,
@@ -173,18 +171,12 @@ export class AgoraRTCView extends Component<IProps, IState> {
         this.props.onCancel();
     }
 
-    switchCamera() {
-        RtcEngine.switchCamera().then((res: any) => {
-            console.log(res);
-        }).catch((err: any) => {
-            console.log(err);
-        });
-
-        // RtcEngine.setCameraZoomFactor(1.0).then((res: any) => {
-        //     console.log(res);
-        // }).catch((err: any) => {
-        //     console.log(err);
-        // });
+    async switchCamera() {
+        try {
+            await RtcEngine.switchCamera();
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     toggleAllRemoteAudioStreams() {
@@ -206,69 +198,80 @@ export class AgoraRTCView extends Component<IProps, IState> {
     toggleCameraTorch() {
         this.setState({
             isCameraTorch: !this.state.isCameraTorch
-        }, () => {
-            RtcEngine.setCameraTorchOn(this.state.isCameraTorch).then((res: any) => {
-                console.log('setCameraTorch', res);
-            })
+        }, async () => {
+            try {
+                await RtcEngine.setCameraTorchOn(this.state.isCameraTorch);
+            } catch (e) {
+                console.log(e);
+            }
         })
     }
 
     toggleVideo() {
         this.setState({
-            disableVideo: !this.state.disableVideo
+            disableVideo: !this.state.disableVideo,
         }, () => {
             this.state.disableVideo ? RtcEngine.enableVideo() : RtcEngine.disableVideo()
         });
     }
 
+    /**
+     * Function show or hide buttons
+     */
     toggleHideButtons() {
         this.setState({
-            hideButton: !this.state.hideButton
-        })
+            hideButton: !this.state.hideButton,
+        });
     }
 
     onPressVideo(uid: any) {
         this.setState({
-            selectedUid: uid
+            selectedUid: uid,
         }, () => {
             this.setState({
-                visible: true
-            })
-        })
+                visible: true,
+            });
+        });
     }
 
+    
     buttonsView(state: any) {
         if (!state.hideButton) {
             return (
                 <View>
                     <OperateButton
-                        style={{ alignSelf: 'center', marginBottom: -10 }}
-                        onPress={this.handleCancel}
-                        imgStyle={{ width: 60, height: 60 }}
+                        style={styleSheet.cancel}
+                        onPress={() => this.handleCancel()}
+                        imgStyle={styleSheet.cancelImg}
                         source={BtnEndCall()}
                     />
+
                     <View style={styleSheet.bottomView}>
                         <OperateButton
-                            onPress={this.toggleCameraTorch}
-                            imgStyle={{ width: 40, height: 40 }}
+                            onPress={() => this.toggleCameraTorch()}
+                            imgStyle={styleSheet.flashImg}
                             source={state.isCameraTorch ? EnablePhotoflash() : DisablePhotoflash()}
                         />
+
                         <OperateButton
-                            onPress={this.toggleVideo}
+                            onPress={() => this.toggleVideo()}
                             source={state.disableVideo ? EnableCamera() : DisableCamera()}
                         />
                     </View>
+
                     <View style={styleSheet.bottomView}>
                         <OperateButton
-                            onPress={this.toggleAllRemoteAudioStreams}
+                            onPress={() => this.toggleAllRemoteAudioStreams()}
                             source={state.isMute ? IconMuted() : BtnMute()}
                         />
+
                         <OperateButton
-                            onPress={this.switchCamera}
+                            onPress={() => this.switchCamera()}
                             source={BtnSwitchCamera()}
                         />
+
                         <OperateButton
-                            onPress={this.toggleSpeakerPhone}
+                            onPress={() => this.toggleSpeakerPhone()}
                             source={!state.isSpeaker ? IconSpeaker() : BtnSpeaker()}
                         />
                     </View>
@@ -277,7 +280,7 @@ export class AgoraRTCView extends Component<IProps, IState> {
         }
     }
 
-    agoraPeerViews = (state: any) => {
+    agoraPeerViews(state: any) {
         return (state.visible ?
             <View style={styleSheet.videoView} /> :
             <View style={styleSheet.videoView}>
@@ -336,7 +339,7 @@ export class AgoraRTCView extends Component<IProps, IState> {
         return (
             <TouchableOpacity
                 activeOpacity={1}
-                onPress={this.toggleHideButtons}
+                onPress={() => this.toggleHideButtons()}
                 style={styleSheet.container}
             >
                 <AgoraView style={styleSheet.localView} showLocalVideo={true} />
