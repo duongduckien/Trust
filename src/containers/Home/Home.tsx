@@ -38,7 +38,7 @@ export class HomeScreen extends Component<IProps, IState> {
         super(props);
         this.state = {
             showLive: false,
-            error: undefined,
+            error: '',
             channelProfile: 1,
             videoProfile: 40,
             clientRole: 1,
@@ -55,16 +55,16 @@ export class HomeScreen extends Component<IProps, IState> {
     }
 
     onCancel(error: any) {
+        console.log(error);
         this.setState({
             showLive: false,
-            error: JSON.stringify(error),
+            error: error ? JSON.stringify(error) : '',
         });
     }
 
     render() {
 
         if (this.state.showLive) {
-            console.log('channelName', this.state.channelName);
             return (
                 <AgoraRTCView
                     channelProfile={this.state.channelProfile}
@@ -72,7 +72,7 @@ export class HomeScreen extends Component<IProps, IState> {
                     videoProfile={this.state.videoProfile}
                     clientRole={this.state.clientRole}
                     uid={this.state.uid}
-                    onCancel={this.onCancel}
+                    onCancel={(err) => this.onCancel(err)}
                 ></AgoraRTCView>
             );
         }

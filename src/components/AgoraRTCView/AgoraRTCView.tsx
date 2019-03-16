@@ -46,7 +46,7 @@ interface IProps {
     channelName: string;
     videoProfile: number;
     clientRole: number;
-    onCancel: Function;
+    onCancel(error?: any): any;
     uid: number;
 }
 
