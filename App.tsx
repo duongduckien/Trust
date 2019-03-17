@@ -13,6 +13,9 @@ import rootSaga from './src/sagas/rootSaga';
 import HomeScreen from './src/containers/Home';
 import LoginScreen from './src/containers/Login';
 
+// Components
+import Loading from './src/components/Loading';
+
 // Config
 import config from './src/assets/data/config.json';
 
@@ -51,6 +54,8 @@ export default class App extends Component<IProps, IState> {
         console.disableYellowBox = true;
         return (
             <Provider store={store}>
+                <Loading />
+
                 <Router>
                     <Scene key="root">
                         <Scene

@@ -24,7 +24,8 @@ const helper = new Helper();
 
 interface IProps {
     actions: {
-        login: any
+        login: any;
+        common: any;
     }
 }
 
@@ -41,6 +42,7 @@ export class LoginScreen extends Component<IProps, IState> {
     loginEmail(params: any) {
         console.log(params);
         // helper.showAlert('warning', strings('LOGIN_FAILED'));
+        // this.props.actions.common.showLoading(true);
     }
 
     render() {
