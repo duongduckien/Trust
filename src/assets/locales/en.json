@@ -6,5 +6,9 @@
     "LOGIN_FAILED": "Login failed!",
     "ERROR": "Error",
     "SUCCESS": "Success",
-    "WARNING": "Warning"
+    "WARNING": "Warning",
+    "EMAIL_REQUIRED": "Email is required!",
+    "EMAIL_FORMAT": "Email format is invalid!",
+    "PASSWORD_REQUIRED": "Password is required!",
+    "EMAIL_OR_PASSWORD_INCORRECT": "Email or Password is incorrect!"
 }

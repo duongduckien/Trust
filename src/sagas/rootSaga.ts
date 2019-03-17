@@ -1,9 +1,11 @@
 import { all } from 'redux-saga/effects';
-import { watchShowLoading } from './common.saga';
+import commonSaga from './common.saga';
+import loginSaga from './login.saga';
 
 function* rootSaga() {
     yield all([
-        watchShowLoading(),
+        ...commonSaga,
+        ...loginSaga,
     ])
 }
 

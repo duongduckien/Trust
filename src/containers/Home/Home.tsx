@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { View, TextInput, Platform, TouchableOpacity } from 'react-native';
-import { WebView } from 'react-native';
-import Config from 'react-native-config';
 import { Container, Content, Text, Item, Input } from 'native-base';
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';

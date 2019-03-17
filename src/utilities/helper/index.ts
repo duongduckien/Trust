@@ -97,4 +97,12 @@ export class Helper {
 
     }
 
+    /**
+     * Function trim space of string
+     * @param  {string} str
+     */
+    trimStr(str: string) {
+        return str.trim();
+    }
+
 }

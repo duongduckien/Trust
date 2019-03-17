@@ -134,6 +134,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-firebase')
     compile project(':react-native-google-signin')
     compile project(':react-native-i18n')
     compile project(':react-native-fbsdk')

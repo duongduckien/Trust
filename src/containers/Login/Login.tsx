@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, TextInput, Platform, TouchableOpacity } from 'react-native';
 import { Container, Content, Text, Item, Input } from 'native-base';
 import { Button } from 'react-native-elements';
-import Config from 'react-native-config';
 import { Actions } from 'react-native-router-flux';
 
 // Languages
@@ -19,8 +18,10 @@ import { mainStyles } from '../../styles';
 
 // Utilities
 import { Helper } from '../../utilities/helper';
+import { Validation } from '../../utilities/validation';
 
 const helper = new Helper();
+const validation = new Validation();
 
 interface IProps {
     actions: {
@@ -40,9 +41,22 @@ export class LoginScreen extends Component<IProps, IState> {
     }
 
     loginEmail(params: any) {
-        console.log(params);
-        // helper.showAlert('warning', strings('LOGIN_FAILED'));
-        // this.props.actions.common.showLoading(true);
+
+        // params.email = 'duongduckien7590@gmail.com',
+        // params.password = '@abc@123';
+
+        const rules = validation.loginValidations;
+        const emailValidation = validation.validate(rules, 'email', helper.trimStr(params.email));
+        const passwordValidation = validation.validate(rules, 'password', helper.trimStr(params.password));
+
+        if (emailValidation.isErr) {
+            helper.showAlert('warning', emailValidation.msgErr);
+        } else if (passwordValidation.isErr) {
+            helper.showAlert('warning', passwordValidation.msgErr);
+        } else {
+            this.props.actions.login.login(params);
+        }
+
     }
 
     render() {

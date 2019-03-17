@@ -19,6 +19,10 @@ import Loading from './src/components/Loading';
 // Config
 import config from './src/assets/data/config.json';
 
+// Services
+import { APIService } from './src/services/api';
+const apiService = new APIService();
+
 // Create store
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));
@@ -46,8 +50,14 @@ export default class App extends Component<IProps, IState> {
 
     }
 
-    componentDidMount() {
-
+    async componentDidMount() {
+        // await apiService.logout();
+        try {
+            await apiService.isLogged();
+            this.setState({ logged: true });
+        } catch (e) {
+            this.setState({ logged: false });
+        }
     }
 
     render() {

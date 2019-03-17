@@ -17,3 +17,9 @@ export function* showLoading(action: any) {
 export function* watchShowLoading() {
     yield takeEvery(types.SHOW_LOADING, showLoading);
 }
+
+const commonSaga = [
+    fork(watchShowLoading),
+];
+
+export default commonSaga;
