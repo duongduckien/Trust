@@ -18,5 +18,8 @@
         "frameRate": 15,
         "orientationMode": 0
     },
-    "uid": 1
+    "uid": 1,
+    "alert": {
+        "position": "top"
+    }
 }

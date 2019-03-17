@@ -2,5 +2,9 @@
     "VIDEO_CALL": "Video call",
     "EMAIL_PLACEHOLDER": "Email",
     "PASSWORD_PLACEHOLDER": "Password",
-    "BTN_SIGNIN_EMAIL": "Signin"
+    "BTN_SIGNIN_EMAIL": "Sign in",
+    "LOGIN_FAILED": "Login failed!",
+    "ERROR": "Error",
+    "SUCCESS": "Success",
+    "WARNING": "Warning"
 }

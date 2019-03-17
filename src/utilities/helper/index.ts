@@ -1,10 +1,17 @@
 import { Platform } from 'react-native';
+import { showMessage, hideMessage } from 'react-native-flash-message';
+
+// Languages
+import { strings } from '../../utilities/i18n';
 
 // Config
 import config from '../../assets/data/config.json';
 
 // Styles
 import { dimensions } from '../../styles';
+
+// Styles
+import { colors } from '../../styles';
 
 export class Helper {
 
@@ -34,6 +41,60 @@ export class Helper {
             ((dimensions.fullHeight === height && dimensions.fullWidth === width) ||
             (dimensions.fullHeight === width && dimensions.fullWidth === height))
         );
+    }
+
+    /**
+     * Function show alert
+     * @param  {string} type
+     * @param  {string} msg
+     */
+    showAlert(type: string, msg: string) {
+
+        switch (type) {
+            case 'success': {
+
+                showMessage({
+                    message: strings('SUCCESS'),
+                    description: msg,
+                    backgroundColor: colors.success,
+                    color: colors.textWhite,
+                    icon: 'success'
+                });
+
+                break;
+
+            }
+            case 'warning': {
+                
+                showMessage({
+                    message: strings('WARNING'),
+                    description: msg,
+                    backgroundColor: colors.warning,
+                    color: colors.textBlack,
+                    icon: 'warning'
+                });
+                
+                break;
+
+            }
+            case 'error': {
+                
+                showMessage({
+                    message: strings('ERROR'),
+                    description: msg,
+                    backgroundColor: colors.error,
+                    color: colors.textWhite,
+                    icon: 'danger'
+                });
+                
+                break;
+
+            }
+            default: {
+                break;
+            }
+        }
+
     }
 
 }

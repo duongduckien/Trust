@@ -59,6 +59,7 @@ export class EmailLogin extends Component<Props, State> {
                     fontSize={mainStyles.btnLogin.fontSize}
                     buttonStyle={styleSheet.btnStyleAccess}
                     fontWeight={styles.btnEmail.fontWeight}
+                    textStyle={styleSheet.btnEmail}
                 />
             </View>
         );

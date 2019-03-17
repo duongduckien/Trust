@@ -9,14 +9,18 @@ export const styleSheet = StyleSheet.create({
     },
     inputField: {
         fontSize: 15,
-        fontFamily: mainFont
-    }
+        fontFamily: mainFont,
+    },
+    btnEmail: {
+        fontFamily: mainFont,
+        textTransform: 'uppercase',
+    },
 });
 
 export const styles = {
     btnEmail: {
         color: '#fff',
-        backgroundColor: colors.primary,
+        backgroundColor: colors.red,
         fontWeight: 'bold'
     }
 }

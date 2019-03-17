@@ -69,6 +69,10 @@ export default class App extends Component<IProps, IState> {
                         />
                     </Scene>
                 </Router>
+
+                <FlashMessage 
+                    position={config['alert']['position']}
+                />
             </Provider>
         );
     }
