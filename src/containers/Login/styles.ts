@@ -5,49 +5,21 @@ export const styleSheet = StyleSheet.create({
     loginView: {
         flex: 1,
         flexDirection:'column',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
+        backgroundColor: '#ececec',
     },
     logo: {
         width: '80%',
-        marginTop: '20%',
+        marginTop: '50%',
     },
-    signInContent: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 30,
-        flex: 1,
-        flexDirection: 'row',
-    },
-    registerTxt: {
-        color: colors.primary,
-        paddingLeft: 10,
-        fontWeight: 'bold',
-        fontSize: 14
-    },
-    dontHaveAccount: {
-        fontSize: 13
-    },
-    orContent: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        marginTop: 15,
-    },
-    orContentMid: {
-        width: 50,
-        height: 40,
-        justifyContent: 'center',
+    logoView: {
+        width: '50%',
         alignItems: 'center',
     },
-    orContentText: {
-        color: '#6d6d6d',
-    },
-    orContentStraight: {
-        width: 50,
-        height: 20,
-        borderBottomColor: '#6d6d6d',
-        borderBottomWidth: 1,
+    form: {
+        width: '80%',
+        marginTop: '5%',
     }
 });
 

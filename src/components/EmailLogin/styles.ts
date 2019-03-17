@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../../styles';
+import { colors, mainFont } from '../../styles';
 
 export const styleSheet = StyleSheet.create({
     btnStyleAccess: {
@@ -9,6 +9,7 @@ export const styleSheet = StyleSheet.create({
     },
     inputField: {
         fontSize: 15,
+        fontFamily: mainFont
     }
 });
 

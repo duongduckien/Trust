@@ -33,7 +33,13 @@
   // Delay splash screen
   [NSThread sleepForTimeInterval:3.0];
   
+  [[UIApplication sharedApplication] setStatusBarHidden:NO];
+  
   return YES;
+}
+
+- (BOOL)prefersStatusBarHidden {
+  return NO;
 }
 
 @end

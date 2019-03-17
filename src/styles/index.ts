@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import { Fonts } from '../utilities/fonts';
 
 export const dimensions = {
     fullHeight: Dimensions.get('window').height,
@@ -6,7 +7,7 @@ export const dimensions = {
 }
 
 export const colors = {
-    primary: '#0f82a9',
+    primary: '#3f7aa7',
     facebook: '#4267A6',
     google: '#db4437',
     linkedin: '#283e4a',
@@ -19,7 +20,7 @@ export const colors = {
 
 export const mainStyles = {
     btnLogin: {
-        borderRadius: 10,
+        borderRadius: 5,
         fontSize: 14,
     },
     btnViewLogin: {
@@ -30,3 +31,5 @@ export const mainStyles = {
         padding: 0,
     },
 }
+
+export const mainFont = Fonts.RobotoCondensedRegular;

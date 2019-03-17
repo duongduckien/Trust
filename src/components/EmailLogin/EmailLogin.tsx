@@ -8,10 +8,7 @@ import { strings } from '../../utilities/i18n';
 
 // Styles
 import { styleSheet, styles } from './styles';
-import { mainStyles } from '../../styles';
-
-// Interfaces
-import { LoginData } from '../../interfaces/Login';
+import { mainStyles, colors } from '../../styles';
 
 interface Props {
     loginEmail?: any;
@@ -24,7 +21,7 @@ interface State {
 
 export class EmailLogin extends Component<Props, State> {
 
-    public state: LoginData = {
+    state = {
         email: '',
         password: ''
     }

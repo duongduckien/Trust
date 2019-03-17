@@ -46,15 +46,18 @@ export class LoginScreen extends Component<IProps, IState> {
         return (
             <Container>
                 <View style={styleSheet.loginView}>
-                    <Logo
-                        image={LogoImage()}
-                        style={styleSheet.logo}
-                    />
-                    <Content>
+                    <View style={styleSheet.logoView}>
+                        <Logo
+                            image={LogoImage()}
+                            style={styleSheet.logo}
+                        />
+                    </View>
+
+                    <View style={styleSheet.form}>
                         <EmailLogin
                             loginEmail={this.loginEmail.bind(this)}
                         />
-                    </Content>
+                    </View>
                 </View>
             </Container>
         );

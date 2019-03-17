@@ -11,6 +11,7 @@ import rootSaga from './src/sagas/rootSaga';
 
 // Screens
 import HomeScreen from './src/containers/Home';
+import LoginScreen from './src/containers/Login';
 
 // Config
 import config from './src/assets/data/config.json';
@@ -20,15 +21,19 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(rootSaga);
 
-interface Props {
+interface IProps {
 
 }
 
-interface State {
+interface IState {
     logged: boolean;
 }
 
-export default class App extends Component<Props, State> {
+export default class App extends Component<IProps, IState> {
+
+    state = {
+        logged: false,
+    }
 
     constructor(props: any) {
         super(props);
@@ -49,10 +54,17 @@ export default class App extends Component<Props, State> {
                 <Router>
                     <Scene key="root">
                         <Scene
+                            key="login"
+                            component={LoginScreen}
+                            initial={!this.state.logged}
+                            hideNavBar={true}
+                        />
+
+                        <Scene
                             key="home"
                             component={HomeScreen}
                             title="Home"
-                            initial={true}
+                            initial={this.state.logged}
                             hideNavBar={true}
                         />
                     </Scene>
