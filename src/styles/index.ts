@@ -32,6 +32,10 @@ export const mainStyles = {
         height: 45,
         padding: 0,
     },
+    drawer: {
+        width: 300,
+        position: 'left' as 'left'
+    },
 }
 
 export const mainFont = Fonts.RobotoCondensedRegular;

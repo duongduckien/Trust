@@ -693,6 +693,14 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.0.tgz#4c48fed958d6dcf9487195a0ef6456d5f6e0163a"
   integrity sha512-eItQyV43bj4rR3JPV0Skpl1SncRCdziTEK9/v8VwXmV6d/qOUO8/EuWeHBbCZcsfSHfzI5UyMJLCSXtxxznyZg==
 
+"@types/react-native-drawer@^2.5.2":
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/@types/react-native-drawer/-/react-native-drawer-2.5.2.tgz#b33d3bf7a64fb95c29e3811a3fae1e64ea45a005"
+  integrity sha512-G1WQV2jcVZVpk4/XDsqPKv9lejWNT/KcUfUQn2hY0/eXdnk25b4tNkUSE9zPhClAHK8yTx7W4lAHmZntngSnUA==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
+
 "@types/react-native-i18n@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/react-native-i18n/-/react-native-i18n-2.0.0.tgz#2df92b3392d813b39530bd126aad429eedc9c3de"
@@ -5307,7 +5315,7 @@ react-native-drawer-layout@1.3.2:
   dependencies:
     react-native-dismiss-keyboard "1.0.0"
 
-react-native-drawer@2.5.1, react-native-drawer@^2.5.1:
+react-native-drawer@2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/react-native-drawer/-/react-native-drawer-2.5.1.tgz#08b9314184f48c724f1b467f8859797369798654"
   integrity sha512-cxcQNbSWy5sbGi7anSVp6EDr6JarOBMY9lbFOeLFeVYbONiudoqRKbgEsSDgSw3/LFCLvUXK5zdjXCOedeytxQ==

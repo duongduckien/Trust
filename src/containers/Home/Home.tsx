@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, TextInput, Platform, TouchableOpacity } from 'react-native';
 import { Container, Content, Text, Item, Input } from 'native-base';
-import { LoginManager, AccessToken } from 'react-native-fbsdk';
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -150,6 +149,13 @@ export class HomeScreen extends Component<IProps, IState> {
                     onPress={() => this.joinChannel()}
                 >
                     <Text style={{ color: "#fff" }}>{strings('VIDEO_CALL')}</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    style={styleSheet.button}
+                    onPress={() => Actions.drawerOpen()}
+                >
+                    <Text style={{ color: "#fff" }}>Open Draw</Text>
                 </TouchableOpacity>
             </View>
         );

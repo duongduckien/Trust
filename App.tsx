@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Scene, Actions } from 'react-native-router-flux';
+import { Router, Scene, Actions, Drawer } from 'react-native-router-flux';
 import FlashMessage from 'react-native-flash-message';
 
 //Redux
@@ -15,6 +15,10 @@ import LoginScreen from './src/containers/Login';
 
 // Components
 import Loading from './src/components/Loading';
+import SideMenu from './src/components/SideMenu';
+
+// Styles
+import { mainStyles } from './src/styles';
 
 // Config
 import config from './src/assets/data/config.json';
@@ -67,28 +71,37 @@ export default class App extends Component<IProps, IState> {
                 <Loading />
 
                 <Router>
-                    <Scene key="root">
-                        <Scene
-                            key="login"
-                            component={LoginScreen}
-                            initial={!this.state.logged}
-                            hideNavBar={true}
-                        />
+                    <Scene
+                        key="drawer"
+                        contentComponent={SideMenu}
+                        drawerWidth={mainStyles.drawer.width}
+                        drawer
+                        initial 
+                        drawerPosition={mainStyles.drawer.position}
+                    >
+                        <Scene key="root">
+                            <Scene
+                                key="login"
+                                component={LoginScreen}
+                                initial={!this.state.logged}
+                                hideNavBar={true}
+                            />
 
-                        <Scene
-                            key="home"
-                            component={HomeScreen}
-                            title="Home"
-                            initial={this.state.logged}
-                            hideNavBar={true}
-                        />
+                            <Scene
+                                key="home"
+                                component={HomeScreen}
+                                title="Home"
+                                initial={this.state.logged}
+                                hideNavBar={true}
+                            />
+                        </Scene>
                     </Scene>
                 </Router>
 
-                <FlashMessage 
+                <FlashMessage
                     position={config['alert']['position']}
                 />
-            </Provider>
+            </Provider >
         );
     }
 
