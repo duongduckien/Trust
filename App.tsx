@@ -16,6 +16,7 @@ import LoginScreen from './src/containers/Login';
 // Components
 import Loading from './src/components/Loading';
 import SideMenu from './src/components/SideMenu';
+import MenuButton from './src/components/MenuButton';
 
 // Styles
 import { mainStyles } from './src/styles';
@@ -64,6 +65,12 @@ export default class App extends Component<IProps, IState> {
         }
     }
 
+    renderMenuButton() {
+        return (
+            <MenuButton/>
+        );
+    };
+
     render() {
         console.disableYellowBox = true;
         return (
@@ -92,7 +99,8 @@ export default class App extends Component<IProps, IState> {
                                 component={HomeScreen}
                                 title="Home"
                                 initial={this.state.logged}
-                                hideNavBar={true}
+                                hideNavBar={false}
+                                renderLeftButton={this.renderMenuButton}
                             />
                         </Scene>
                     </Scene>
