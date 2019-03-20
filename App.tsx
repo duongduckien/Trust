@@ -17,6 +17,7 @@ import LoginScreen from './src/containers/Login';
 import Loading from './src/components/Loading';
 import SideMenu from './src/components/SideMenu';
 import MenuButton from './src/components/MenuButton';
+import Statusbar from './src/components/Statusbar';
 
 // Styles
 import { mainStyles } from './src/styles';
@@ -77,6 +78,8 @@ export default class App extends Component<IProps, IState> {
             <Provider store={store}>
                 <Loading />
 
+                <Statusbar />
+
                 <Router>
                     <Scene
                         key="drawer"
@@ -95,6 +98,7 @@ export default class App extends Component<IProps, IState> {
                             />
 
                             <Scene
+                                navigationBarStyle={mainStyles.navigationBar}
                                 key="home"
                                 component={HomeScreen}
                                 title="Home"

@@ -8,6 +8,7 @@ export const dimensions = {
 
 export const colors = {
     primary: '#3f7aa7',
+    seconds: '#4a5568',
     red: '#cf1022',
     green: '#0b8011',
     facebook: '#4267A6',
@@ -35,6 +36,9 @@ export const mainStyles = {
     drawer: {
         width: 300,
         position: 'left' as 'left'
+    },
+    navigationBar: {
+        backgroundColor: colors.seconds,
     },
 }
 

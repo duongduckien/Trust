@@ -3,9 +3,9 @@ import { colors, mainFont } from '../../styles';
 
 export const styleSheet = StyleSheet.create({
     icon: {
-        color: colors.primary,
+        color: '#aeb2ba',
         paddingLeft: 10,
-        fontSize: 30
+        fontSize: 25
     },
 });
 
