@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, StatusBar } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 
@@ -21,10 +21,14 @@ export class MenuButton extends Component<IProps, IState> {
         super(props);
     }
 
+    handleOpenSideBar() {
+        Actions.drawerOpen();
+    }
+
     render() {
         return (
             <TouchableOpacity
-                onPress={() => Actions.drawerOpen()}
+                onPress={() => this.handleOpenSideBar()}
             >
                 <Icon
                     name='bars'

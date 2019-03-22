@@ -17,8 +17,9 @@ export const colors = {
     success: '#28a745',
     error: '#dc3545',
     warning: '#ffc107',
-    textWhite: '#fff',
-    textBlack: '#000'
+    textWhite: '#aeb2ba',
+    textBlack: '#000',
+    bgWhite: '#dad8d9',
 }
 
 export const mainStyles = {
@@ -39,6 +40,9 @@ export const mainStyles = {
     },
     navigationBar: {
         backgroundColor: colors.seconds,
+    },
+    titleHeader: {
+        color: colors.textWhite,
     },
 }
 

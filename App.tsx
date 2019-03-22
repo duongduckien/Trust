@@ -81,10 +81,8 @@ export default class App extends Component<IProps, IState> {
                 <Statusbar />
 
                 <Router>
-                    <Scene
-                        key="drawer"
+                    <Drawer
                         contentComponent={SideMenu}
-                        drawerWidth={mainStyles.drawer.width}
                         drawer
                         initial 
                         drawerPosition={mainStyles.drawer.position}
@@ -107,7 +105,7 @@ export default class App extends Component<IProps, IState> {
                                 renderLeftButton={this.renderMenuButton}
                             />
                         </Scene>
-                    </Scene>
+                    </Drawer>
                 </Router>
 
                 <FlashMessage

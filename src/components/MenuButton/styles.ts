@@ -3,7 +3,7 @@ import { colors, mainFont } from '../../styles';
 
 export const styleSheet = StyleSheet.create({
     icon: {
-        color: '#aeb2ba',
+        color: colors.textWhite,
         paddingLeft: 10,
         fontSize: 25
     },
