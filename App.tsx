@@ -103,6 +103,7 @@ export default class App extends Component<IProps, IState> {
                                 initial={this.state.logged}
                                 hideNavBar={false}
                                 renderLeftButton={this.renderMenuButton}
+                                titleStyle={mainStyles.titleHeader}
                             />
                         </Scene>
                     </Drawer>
