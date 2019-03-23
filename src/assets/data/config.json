@@ -1,4 +1,5 @@
 {
+    "env": "dev",
     "apiBase": "abc.com",
     "appId": "40fed2eba392458e8425a96f77d49f4f",
     "devices": {

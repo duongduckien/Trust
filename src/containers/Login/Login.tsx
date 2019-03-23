@@ -16,6 +16,9 @@ import { LogoImage } from '../../components/Images/Images';
 import { styleSheet, styles } from './styles';
 import { mainStyles } from '../../styles';
 
+// Config
+import config from '../../assets/data/config.json';
+
 // Utilities
 import { Helper } from '../../utilities/helper';
 import { Validation } from '../../utilities/validation';
@@ -42,8 +45,10 @@ export class LoginScreen extends Component<IProps, IState> {
 
     loginEmail(params: any) {
 
-        // params.email = 'duongduckien7590@gmail.com',
-        // params.password = '@abc@123';
+        if (config['env'] === 'dev') {
+            params.email = 'duongduckien7590@gmail.com',
+            params.password = '@abc@123';
+        }
 
         const rules = validation.loginValidations;
         const emailValidation = validation.validate(rules, 'email', helper.trimStr(params.email));

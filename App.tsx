@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Scene, Actions, Drawer } from 'react-native-router-flux';
+import { Router, Scene, Drawer } from 'react-native-router-flux';
 import FlashMessage from 'react-native-flash-message';
 
 //Redux
@@ -29,6 +29,10 @@ import config from './src/assets/data/config.json';
 import { APIService } from './src/services/api';
 const apiService = new APIService();
 
+// Utilities
+import { Storage } from './src/utilities/storage';
+const storage = new Storage();
+
 // Create store
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));
@@ -57,7 +61,6 @@ export default class App extends Component<IProps, IState> {
     }
 
     async componentDidMount() {
-        // await apiService.logout();
         try {
             await apiService.isLogged();
             this.setState({ logged: true });

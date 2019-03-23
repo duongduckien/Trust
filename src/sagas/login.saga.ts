@@ -9,9 +9,11 @@ import { strings } from '../utilities/i18n';
 
 // Utilities
 import { Helper } from '../utilities/helper';
+import { Storage } from '../utilities/storage';
 
 const helper = new Helper();
 const api = new APIService();
+const storage = new Storage();
 
 export function* login(action: any) {
 
@@ -21,6 +23,7 @@ export function* login(action: any) {
         const params = action.payload.items;
         const data = yield call(api.login, params);
         console.log(data);
+        storage.setItem('userData', JSON.stringify(data.user._user));
         yield put(showLoading(false));
 
         Actions.home();

@@ -10,5 +10,7 @@
     "EMAIL_REQUIRED": "Email is required!",
     "EMAIL_FORMAT": "Email format is invalid!",
     "PASSWORD_REQUIRED": "Password is required!",
-    "EMAIL_OR_PASSWORD_INCORRECT": "Email or Password is incorrect!"
+    "EMAIL_OR_PASSWORD_INCORRECT": "Email or Password is incorrect!",
+    "SETTINGS": "Settings",
+    "LOGOUT": "Logout"
 }
