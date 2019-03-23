@@ -15,5 +15,6 @@
     "LOGOUT": "Logout",
     "CONFIRM_LOGOUT": "Are you sure you want to log out?",
     "CANCEL": "Cancel",
-    "AGREE": "Agree"
+    "AGREE": "Agree",
+    "CHAT": "Chat"
 }

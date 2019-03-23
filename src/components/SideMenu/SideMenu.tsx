@@ -53,12 +53,26 @@ export class SideMenu extends Component<Props, State> {
 
     }
 
+    changeRootScreen(name: string) {
+        Actions.drawerClose();
+        this.props.actions.common.changeRootScreen(name);
+    }
+
     render() {
         return (
             <Container>
                 <Content>
                     <List>
-                        <ListItem>
+                        <ListItem onPress={() => this.changeRootScreen('ChatScreen')}>
+                            <Icon
+                                name='comments'
+                                type='font-awesome'
+                                iconStyle={styleSheet.iconList}
+                            />
+                            <Text style={styleSheet.textList}>{strings('CHAT')}</Text>
+                        </ListItem>
+
+                        <ListItem onPress={() => this.changeRootScreen('SettingsScreen')}>
                             <Icon
                                 name='cogs'
                                 type='font-awesome'
