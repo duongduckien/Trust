@@ -18,6 +18,7 @@ import Loading from './src/components/Loading';
 import SideMenu from './src/components/SideMenu';
 import MenuButton from './src/components/MenuButton';
 import Statusbar from './src/components/Statusbar';
+import AlertDialog from './src/components/AlertDialog';
 
 // Styles
 import { mainStyles } from './src/styles';
@@ -115,6 +116,8 @@ export default class App extends Component<IProps, IState> {
                 <FlashMessage
                     position={config['alert']['position']}
                 />
+
+                <AlertDialog />
             </Provider >
         );
     }

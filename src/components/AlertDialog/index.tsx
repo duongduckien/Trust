@@ -1,4 +1,4 @@
-import { SideMenu } from './SideMenu';
+import { AlertDialog } from './AlertDialog';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as commonActions from '../../actions/common.action';
@@ -17,4 +17,4 @@ const mapDispatchToProps = (dispatch: any) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SideMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(AlertDialog);

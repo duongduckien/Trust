@@ -5,10 +5,6 @@ import { Item, Input } from 'native-base';
 import { Icon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 
-// Services
-import { APIService } from '../../services/api';
-const apiService = new APIService();
-
 // Languages
 import { strings } from '../../utilities/i18n';
 
@@ -17,7 +13,10 @@ import { styleSheet, styles } from './styles';
 import { mainStyles, colors } from '../../styles';
 
 interface Props {
-
+    common: any;
+    actions: {
+        common: any;
+    };
 }
 
 interface State {
@@ -30,13 +29,28 @@ export class SideMenu extends Component<Props, State> {
         super(props);
     }
 
-    async logout() {
+    logout() {
+
         try {
-            await apiService.logout();
-            Actions.login();
+
+            this.props.actions.common.showAlert({
+                type: 'logout',
+                show: true,
+                showProgress: false,
+                title: strings('LOGOUT'),
+                message: strings('CONFIRM_LOGOUT'),
+                closeOnTouchOutside: true,
+                closeOnHardwareBackPress: false,
+                showCancelButton: true,
+                showConfirmButton: true,
+                cancelText: strings('CANCEL'),
+                confirmText: strings('AGREE'),
+            });
+
         } catch (e) {
             console.log(e);
         }
+
     }
 
     render() {

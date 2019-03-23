@@ -12,5 +12,8 @@
     "PASSWORD_REQUIRED": "Password is required!",
     "EMAIL_OR_PASSWORD_INCORRECT": "Email or Password is incorrect!",
     "SETTINGS": "Settings",
-    "LOGOUT": "Logout"
+    "LOGOUT": "Logout",
+    "CONFIRM_LOGOUT": "Are you sure you want to log out?",
+    "CANCEL": "Cancel",
+    "AGREE": "Agree"
 }
