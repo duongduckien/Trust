@@ -16,5 +16,7 @@
     "CONFIRM_LOGOUT": "Are you sure you want to log out?",
     "CANCEL": "Cancel",
     "AGREE": "Agree",
-    "CHAT": "Chat"
+    "CHAT": "Chat",
+    "CHAT_SCREEN_TITLE": "Chat",
+    "SETTINGS_SCREEN_TITLE": "Settings"
 }

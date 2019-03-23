@@ -4,6 +4,9 @@ import { Router, Scene, Drawer } from 'react-native-router-flux';
 // Styles
 import { mainStyles } from '../../styles';
 
+// Languages
+import { strings } from '../../utilities/i18n';
+
 // Screens
 import HomeScreen from '../../containers/Home';
 import LoginScreen from '../../containers/Login';
@@ -17,7 +20,7 @@ import { APIService } from '../../services/api';
 const apiService = new APIService();
 
 interface IProps {
-
+    common: any;
 }
 
 interface IState {
@@ -50,6 +53,24 @@ export class RouterComponent extends Component<IProps, IState> {
     };
 
     render() {
+
+        const rootScreen = this.props.common.rootScreen;
+        let titleScreen = '';
+
+        switch (rootScreen) {
+            case 'ChatScreen': {
+                titleScreen = strings('CHAT_SCREEN_TITLE');
+                break;
+            }
+            case 'SettingsScreen': {
+                titleScreen = strings('SETTINGS_SCREEN_TITLE');
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+
         return (
             <Router>
                 <Drawer
@@ -70,7 +91,7 @@ export class RouterComponent extends Component<IProps, IState> {
                             navigationBarStyle={mainStyles.navigationBar}
                             key="home"
                             component={HomeScreen}
-                            title="Home"
+                            title={titleScreen}
                             initial={this.state.logged}
                             hideNavBar={false}
                             renderLeftButton={this.renderMenuButton}

@@ -54,7 +54,6 @@ export class SideMenu extends Component<Props, State> {
     }
 
     changeRootScreen(name: string) {
-        Actions.drawerClose();
         this.props.actions.common.changeRootScreen(name);
     }
 
