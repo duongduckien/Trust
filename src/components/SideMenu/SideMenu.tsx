@@ -12,6 +12,11 @@ import { strings } from '../../utilities/i18n';
 import { styleSheet, styles } from './styles';
 import { mainStyles, colors } from '../../styles';
 
+// Utilities
+import { Helper } from '../../utilities/helper';
+
+const helper = new Helper();
+
 interface Props {
     common: any;
     actions: {
@@ -54,7 +59,22 @@ export class SideMenu extends Component<Props, State> {
     }
 
     changeRootScreen(name: string) {
+
+        Actions.drawerClose();
+
+        switch (name) {
+            case 'MessagesScreen': {
+                helper.setTitle(strings('MESSAGES_SCREEN_TITLE'));
+                break;
+            }
+            case 'SettingsScreen': {
+                helper.setTitle(strings('SETTINGS_SCREEN_TITLE'));
+                break;
+            }
+        }
+
         this.props.actions.common.changeRootScreen(name);
+
     }
 
     render() {

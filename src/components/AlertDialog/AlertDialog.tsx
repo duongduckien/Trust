@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import { Actions } from 'react-native-router-flux';
 
 // Styles
 import { styleSheet, styles } from './styles';
@@ -42,6 +43,9 @@ export class AlertDialog extends Component<Props, State> {
     }
 
     render() {
+
+        Actions.drawerClose();
+
         return (
             <AwesomeAlert
                 show={this.props.common.showAlert.show}
@@ -63,6 +67,7 @@ export class AlertDialog extends Component<Props, State> {
                 }}
             />
         );
+
     }
 
 }

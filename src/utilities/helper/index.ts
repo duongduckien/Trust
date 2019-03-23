@@ -1,5 +1,6 @@
 import { Platform } from 'react-native';
 import { showMessage, hideMessage } from 'react-native-flash-message';
+import { Actions } from 'react-native-router-flux';
 
 // Languages
 import { strings } from '../../utilities/i18n';
@@ -103,6 +104,14 @@ export class Helper {
      */
     trimStr(str: string) {
         return str.trim();
+    }
+
+    /**
+     * Function set title of header
+     * @param  {string} name
+     */
+    setTitle(name: string) {
+        Actions.refresh({key: 'home', title: name});
     }
 
 }

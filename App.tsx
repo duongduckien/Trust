@@ -9,6 +9,9 @@ import createSagaMiddleware from 'redux-saga';
 import reducers from './src/reducers';
 import rootSaga from './src/sagas/rootSaga';
 
+// Languages
+import { strings } from './src/utilities/i18n';
+
 // Screens
 import HomeScreen from './src/containers/Home';
 import LoginScreen from './src/containers/Login';
@@ -95,7 +98,7 @@ export default class App extends Component<IProps, IState> {
                                 navigationBarStyle={mainStyles.navigationBar}
                                 key="home"
                                 component={HomeScreen}
-                                title="Home"
+                                title={strings('MESSAGES_SCREEN_TITLE')}
                                 initial={this.state.logged}
                                 hideNavBar={false}
                                 renderLeftButton={this.renderMenuButton}
