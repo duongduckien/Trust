@@ -58,8 +58,8 @@ export class RouterComponent extends Component<IProps, IState> {
         let titleScreen = '';
 
         switch (rootScreen) {
-            case 'ChatScreen': {
-                titleScreen = strings('CHAT_SCREEN_TITLE');
+            case 'MessagesScreen': {
+                titleScreen = strings('MESSAGES_SCREEN_TITLE');
                 break;
             }
             case 'SettingsScreen': {

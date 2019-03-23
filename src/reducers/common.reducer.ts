@@ -9,7 +9,7 @@ export interface CommonState {
 export const COMMON_INITAL_STATE: CommonState = {
     showLoading: false,
     showAlert: {},
-    rootScreen: 'ChatScreen'
+    rootScreen: 'MessagesScreen'
 };
 
 export function commonReducer(state = COMMON_INITAL_STATE, action: any): CommonState {

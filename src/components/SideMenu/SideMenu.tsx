@@ -62,13 +62,13 @@ export class SideMenu extends Component<Props, State> {
             <Container>
                 <Content>
                     <List>
-                        <ListItem onPress={() => this.changeRootScreen('ChatScreen')}>
+                        <ListItem onPress={() => this.changeRootScreen('MessagesScreen')}>
                             <Icon
                                 name='comments'
                                 type='font-awesome'
                                 iconStyle={styleSheet.iconList}
                             />
-                            <Text style={styleSheet.textList}>{strings('CHAT')}</Text>
+                            <Text style={styleSheet.textList}>{strings('MESSAGES')}</Text>
                         </ListItem>
 
                         <ListItem onPress={() => this.changeRootScreen('SettingsScreen')}>

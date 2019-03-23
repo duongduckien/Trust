@@ -21,7 +21,7 @@ interface IState {
 
 }
 
-export class ChatScreen extends Component<IProps, IState> {
+export class MessagesScreen extends Component<IProps, IState> {
 
     constructor(props: any) {
         super(props);

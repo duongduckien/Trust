@@ -28,7 +28,6 @@ export function* logOut() {
 
         yield apiService.logout();
         Actions.login();
-        console.log('Logout success');
 
     } catch (e) {
         console.log(e);

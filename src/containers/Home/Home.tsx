@@ -13,7 +13,7 @@ import { mainStyles } from '../../styles';
 
 // Components
 import AgoraRTCView from '../../components/AgoraRTCView';
-import ChatScreen from '../Chat';
+import MessagesScreen from '../Messages';
 import SettingsScreen from '../Settings';
 
 // Config
@@ -58,9 +58,9 @@ export class HomeScreen extends Component<IProps, IState> {
         const nameScreen = this.props.common.rootScreen;
 
         switch (nameScreen) {
-            case 'ChatScreen': {
+            case 'MessagesScreen': {
                 return (
-                    <ChatScreen />
+                    <MessagesScreen />
                 );
             }
 
