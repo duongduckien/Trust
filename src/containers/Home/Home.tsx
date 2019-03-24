@@ -15,6 +15,7 @@ import { mainStyles } from '../../styles';
 import AgoraRTCView from '../../components/AgoraRTCView';
 import MessagesScreen from '../Messages';
 import SettingsScreen from '../Settings';
+import ContactScreen from '../Contact';
 
 // Config
 import configData from '../../assets/data/config.json';
@@ -63,10 +64,14 @@ export class HomeScreen extends Component<IProps, IState> {
                     <MessagesScreen />
                 );
             }
-
             case 'SettingsScreen': {
                 return (
                     <SettingsScreen />
+                );
+            }
+            case 'ContactScreen': {
+                return (
+                    <ContactScreen />
                 );
             }
             default: {

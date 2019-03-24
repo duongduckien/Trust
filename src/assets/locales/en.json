@@ -17,6 +17,8 @@
     "CANCEL": "Cancel",
     "AGREE": "Agree",
     "MESSAGES": "Messages",
+    "CONTACT": "Contact",
     "MESSAGES_SCREEN_TITLE": "Messages",
-    "SETTINGS_SCREEN_TITLE": "Settings"
+    "SETTINGS_SCREEN_TITLE": "Settings",
+    "CONTACT_SCREEN_TITLE": "Contact"
 }

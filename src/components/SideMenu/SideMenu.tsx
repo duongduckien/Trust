@@ -74,6 +74,10 @@ export class SideMenu extends Component<Props, State> {
                 helper.setTitle(strings('SETTINGS_SCREEN_TITLE'));
                 break;
             }
+            case 'ContactScreen': {
+                helper.setTitle(strings('CONTACT_SCREEN_TITLE'));
+                break;
+            }
         }
 
         this.props.actions.common.changeRootScreen(name);
@@ -84,16 +88,16 @@ export class SideMenu extends Component<Props, State> {
         return (
             <Container style={styleSheet.sideMenu}>
                 <View style={styleSheet.avatarView}>
-                    <Image 
-                        style={styleSheet.avatar} 
+                    <Image
+                        style={styleSheet.avatar}
                         source={AvatarDefault()}
                     />
                 </View>
 
                 <Content style={styleSheet.listMenu}>
                     <List>
-                        <ListItem 
-                            style={styleSheet.listItem} 
+                        <ListItem
+                            style={styleSheet.listItem}
                             onPress={() => this.changeRootScreen('MessagesScreen')}
                         >
                             <Icon
@@ -102,6 +106,18 @@ export class SideMenu extends Component<Props, State> {
                                 iconStyle={styleSheet.iconList}
                             />
                             <Text style={styleSheet.textList}>{strings('MESSAGES')}</Text>
+                        </ListItem>
+
+                        <ListItem
+                            style={styleSheet.listItem}
+                            onPress={() => this.changeRootScreen('ContactScreen')}
+                        >
+                            <Icon
+                                name='id-card'
+                                type='font-awesome'
+                                iconStyle={styleSheet.iconList}
+                            />
+                            <Text style={styleSheet.textList}>{strings('CONTACT')}</Text>
                         </ListItem>
 
                         <ListItem
