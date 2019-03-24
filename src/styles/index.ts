@@ -1,9 +1,11 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { Fonts } from '../utilities/fonts';
 
+export const mainFont = Fonts.RobotoCondensedRegular;
+
 export const dimensions = {
     fullHeight: Dimensions.get('window').height,
-    fullWidth: Dimensions.get('window').width
+    fullWidth: Dimensions.get('window').width,
 }
 
 export const colors = {
@@ -17,7 +19,7 @@ export const colors = {
     success: '#28a745',
     error: '#dc3545',
     warning: '#ffc107',
-    textWhite: '#aeb2ba',
+    textWhite: '#eee',
     textBlack: '#000',
     bgWhite: '#dad8d9',
 }
@@ -43,7 +45,6 @@ export const mainStyles = {
     },
     titleHeader: {
         color: colors.textWhite,
+        fontFamily: mainFont,
     },
 }
-
-export const mainFont = Fonts.RobotoCondensedRegular;

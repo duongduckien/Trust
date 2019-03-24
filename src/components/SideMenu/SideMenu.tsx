@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, StatusBar } from 'react-native';
-import { Container, Header, Content, List, ListItem, Text, Button } from 'native-base';
+import { View, StatusBar, Image } from 'react-native';
+import { Container, Header, Content, List, ListItem, Text, Button, Thumbnail } from 'native-base';
 import { Item, Input } from 'native-base';
 import { Icon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
@@ -11,6 +11,9 @@ import { strings } from '../../utilities/i18n';
 // Styles
 import { styleSheet, styles } from './styles';
 import { mainStyles, colors } from '../../styles';
+
+// Components
+import { AvatarDefault } from '../Images/Images';
 
 // Utilities
 import { Helper } from '../../utilities/helper';
@@ -79,10 +82,20 @@ export class SideMenu extends Component<Props, State> {
 
     render() {
         return (
-            <Container>
-                <Content>
+            <Container style={styleSheet.sideMenu}>
+                <View style={styleSheet.avatarView}>
+                    <Image 
+                        style={styleSheet.avatar} 
+                        source={AvatarDefault()}
+                    />
+                </View>
+
+                <Content style={styleSheet.listMenu}>
                     <List>
-                        <ListItem onPress={() => this.changeRootScreen('MessagesScreen')}>
+                        <ListItem 
+                            style={styleSheet.listItem} 
+                            onPress={() => this.changeRootScreen('MessagesScreen')}
+                        >
                             <Icon
                                 name='comments'
                                 type='font-awesome'
@@ -91,7 +104,10 @@ export class SideMenu extends Component<Props, State> {
                             <Text style={styleSheet.textList}>{strings('MESSAGES')}</Text>
                         </ListItem>
 
-                        <ListItem onPress={() => this.changeRootScreen('SettingsScreen')}>
+                        <ListItem
+                            style={styleSheet.listItem}
+                            onPress={() => this.changeRootScreen('SettingsScreen')}
+                        >
                             <Icon
                                 name='cogs'
                                 type='font-awesome'
@@ -100,7 +116,10 @@ export class SideMenu extends Component<Props, State> {
                             <Text style={styleSheet.textList}>{strings('SETTINGS')}</Text>
                         </ListItem>
 
-                        <ListItem onPress={() => this.logout()}>
+                        <ListItem
+                            style={styleSheet.listItem}
+                            onPress={() => this.logout()}
+                        >
                             <Icon
                                 name='sign-out'
                                 type='font-awesome'

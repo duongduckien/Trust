@@ -10,3 +10,4 @@ export const DisablePhotoflash = () => require('../../assets/images/disable_phot
 export const IconMuted = () => require('../../assets/images/icon_muted.png');
 export const IconSpeaker = () => require('../../assets/images/icon_speaker.png');
 export const LogoImage = () => require('../../assets/images/logo.png');
+export const AvatarDefault = () => require('../../assets/images/no-avatar.png');
