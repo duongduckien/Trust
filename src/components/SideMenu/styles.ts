@@ -14,7 +14,7 @@ export const styleSheet = StyleSheet.create({
         fontFamily: mainFont,
     },
     iconList: {
-        color: '#ec3233',
+        color: colors.red,
         paddingLeft: 15,
     },
     listItem: {

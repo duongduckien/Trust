@@ -1,6 +1,7 @@
 import { Platform } from 'react-native';
 import { showMessage, hideMessage } from 'react-native-flash-message';
 import { Actions } from 'react-native-router-flux';
+import moment from 'moment';
 
 // Languages
 import { strings } from '../../utilities/i18n';
@@ -112,6 +113,14 @@ export class Helper {
      */
     setTitle(name: string) {
         Actions.refresh({key: 'home', title: name});
+    }
+
+    /**
+     * Function get UTC time
+     */
+    getTime() {
+        const now = new Date();
+        return moment.utc(now).valueOf();
     }
 
 }

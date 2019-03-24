@@ -11,3 +11,6 @@ export const IconMuted = () => require('../../assets/images/icon_muted.png');
 export const IconSpeaker = () => require('../../assets/images/icon_speaker.png');
 export const LogoImage = () => require('../../assets/images/logo.png');
 export const AvatarDefault = () => require('../../assets/images/no-avatar.png');
+export const AvatarDemo1 = () => require('../../assets/images/avatar-demo-1.jpeg');
+export const AvatarDemo2 = () => require('../../assets/images/avatar-demo-2.jpeg');
+export const AvatarDemo3 = () => require('../../assets/images/avatar-demo-3.jpeg');

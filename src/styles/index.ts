@@ -11,7 +11,8 @@ export const dimensions = {
 export const colors = {
     primary: '#3f7aa7',
     seconds: '#4a5568',
-    red: '#cf1022',
+    third: '#f44447',
+    red: '#ec3233',
     green: '#0b8011',
     facebook: '#4267A6',
     google: '#db4437',
@@ -19,7 +20,7 @@ export const colors = {
     success: '#28a745',
     error: '#dc3545',
     warning: '#ffc107',
-    textWhite: '#eee',
+    textWhite: '#fff',
     textBlack: '#000',
     bgWhite: '#dad8d9',
 }
@@ -41,7 +42,7 @@ export const mainStyles = {
         position: 'left' as 'left'
     },
     navigationBar: {
-        backgroundColor: colors.seconds,
+        backgroundColor: colors.red,
     },
     titleHeader: {
         color: colors.textWhite,

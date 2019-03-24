@@ -1,12 +1,12 @@
 import { FirebaseService } from './firebase';
 
-const firebase = new FirebaseService();
+const apiService = new FirebaseService();
 
 export class APIService {
 
     login(params: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            firebase.auth(params.email, params.password).then((res: any) => {
+            apiService.auth(params.email, params.password).then((res: any) => {
                 resolve(res);
             }).catch((err: any) => {
                 reject(err);
@@ -16,7 +16,7 @@ export class APIService {
 
     isLogged(): Promise<any> {
         return new Promise((resolve, reject) => {
-            firebase.logged().then((res: any) => {
+            apiService.logged().then((res: any) => {
                 resolve(res);
             }).catch((err: any) => {
                 reject(err);
@@ -26,10 +26,20 @@ export class APIService {
 
     logout(): Promise<any> {
         return new Promise((resolve, reject) => {
-            firebase.signOut().then(() => {
+            apiService.signOut().then(() => {
                 resolve();
             }).catch(() => {
                 reject();
+            });
+        });
+    }
+
+    createAccount(params: any): Promise<any> {
+        return new Promise((resolve, reject) => {
+            apiService.createUser(params.email, params.password).then((res: any) => {
+                resolve(res);
+            }).catch((err: any) => {
+                reject(err);
             });
         });
     }
