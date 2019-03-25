@@ -24,6 +24,7 @@ export const styleSheet = StyleSheet.create({
         alignItems: 'center',
         marginTop: 10,
         marginBottom: 10,
+        // backgroundColor: 'red',
     },
     itemCenter: {
         width: (dimensions.fullWidth / 5) * 3,
@@ -32,6 +33,7 @@ export const styleSheet = StyleSheet.create({
         marginBottom: 10,
         justifyContent: 'center',
         alignItems: 'flex-start',
+        // backgroundColor: 'blue',
     },
     itemRight: {
         width: (dimensions.fullWidth / 5) * 1,
@@ -40,6 +42,7 @@ export const styleSheet = StyleSheet.create({
         marginBottom: 10,
         justifyContent: 'center',
         alignItems: 'center',
+        // backgroundColor: 'green',
     },
     itemAvatar: {
         width: 60,

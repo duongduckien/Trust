@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 import { Container, Content, List, ListItem, Left, Body, Text, Right, Thumbnail, View } from 'native-base';
 import { Icon } from 'react-native-elements';
 
@@ -30,27 +30,41 @@ export class ContactScreen extends Component<IProps, IState> {
         super(props);
     }
 
+    goToChat(id: string) {
+        console.log('Chat', id);
+    }
+
+    videoCall(id: string) {
+        console.log('Video call', id);
+    }
+
     render() {
         return (
             <Container>
                 <Content>
                     <List>
                         <View style={styleSheet.listItem}>
-                            <View style={styleSheet.itemLeft}>
-                                <Image style={styleSheet.itemAvatar} source={AvatarDemo1()}></Image>
-                            </View>
+                            <TouchableOpacity onPress={() => this.goToChat('12')}>
+                                <View style={styleSheet.listItem}>
+                                    <View style={styleSheet.itemLeft}>
+                                        <Image style={styleSheet.itemAvatar} source={AvatarDemo1()}></Image>
+                                    </View>
 
-                            <View style={styleSheet.itemCenter}>
-                                <Text style={styleSheet.nameContact}>John Stone</Text>
-                            </View>
+                                    <View style={styleSheet.itemCenter}>
+                                        <Text style={styleSheet.nameContact}>John Stone</Text>
+                                    </View>
+                                </View>
+                            </TouchableOpacity>
 
-                            <View style={styleSheet.itemRight}>
-                                <Icon
-                                    name='video-camera'
-                                    type='font-awesome'
-                                    iconStyle={styleSheet.itemIcon}
-                                />
-                            </View>
+                            <TouchableOpacity onPress={() => this.videoCall('12')}>
+                                <View style={styleSheet.itemRight}>
+                                    <Icon
+                                        name='video-camera'
+                                        type='font-awesome'
+                                        iconStyle={styleSheet.itemIcon}
+                                    />
+                                </View>
+                            </TouchableOpacity>
                         </View>
 
                         <View style={styleSheet.listItem}>
