@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Image, TouchableOpacity } from 'react-native';
 import { Container, Content, List, ListItem, Left, Body, Text, Right, Thumbnail, View } from 'native-base';
 import { Icon } from 'react-native-elements';
+import { Actions } from 'react-native-router-flux';
 
 // Languages
 import { strings } from '../../utilities/i18n';
@@ -32,6 +33,7 @@ export class ContactScreen extends Component<IProps, IState> {
 
     goToChat(id: string) {
         console.log('Chat', id);
+        Actions.chat({ userId: id });
     }
 
     videoCall(id: string) {

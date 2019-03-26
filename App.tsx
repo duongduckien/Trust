@@ -15,6 +15,7 @@ import { strings } from './src/utilities/i18n';
 // Screens
 import HomeScreen from './src/containers/Home';
 import LoginScreen from './src/containers/Login';
+import ChatScreen from './src/containers/Chat';
 
 // Components
 import Loading from './src/components/Loading';
@@ -22,6 +23,7 @@ import Statusbar from './src/components/Statusbar';
 import AlertDialog from './src/components/AlertDialog';
 import SideMenu from './src/components/SideMenu';
 import MenuButton from './src/components/MenuButton';
+import BackButton from './src/components/BackButton';
 
 // Config
 import config from './src/assets/data/config.json';
@@ -65,9 +67,15 @@ export default class App extends Component<IProps, IState> {
         }
     }
 
-    renderMenuButton() {
+    renderMenuButton(key: string) {
         return (
-            <MenuButton/>
+            <MenuButton key={key} />
+        );
+    };
+
+    renderBackButton(key: string) {
+        return (
+            <BackButton key={key} />
         );
     };
 
@@ -101,10 +109,19 @@ export default class App extends Component<IProps, IState> {
                                 title={strings('MESSAGES_SCREEN_TITLE')}
                                 initial={this.state.logged}
                                 hideNavBar={false}
-                                renderLeftButton={this.renderMenuButton}
+                                renderLeftButton={() => this.renderMenuButton('home')}
                                 titleStyle={mainStyles.titleHeader}
                             />
                         </Scene>
+                        
+                        <Scene
+                            navigationBarStyle={mainStyles.navigationBar}
+                            key="chat"
+                            component={ChatScreen}
+                            hideNavBar={false}
+                            renderLeftButton={() => this.renderBackButton('chat')}
+                            titleStyle={mainStyles.titleHeader}
+                        />
                     </Drawer>
                 </Router>
 

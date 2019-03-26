@@ -15,23 +15,23 @@ interface IState {
 
 }
 
-export class MenuButton extends Component<IProps, IState> {
+export class BackButton extends Component<IProps, IState> {
 
     constructor(props: any) {
         super(props);
     }
 
-    handleOpenSideBar() {
-        Actions.drawerOpen();
+    back() {
+        Actions.pop();
     }
 
     render() {
         return (
             <TouchableOpacity
-                onPress={() => this.handleOpenSideBar()}
+                onPress={() => this.back()}
             >
                 <Icon
-                    name='bars'
+                    name='angle-left'
                     type='font-awesome'
                     iconStyle={styleSheet.icon}
                 />
