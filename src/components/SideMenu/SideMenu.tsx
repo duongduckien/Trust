@@ -16,9 +16,7 @@ import { mainStyles, colors } from '../../styles';
 import { AvatarDefault } from '../Images/Images';
 
 // Utilities
-import { Helper } from '../../utilities/helper';
-
-const helper = new Helper();
+import helper from '../../utilities/helper';
 
 interface Props {
     common: any;

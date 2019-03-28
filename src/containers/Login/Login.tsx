@@ -20,11 +20,8 @@ import { mainStyles } from '../../styles';
 import config from '../../assets/data/config.json';
 
 // Utilities
-import { Helper } from '../../utilities/helper';
-import { Validation } from '../../utilities/validation';
-
-const helper = new Helper();
-const validation = new Validation();
+import helper from '../../utilities/helper';
+import validation from '../../utilities/validation';
 
 interface IProps {
     actions: {

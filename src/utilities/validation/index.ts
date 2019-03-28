@@ -1,7 +1,7 @@
 // Languages
 import { strings } from '../../utilities/i18n';
 
-export class Validation {
+class Validation {
 
     public loginValidations: any;
 
@@ -103,3 +103,6 @@ export class Validation {
     }
 
 }
+
+const validation = new Validation();
+export default validation;

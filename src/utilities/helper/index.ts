@@ -15,7 +15,7 @@ import { dimensions } from '../../styles';
 // Styles
 import { colors } from '../../styles';
 
-export class Helper {
+class Helper {
 
     isIOS() {
         return (Platform.OS === 'ios') ? true : false;
@@ -124,3 +124,6 @@ export class Helper {
     }
 
 }
+
+const helper = new Helper();
+export default helper;

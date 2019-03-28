@@ -25,12 +25,10 @@ import {
 import { styleSheet, styles } from './styles';
 
 // Utilities
-import { Helper } from '../../utilities/helper';
+import helper from '../../utilities/helper';
 
 // Config
 import configData from '../../assets/data/config.json';
-
-const helper = new Helper();
 
 const { Agora } = NativeModules;
 if (!Agora) {

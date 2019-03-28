@@ -2,8 +2,7 @@ import { StyleSheet } from 'react-native';
 import { dimensions } from '../../styles';
 
 // Utilities
-import { Helper } from '../../utilities/helper';
-const helper = new Helper();
+import helper from '../../utilities/helper';
 
 const safeTop = (top: any) => (helper.isIphoneX() ? (top + 88) : (helper.isIphoneXR() ? (top + 64) : top));
 

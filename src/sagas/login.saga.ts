@@ -8,11 +8,8 @@ import { showLoading } from '../actions/common.action';
 import { strings } from '../utilities/i18n';
 
 // Utilities
-import { Helper } from '../utilities/helper';
-import { Storage } from '../utilities/storage';
-
-const helper = new Helper();
-const storage = new Storage();
+import helper from '../utilities/helper';
+import storage from '../utilities/storage';
 
 export function* login(action: any) {
 

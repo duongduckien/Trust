@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 
-export class Storage {
+class Storage {
 
     setItem(key: string, value: any): Promise<any> {
         return new Promise((resolve, reject) => {
@@ -23,3 +23,6 @@ export class Storage {
     }
 
 }
+
+const storage = new Storage();
+export default storage;
