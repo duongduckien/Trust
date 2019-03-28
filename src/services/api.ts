@@ -1,12 +1,10 @@
-import { FirebaseService } from './firebase';
+import firebaseService from './firebase';
 
-const apiService = new FirebaseService();
-
-export class APIService {
+class APIService {
 
     login(params: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            apiService.auth(params.email, params.password).then((res: any) => {
+            firebaseService.auth(params.email, params.password).then((res: any) => {
                 resolve(res);
             }).catch((err: any) => {
                 reject(err);
@@ -16,7 +14,7 @@ export class APIService {
 
     isLogged(): Promise<any> {
         return new Promise((resolve, reject) => {
-            apiService.logged().then((res: any) => {
+            firebaseService.logged().then((res: any) => {
                 resolve(res);
             }).catch((err: any) => {
                 reject(err);
@@ -26,7 +24,7 @@ export class APIService {
 
     logout(): Promise<any> {
         return new Promise((resolve, reject) => {
-            apiService.signOut().then(() => {
+            firebaseService.signOut().then(() => {
                 resolve();
             }).catch(() => {
                 reject();
@@ -36,7 +34,7 @@ export class APIService {
 
     createAccount(params: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            apiService.createUser(params.email, params.password).then((res: any) => {
+            firebaseService.createUser(params.email, params.password).then((res: any) => {
                 resolve(res);
             }).catch((err: any) => {
                 reject(err);
@@ -44,4 +42,12 @@ export class APIService {
         });
     }
 
+    getUserId() {
+        const user: any = firebaseService.getCurrentUser();
+        return user['uid'];
+    }
+
 }
+
+const apiService = new APIService();
+export default apiService;

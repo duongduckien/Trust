@@ -1,7 +1,7 @@
 import { put, call, fork, takeLatest } from 'redux-saga/effects';
 import { Actions } from 'react-native-router-flux';
 import * as types from '../actions/types';
-import { APIService } from '../services/api';
+import apiService from '../services/api';
 import { showLoading } from '../actions/common.action';
 
 // Languages
@@ -12,7 +12,6 @@ import { Helper } from '../utilities/helper';
 import { Storage } from '../utilities/storage';
 
 const helper = new Helper();
-const api = new APIService();
 const storage = new Storage();
 
 export function* login(action: any) {
@@ -21,7 +20,7 @@ export function* login(action: any) {
 
         yield put(showLoading(true));
         const params = action.payload.items;
-        const data = yield call(api.login, params);
+        const data = yield call(apiService.login, params);
         console.log(data);
         storage.setItem('userData', JSON.stringify(data.user._user));
         yield put(showLoading(false));

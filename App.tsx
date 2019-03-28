@@ -24,6 +24,7 @@ import AlertDialog from './src/components/AlertDialog';
 import SideMenu from './src/components/SideMenu';
 import MenuButton from './src/components/MenuButton';
 import BackButton from './src/components/BackButton';
+import RightButton from './src/components/RightButton';
 
 // Config
 import config from './src/assets/data/config.json';
@@ -32,8 +33,7 @@ import config from './src/assets/data/config.json';
 import { mainStyles } from './src/styles';
 
 // Services
-import { APIService } from './src/services/api';
-const apiService = new APIService();
+import apiService from './src/services/api';
 
 // Create store
 const sagaMiddleware = createSagaMiddleware();
@@ -79,6 +79,12 @@ export default class App extends Component<IProps, IState> {
         );
     };
 
+    renderRightButton(key: string) {
+        return (
+            <RightButton key={key} />
+        );
+    }
+
     render() {
         console.disableYellowBox = true;
         return (
@@ -105,11 +111,12 @@ export default class App extends Component<IProps, IState> {
                             <Scene
                                 navigationBarStyle={mainStyles.navigationBar}
                                 key="home"
-                                component={HomeScreen}
+                                component={ChatScreen}
                                 title={strings('MESSAGES_SCREEN_TITLE')}
                                 initial={this.state.logged}
                                 hideNavBar={false}
                                 renderLeftButton={() => this.renderMenuButton('home')}
+                                renderRightButton={() => this.renderRightButton('home')}
                                 titleStyle={mainStyles.titleHeader}
                             />
                         </Scene>

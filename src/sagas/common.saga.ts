@@ -3,8 +3,7 @@ import { Actions } from 'react-native-router-flux';
 import * as types from '../actions/types';
 
 // Services
-import { APIService } from '../services/api';
-const apiService = new APIService();
+import apiService from '../services/api';
 
 export function* showLoading(action: any) {
 

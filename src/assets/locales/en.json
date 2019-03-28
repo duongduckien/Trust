@@ -20,5 +20,6 @@
     "CONTACT": "Contact",
     "MESSAGES_SCREEN_TITLE": "Messages",
     "SETTINGS_SCREEN_TITLE": "Settings",
-    "CONTACT_SCREEN_TITLE": "Contact"
+    "CONTACT_SCREEN_TITLE": "Contact",
+    "PLACEHOLDER_TYPE_MESSAGE": "Type a message..."
 }
