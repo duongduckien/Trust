@@ -1,6 +1,10 @@
 import firebase from 'react-native-firebase';
 
-class FirebaseService {
+class FirebaseSDKService {
+
+    constructor() {
+
+    }
 
     /**
      * Function authentication
@@ -13,22 +17,6 @@ class FirebaseService {
                 resolve(res);
             }).catch((err: any) => {
                 reject(err);
-            });
-        });
-    }
-
-    /**
-     * @param  {string} collection
-     * @param  {any} data
-     */
-    insert(collection: string, data: any): Promise<any> {
-        return new Promise((resolve, reject) => {
-            firebase.database().ref(collection).push(data, err => {
-                if (!err) {
-                    resolve();
-                } else {
-                    reject(err);
-                }
             });
         });
     }
@@ -62,6 +50,13 @@ class FirebaseService {
     }
 
     /**
+     * Function get current user
+     */
+    getCurrentUser() {
+        return firebase.auth().currentUser;
+    }
+
+    /**
      * Function create user
      * @param  {string} email
      * @param  {string} password
@@ -70,23 +65,13 @@ class FirebaseService {
         return new Promise((resolve, reject) => {
             firebase.auth().createUserWithEmailAndPassword(email, password).then((res: any) => {
 
-
-
-            })
-                .catch((err: any) => {
-                    reject(err);
-                });
+            }).catch((err: any) => {
+                reject(err);
+            });
         });
-    }
-
-    /**
-     * Function get current user
-     */
-    getCurrentUser() {
-        return firebase.auth().currentUser;
     }
 
 }
 
-const firebaseService = new FirebaseService();
-export default firebaseService;
+const firebaseSDK = new FirebaseSDKService();
+export default firebaseSDK;

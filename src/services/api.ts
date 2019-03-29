@@ -1,10 +1,11 @@
-import firebaseService from './firebase';
+import firebaseSDKService from './firebaseSDK';
+import firebaseWebService from './firebaseWeb';
 
 class APIService {
 
     login(params: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            firebaseService.auth(params.email, params.password).then((res: any) => {
+            firebaseSDKService.auth(params.email, params.password).then((res: any) => {
                 resolve(res);
             }).catch((err: any) => {
                 reject(err);
@@ -14,7 +15,7 @@ class APIService {
 
     isLogged(): Promise<any> {
         return new Promise((resolve, reject) => {
-            firebaseService.logged().then((res: any) => {
+            firebaseSDKService.logged().then((res: any) => {
                 resolve(res);
             }).catch((err: any) => {
                 reject(err);
@@ -24,7 +25,7 @@ class APIService {
 
     logout(): Promise<any> {
         return new Promise((resolve, reject) => {
-            firebaseService.signOut().then(() => {
+            firebaseSDKService.signOut().then(() => {
                 resolve();
             }).catch(() => {
                 reject();
@@ -34,7 +35,7 @@ class APIService {
 
     createAccount(params: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            firebaseService.createUser(params.email, params.password).then((res: any) => {
+            firebaseSDKService.createUser(params.email, params.password).then((res: any) => {
                 resolve(res);
             }).catch((err: any) => {
                 reject(err);
@@ -43,8 +44,23 @@ class APIService {
     }
 
     getUserId() {
-        const user: any = firebaseService.getCurrentUser();
+        const user: any = firebaseSDKService.getCurrentUser();
         return user['uid'];
+    }
+
+    /**
+    |--------------------------------------------------
+    | Function for test
+    |--------------------------------------------------
+    */
+    createLastId(collectionName: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            firebaseWebService.getWhere('lastId', 'collection', collectionName).then((res: any) => {
+                console.log(res);
+            }).catch((err: any) => {
+                console.log(err);
+            });
+        });
     }
 
 }

@@ -26,8 +26,9 @@ export class RightButton extends Component<IProps, IState> {
 
     handleVoiceCall() {
         // console.log('handleVoiceCall');
-        const res = apiService.getUserId();
-        console.log(res);
+        // const res = apiService.getUserId();
+        // console.log(res);
+        apiService.createLastId('users');
     }
 
     handleVideoCall() {

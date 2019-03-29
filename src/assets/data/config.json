@@ -22,5 +22,13 @@
     "uid": 1,
     "alert": {
         "position": "top"
+    },
+    "firebase": {
+        "apiKey": "AIzaSyD6v6_XKCJmVF-6e-D3t0J2-bizSsqVbOU",
+        "authDomain": "trust-1ef94.firebaseapp.com",
+        "databaseURL": "https://trust-1ef94.firebaseio.com",
+        "projectId": "trust-1ef94",
+        "storageBucket": "trust-1ef94.appspot.com",
+        "messagingSenderId": "711226319400"
     }
 }
