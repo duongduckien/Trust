@@ -9,6 +9,7 @@ import { mainStyles, colors } from '../../styles';
 
 // Services
 import apiService from '../../services/api';
+import firebaseWebService from '../../services/firebaseWeb';
 
 interface IProps {
     key: string;
@@ -24,11 +25,16 @@ export class RightButton extends Component<IProps, IState> {
         super(props);
     }
 
-    handleVoiceCall() {
+    async handleVoiceCall() {
         // console.log('handleVoiceCall');
         // const res = apiService.getUserId();
         // console.log(res);
-        apiService.createLastId('users');
+        try {
+            const res = await firebaseWebService.getUniqueId('users');
+            console.log(res);
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     handleVideoCall() {

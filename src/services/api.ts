@@ -55,10 +55,10 @@ class APIService {
     */
     createLastId(collectionName: string): Promise<any> {
         return new Promise((resolve, reject) => {
-            firebaseWebService.getWhere('lastId', 'collection', collectionName).then((res: any) => {
-                console.log(res);
+            firebaseWebService.insertWithCustomKey('lastId', collectionName, 1).then(() => {
+                resolve('Create lastID for collection successfully.');
             }).catch((err: any) => {
-                console.log(err);
+                reject(err);
             });
         });
     }
