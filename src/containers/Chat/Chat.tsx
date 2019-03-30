@@ -25,10 +25,12 @@ import helper from '../../utilities/helper';
 import { IMessage } from '../../interfaces/chat.interface';
 
 // Services
-import chatService from '../../services/chat';
+import apiService from '../../services/api';
 
 interface IProps {
-
+    actions: {
+        common: any;
+    };
 }
 
 interface IState {
@@ -43,29 +45,25 @@ export class ChatScreen extends Component<IProps, IState> {
 
     constructor(props: any) {
         super(props);
-        // this.getMessages();
     }
 
     componentWillMount() {
-
-        // firebase.database().ref('messages').child('2_3').once('value', res => {
-        //     console.log(res);
-        // });
-
+        this.getMessages();
     }
 
-    // async getMessages() {
-
-    //     try {
-
-    //         const msg = await apiService.getMessages(2, 3);
-    //         console.log(msg);
-
-    //     } catch (e) {
-    //         console.log(e);
-    //     }
-
-    // }
+    async getMessages() {
+        try {
+            this.props.actions.common.showLoading(true);
+            const msg = await apiService.getMessages(2, 3);
+            this.setState({
+                messages: msg,
+            });
+        } catch (e) {
+            console.log(e);
+        } finally {
+            this.props.actions.common.showLoading(false);
+        }
+    }
 
     onSend(messages = []) {
         this.setState(previousState => ({
@@ -75,67 +73,28 @@ export class ChatScreen extends Component<IProps, IState> {
         });
     }
 
-
     componentDidMount() {
 
-        chatService.refOn((message: any) => {
-            console.log(message);
-        });
-
-        // if (helper.getKeyMessages(2, 3) !== '') {
-            
-        //     const keyOfMsg = helper.getKeyMessages(2, 3);
-        //     firebase.database().ref('messages').child(keyOfMsg).limitToLast(20).on('child_added', (snap: any) => {
-        //         // console.log('Messages', snap.val());
-        //         const result: IMessage = snap.val();
-        //         const msg: any = this.state.messages;
-        //         msg.push(result);
-        //         this.setState({
-        //             messages: msg
-        //         }, () => {
-        //             console.log(this.state.messages);
-        //         });
-        //     });
-
-        // }
-
-        // firebase.database().get
-
         // this.setState({
-        //     guestText: 'Đấy cũng là câu đùa cửa miệng của nhiều người đối với Đào, nhưng lần nào nghe nói câu nói ấy chị cũng buồn tủi như chợt được biết lần đầu về mình và chỉ trong chốc lát nét mặt chị đã thay đổi hẳn'
+        //     messages: [
+        //         {
+        //             _id: 1,
+        //             text: 'First messages',
+        //             createdAt: new Date(),
+        //             user: {
+        //                 _id: 2,
+        //                 name: 'React Native',
+        //                 avatar: 'https://placeimg.com/140/140/any',
+        //             },
+        //         },
+        //     ],
         // });
-
-        // setTimeout(() => {
-        //     this.setState({
-        //         guestText: 'sdad'
-        //     });
-        // }, 5000);
-
-
-        this.setState({
-            messages: [
-                {
-                    _id: 1,
-                    text: 'First messages',
-                    createdAt: new Date(),
-                    user: {
-                        _id: 2,
-                        name: 'React Native',
-                        avatar: 'https://placeimg.com/140/140/any',
-                    },
-                },
-            ],
-        });
         
     }
 
     handleLoadEarlier() {
         console.log('handleLoadEarlier');
     }
-
-    // handleChatView(event: any) {
-    //     console.log(event.nativeEvent.layout);
-    // }
 
     render() {
         return (
@@ -157,27 +116,3 @@ export class ChatScreen extends Component<IProps, IState> {
     }
 
 }
-
-{/* <View style={styleSheet.rowChat}>
-    <View style={styleSheet.guestChat}>
-        <View style={styleSheet.contentAvatar}>
-            <Avatar
-                source={AvatarDemo2()}
-                rounded
-                width={styles.avatarGuest.width}
-            ></Avatar>
-        </View>
-
-        <View style={styleSheet.contentGuestChatText} onLayout={(event) => this.handleChatView(event)}>
-            <Text style={styleSheet.chatText}>
-                {this.state.guestText}
-            </Text>
-        </View>
-    </View>
-
-    <View style={styleSheet.meChat}>
-        <View style={styleSheet.contentMeChatText}>
-            <Text style={styleSheet.chatText}>Me chat</Text>
-        </View>
-    </View>
-</View> */}

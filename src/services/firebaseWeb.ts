@@ -5,6 +5,9 @@ import helper from '../utilities/helper';
 // Config
 import config from '../assets/data/config.json';
 
+// Interfaces
+import { IUserGiftedChat, IMessageGiftedChat } from '../interfaces/chat.interface';
+
 class FirebaseWebService {
 
     constructor() {
@@ -190,16 +193,19 @@ class FirebaseWebService {
         });
     }
 
+    /**
+     * @param  {number} userId
+     * @param  {number} guestId
+     */
     getMessages(userId: number, guestId: number): Promise<any> {
         return new Promise((resolve, reject) => {
 
             if (helper.getKeyMessages(userId, guestId)) {
 
                 const keyOfMsg = helper.getKeyMessages(userId, guestId);
-                console.log(keyOfMsg);
                 firebase.database().ref('messages').child(keyOfMsg).once('value', res => {
                     if (res.val()) {
-                        resolve(res.val());
+                        resolve(this.convertMessages(res.val()));
                     } else {
                         reject();
                     }
@@ -210,6 +216,35 @@ class FirebaseWebService {
             }
 
         });
+    }
+
+    /**
+     * Function convert messages data
+     * @param  {any} data
+     */
+    convertMessages(data: any) {
+        const result = [];
+        if (Object.keys(data).length > 0) {
+            for (const key in data) {
+                if (data.hasOwnProperty(key)) {
+
+                    const userSender: IUserGiftedChat = {
+                        _id: data[key]['userId'],
+                    }
+
+                    const obj: IMessageGiftedChat = {
+                        _id: key,
+                        text: data[key]['message'],
+                        createdAt: new Date(data[key]['createdAt']),
+                        user: userSender,
+                    }
+
+                    result.push(obj);
+
+                }
+            }
+        }
+        return result;
     }
 
 }

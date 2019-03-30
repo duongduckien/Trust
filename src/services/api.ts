@@ -52,7 +52,7 @@ class APIService {
     getMessages(userId: number, guestId: number): Promise<any> {
         return new Promise(async (resolve, reject) => {
             try {
-                const messages = firebaseWebService.getMessages(userId, guestId);
+                const messages = await firebaseWebService.getMessages(userId, guestId);
                 resolve(messages);
             } catch (e) {
                 reject(e);
