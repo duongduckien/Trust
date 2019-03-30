@@ -63,6 +63,23 @@ class APIService {
         });
     }
 
+    async createUserExample() {
+        try {
+            const userData = {
+                email: 'test2@gmail.com',
+                password: '123456',
+                firstName: 'The',
+                lastName: 'Test2',
+                phone: '',
+                avatar: '',
+            }
+            const result = await firebaseWebService.createUser(userData);
+            console.log(result);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
 }
 
 const apiService = new APIService();

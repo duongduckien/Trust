@@ -62,12 +62,13 @@ class FirebaseSDKService {
      * @param  {string} password
      */
     createUser(email: string, password: string): Promise<any> {
-        return new Promise((resolve, reject) => {
-            firebase.auth().createUserWithEmailAndPassword(email, password).then((res: any) => {
-
-            }).catch((err: any) => {
-                reject(err);
-            });
+        return new Promise(async (resolve, reject) => {
+            try {
+                const result = await firebase.auth().createUserWithEmailAndPassword(email, password);
+                resolve(result);
+            } catch (e) {
+                reject(e);
+            }
         });
     }
 

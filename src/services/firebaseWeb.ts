@@ -1,4 +1,6 @@
 import firebase from 'firebase';
+import firebaseSDK from './firebaseSDK';
+import helper from '../utilities/helper';
 
 // Config
 import config from '../assets/data/config.json';
@@ -17,7 +19,7 @@ class FirebaseWebService {
      */
     insert(collection: string, data: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            firebase.database().ref(collection).push(data, err => {
+            firebase.database().ref(collection).push(data, (err: any) => {
                 if (!err) {
                     resolve();
                 } else {
@@ -34,7 +36,7 @@ class FirebaseWebService {
      */
     updateWhereKey(collection: string, key: string, data: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            firebase.database().ref(collection).child(key).update(data, err => {
+            firebase.database().ref(collection).child(key).update(data, (err: any) => {
                 if (!err) {
                     resolve();
                 } else {
@@ -93,6 +95,11 @@ class FirebaseWebService {
         });
     }
 
+    /**
+     * @param  {string} collection
+     * @param  {string} key
+     * @param  {any} value
+     */
     setWhereKey(collection: string, key: string, value: any): Promise<any> {
         return new Promise((resolve, reject) => {
             firebase.database().ref(collection).child(key).set(value).then((res: any) => {
@@ -117,6 +124,42 @@ class FirebaseWebService {
                     reject();
                 }
             });
+        });
+    }
+
+    createUser(userData: any): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            
+            try {
+
+                if (!userData['email'] || userData['email'] === '') {
+                    throw new Error('Missing email value.');
+                }
+
+                if (!userData['password'] || userData['password'] === '') {
+                    throw new Error('Missing password value.');
+                }
+
+                await firebaseSDK.createUser(userData['email'], userData['password']);
+
+                // Get unique ID
+                const id = await this.getUniqueId('users');
+
+                // Add new keys
+                userData['userId'] = id;
+                userData['createdAt'] = helper.getTime();
+                userData['updatedAt'] = helper.getTime();
+                userData['deleted'] = 0;
+
+                // Insert user data to firebase
+                await this.insert('users', userData);
+
+                resolve('Create user succesfully.');
+
+            } catch (e) {
+                reject(e);
+            }
+
         });
     }
 
