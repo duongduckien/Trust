@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import { Content, Container } from 'native-base';
 import { Avatar } from 'react-native-elements';
 import { GiftedChat } from 'react-native-gifted-chat';
+import firebase from 'firebase';
 
 // Components
 import { AvatarDemo2 } from '../../components/Images/Images';
@@ -10,14 +11,21 @@ import { AvatarDemo2 } from '../../components/Images/Images';
 // Languages
 import { strings } from '../../utilities/i18n';
 
-// Components
-
 // Styles
 import { styleSheet, styles } from './styles';
 import { mainStyles } from '../../styles';
 
 // Config
 import config from '../../assets/data/config.json';
+
+// Utilities
+import helper from '../../utilities/helper';
+
+// Interfaces
+import { IMessage } from '../../interfaces/chat.interface';
+
+// Services
+import chatService from '../../services/chat';
 
 interface IProps {
 
@@ -35,7 +43,29 @@ export class ChatScreen extends Component<IProps, IState> {
 
     constructor(props: any) {
         super(props);
+        // this.getMessages();
     }
+
+    componentWillMount() {
+
+        // firebase.database().ref('messages').child('2_3').once('value', res => {
+        //     console.log(res);
+        // });
+
+    }
+
+    // async getMessages() {
+
+    //     try {
+
+    //         const msg = await apiService.getMessages(2, 3);
+    //         console.log(msg);
+
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+
+    // }
 
     onSend(messages = []) {
         this.setState(previousState => ({
@@ -47,6 +77,30 @@ export class ChatScreen extends Component<IProps, IState> {
 
 
     componentDidMount() {
+
+        chatService.refOn((message: any) => {
+            console.log(message);
+        });
+
+        // if (helper.getKeyMessages(2, 3) !== '') {
+            
+        //     const keyOfMsg = helper.getKeyMessages(2, 3);
+        //     firebase.database().ref('messages').child(keyOfMsg).limitToLast(20).on('child_added', (snap: any) => {
+        //         // console.log('Messages', snap.val());
+        //         const result: IMessage = snap.val();
+        //         const msg: any = this.state.messages;
+        //         msg.push(result);
+        //         this.setState({
+        //             messages: msg
+        //         }, () => {
+        //             console.log(this.state.messages);
+        //         });
+        //     });
+
+        // }
+
+        // firebase.database().get
+
         // this.setState({
         //     guestText: 'Đấy cũng là câu đùa cửa miệng của nhiều người đối với Đào, nhưng lần nào nghe nói câu nói ấy chị cũng buồn tủi như chợt được biết lần đầu về mình và chỉ trong chốc lát nét mặt chị đã thay đổi hẳn'
         // });
@@ -56,6 +110,8 @@ export class ChatScreen extends Component<IProps, IState> {
         //         guestText: 'sdad'
         //     });
         // }, 5000);
+
+
         this.setState({
             messages: [
                 {
@@ -94,6 +150,10 @@ export class ChatScreen extends Component<IProps, IState> {
                 }}
             />
         );
+    }
+
+    componentWillUnmount() {
+        
     }
 
 }

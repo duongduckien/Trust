@@ -25,13 +25,13 @@ class Helper {
         return (Platform.OS === 'android') ? true : false;
     }
 
-    isIphoneX () {
+    isIphoneX() {
         const height = config['devices']['iphoneX']['height'];
         const width = config['devices']['iphoneX']['width'];
         return (
             Platform.OS === 'ios' &&
             ((dimensions.fullHeight === height && dimensions.fullWidth === width) ||
-            (dimensions.fullHeight === width && dimensions.fullWidth === height))
+                (dimensions.fullHeight === width && dimensions.fullWidth === height))
         );
     }
 
@@ -41,7 +41,7 @@ class Helper {
         return (
             Platform.OS === 'ios' &&
             ((dimensions.fullHeight === height && dimensions.fullWidth === width) ||
-            (dimensions.fullHeight === width && dimensions.fullWidth === height))
+                (dimensions.fullHeight === width && dimensions.fullWidth === height))
         );
     }
 
@@ -67,7 +67,7 @@ class Helper {
 
             }
             case 'warning': {
-                
+
                 showMessage({
                     message: strings('WARNING'),
                     description: msg,
@@ -75,12 +75,12 @@ class Helper {
                     color: colors.textBlack,
                     icon: 'warning'
                 });
-                
+
                 break;
 
             }
             case 'error': {
-                
+
                 showMessage({
                     message: strings('ERROR'),
                     description: msg,
@@ -88,7 +88,7 @@ class Helper {
                     color: colors.textWhite,
                     icon: 'danger'
                 });
-                
+
                 break;
 
             }
@@ -112,7 +112,7 @@ class Helper {
      * @param  {string} name
      */
     setTitle(name: string) {
-        Actions.refresh({key: 'home', title: name});
+        Actions.refresh({ key: 'home', title: name });
     }
 
     /**
@@ -121,6 +121,34 @@ class Helper {
     getTime() {
         const now = new Date();
         return moment.utc(now).valueOf();
+    }
+
+    /**
+     * Function get custom key of messages
+     * @param  {number} userId
+     * @param  {number} guestId
+     */
+    getKeyMessages(userId: number, guestId: number) {
+        if (Number.isInteger(userId) && Number.isInteger(guestId)) {
+            if (userId < guestId) {
+                return `${userId}_${guestId}`;
+            }
+            return `${guestId}_${userId}`;
+        }
+        return '';
+    }
+
+    /**
+     * Function create a random string
+     * @param  {number} len
+     */
+    randomString(len: number) {
+        let str = '';
+        let charset = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        for (let i = 0; i < len; i++) {
+            str += charset.charAt(Math.floor(Math.random() * charset.length));
+        }
+        return str;
     }
 
 }

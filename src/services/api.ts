@@ -1,5 +1,6 @@
 import firebaseSDKService from './firebaseSDK';
 import firebaseWebService from './firebaseWeb';
+import helper from '../utilities/helper';
 
 class APIService {
 
@@ -48,6 +49,17 @@ class APIService {
         return user['uid'];
     }
 
+    getMessages(userId: number, guestId: number): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const messages = firebaseWebService.getMessages(userId, guestId);
+                resolve(messages);
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
     /**
     |--------------------------------------------------
     | Function for test
@@ -76,6 +88,21 @@ class APIService {
             const result = await firebaseWebService.createUser(userData);
             console.log(result);
         } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async createMsgExample() {
+        try {
+            const customKey = '2_3';
+            const msgData = {
+                userId: 2,
+                message: `${helper.randomString(10)} from 2`,
+                createdAt: helper.getTime(), 
+            };
+            await firebaseWebService.createMessage(customKey, msgData);
+            console.log('Create message successfully.');
+        } catch(e) {
             console.log(e);
         }
     }

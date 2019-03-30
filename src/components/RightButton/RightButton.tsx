@@ -33,7 +33,7 @@ export class RightButton extends Component<IProps, IState> {
             // const res = await firebaseWebService.getUniqueId('users');
             // console.log(res);
 
-            await apiService.createUserExample();
+            await apiService.createMsgExample();
         } catch (e) {
             console.log(e);
         }

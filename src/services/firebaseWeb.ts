@@ -45,7 +45,7 @@ class FirebaseWebService {
             })
         });
     }
-    
+
     /**
      * @param  {string} collection
      * @param  {string} key
@@ -127,9 +127,24 @@ class FirebaseWebService {
         });
     }
 
+    getWhereCustomKey(collection: string, customKey: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            firebase.database().ref(collection).orderByChild(customKey).once('value', (res: any) => {
+                if (res.val()) {
+                    resolve(res.val());
+                } else {
+                    reject();
+                }
+            });
+        });
+    }
+
+    /**
+     * @param  {any} userData
+     */
     createUser(userData: any): Promise<any> {
         return new Promise(async (resolve, reject) => {
-            
+
             try {
 
                 if (!userData['email'] || userData['email'] === '') {
@@ -158,6 +173,40 @@ class FirebaseWebService {
 
             } catch (e) {
                 reject(e);
+            }
+
+        });
+    }
+
+    createMessage(customKey: string, msgData: any): Promise<any> {
+        return new Promise((resolve, reject) => {
+            firebase.database().ref('messages').child(customKey).push(msgData, (err: any) => {
+                if (!err) {
+                    resolve();
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
+    getMessages(userId: number, guestId: number): Promise<any> {
+        return new Promise((resolve, reject) => {
+
+            if (helper.getKeyMessages(userId, guestId)) {
+
+                const keyOfMsg = helper.getKeyMessages(userId, guestId);
+                console.log(keyOfMsg);
+                firebase.database().ref('messages').child(keyOfMsg).once('value', res => {
+                    if (res.val()) {
+                        resolve(res.val());
+                    } else {
+                        reject();
+                    }
+                });
+
+            } else {
+                reject('Cannot create key of message.');
             }
 
         });
