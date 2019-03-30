@@ -1,10 +1,13 @@
 import { combineReducers } from 'redux';
-import { commonReducer, CommonState } from './common.reducer';
+import { commonReducer, ICommonState } from './common.reducer';
+import { chatReducer, IChatState } from './chat.reducer';
 
-export interface State {
-    common: CommonState;
+export interface IState {
+    common: ICommonState;
+    chat: IChatState;
 };
 
-export default combineReducers<State>({
-    common: commonReducer
+export default combineReducers<IState>({
+    common: commonReducer,
+    chat: chatReducer,
 });

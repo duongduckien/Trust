@@ -1,18 +1,18 @@
 import * as types from '../actions/types';
 
-export interface CommonState {
+export interface ICommonState {
     showLoading: boolean;
     showAlert: any;
     rootScreen: string;
 }
 
-export const COMMON_INITAL_STATE: CommonState = {
+export const COMMON_INITAL_STATE: ICommonState = {
     showLoading: false,
     showAlert: {},
     rootScreen: 'MessagesScreen'
 };
 
-export function commonReducer(state = COMMON_INITAL_STATE, action: any): CommonState {
+export function commonReducer(state = COMMON_INITAL_STATE, action: any): ICommonState {
     switch (action.type) {
         case types.SHOW_LOADING: {
             return { ...state, ...{ showLoading: action.data } };
