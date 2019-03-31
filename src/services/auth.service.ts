@@ -1,4 +1,3 @@
-import firebaseSDKService from './firebaseSDK.service';
 import firebaseWebService from './firebaseWeb.service';
 import helper from '../utilities/helper';
 
@@ -10,7 +9,7 @@ class AuthService {
      */
     login(params: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            firebaseSDKService.auth(params.email, params.password).then((res: any) => {
+            firebaseWebService.auth(params.email, params.password).then((res: any) => {
                 resolve(res);
             }).catch((err: any) => {
                 reject(err);
@@ -23,7 +22,7 @@ class AuthService {
      */
     isLogged(): Promise<any> {
         return new Promise((resolve, reject) => {
-            firebaseSDKService.logged().then((res: any) => {
+            firebaseWebService.logged().then((res: any) => {
                 resolve(res);
             }).catch((err: any) => {
                 reject(err);
@@ -36,7 +35,7 @@ class AuthService {
      */
     logout(): Promise<any> {
         return new Promise((resolve, reject) => {
-            firebaseSDKService.signOut().then(() => {
+            firebaseWebService.signOut().then(() => {
                 resolve();
             }).catch(() => {
                 reject();

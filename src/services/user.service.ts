@@ -1,4 +1,3 @@
-import firebaseSDKService from './firebaseSDK.service';
 import firebaseWebService from './firebaseWeb.service';
 import helper from '../utilities/helper';
 
@@ -10,7 +9,7 @@ class UserService {
      */
     createAccount(params: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            firebaseSDKService.createUser(params.email, params.password).then((res: any) => {
+            firebaseWebService.createUser(params).then((res: any) => {
                 resolve(res);
             }).catch((err: any) => {
                 reject(err);
@@ -55,12 +54,12 @@ class UserService {
         return new Promise(async (resolve, reject) => {
             try {
 
-                const currentUser: any = firebaseSDKService.getCurrentUser();
-                console.log(currentUser);
+                // const currentUser: any = firebaseSDKService.getCurrentUser();
+                // console.log(currentUser);
                 // const email = currentUser._user.email;
-                // const userInfo = await firebaseWebService.getWhere('users', 'email', email);
-                // console.log(userInfo);
-                resolve();
+                const userInfo = await firebaseWebService.getWhere('users', 'email', 'test1@gmail.com');
+                console.log(userInfo);
+                resolve(userInfo);
 
             } catch (e) {
                 console.log(e);

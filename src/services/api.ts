@@ -1,4 +1,3 @@
-import firebaseSDKService from './firebaseSDK.service';
 import firebaseWebService from './firebaseWeb.service';
 import helper from '../utilities/helper';
 

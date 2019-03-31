@@ -27,6 +27,7 @@ import { IMessage, IMessageGiftedChat } from '../../interfaces/chat.interface';
 
 // Services
 import apiService from '../../services/api';
+import userService from '../../services/user.service';
 
 interface IProps {
     actions: {
@@ -56,7 +57,7 @@ export class ChatScreen extends Component<IProps, IState> {
 
     async getMessages() {
         try {
-            const guest = await apiService.getUserInfo(3);
+            const guest = await userService.getUserInfoByID(3);
             if (!Array.isArray(guest) || guest.length < 0) {
                 throw new Error('Cannot get the information of guest.');
             }

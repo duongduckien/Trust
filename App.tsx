@@ -51,20 +51,25 @@ interface IState {
 export default class App extends Component<IProps, IState> {
 
     state = {
-        logged: false,
+        logged: true,
     }
 
     constructor(props: any) {
         super(props);
+        this.isLogged();
     }
 
-    async componentDidMount() {
+    async isLogged() {
         try {
             await authService.isLogged();
             this.setState({ logged: true });
         } catch (e) {
             this.setState({ logged: false });
         }
+    }
+
+    componentDidMount() {
+       
     }
 
     renderMenuButton(key: string) {
