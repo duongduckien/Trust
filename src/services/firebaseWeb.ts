@@ -1,5 +1,8 @@
 import firebase from 'firebase';
 import firebaseSDK from './firebaseSDK';
+import _ from 'lodash';
+
+// Utilities
 import helper from '../utilities/helper';
 
 // Config
@@ -181,15 +184,29 @@ class FirebaseWebService {
         });
     }
 
-    createMessage(customKey: string, msgData: any): Promise<any> {
+    /**
+     * @param  {number} userId
+     * @param  {number} guestId
+     * @param  {any} msgData
+     */
+    createMessage(userId: number, guestId: number, msgData: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            firebase.database().ref('messages').child(customKey).push(msgData, (err: any) => {
-                if (!err) {
-                    resolve();
-                } else {
-                    reject(err);
-                }
-            });
+
+            if (helper.getKeyMessages(userId, guestId)) {
+
+                const keyOfMsg = helper.getKeyMessages(userId, guestId);
+                firebase.database().ref('messages').child(keyOfMsg).push(msgData, (err: any) => {
+                    if (!err) {
+                        resolve();
+                    } else {
+                        reject(err);
+                    }
+                });
+
+            } else {
+                reject('Cannot create key of message.');
+            }
+
         });
     }
 
@@ -244,7 +261,7 @@ class FirebaseWebService {
                 }
             }
         }
-        return result;
+        return _.orderBy(result, 'createdAt', 'desc');
     }
 
 }

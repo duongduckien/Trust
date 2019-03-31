@@ -53,23 +53,39 @@ export class ChatScreen extends Component<IProps, IState> {
 
     async getMessages() {
         try {
-            this.props.actions.common.showLoading(true);
+            // this.props.actions.common.showLoading(true);
             const msg = await apiService.getMessages(2, 3);
+            console.log(msg);
             this.setState({
                 messages: msg,
             });
         } catch (e) {
             console.log(e);
         } finally {
-            this.props.actions.common.showLoading(false);
+            // this.props.actions.common.showLoading(false);
         }
     }
 
     onSend(messages = []) {
         this.setState(previousState => ({
             messages: GiftedChat.append(previousState.messages, messages),
-        }), () => {
-            console.log(this.state.messages);
+        }), async () => {
+
+            try {
+
+                console.log(messages);
+                const msgData: IMessage = {
+                    createdAt: new Date(messages[0]['createdAt']).getTime(),
+                    message: messages[0]['text'],
+                    userId: messages[0]['user']['_id'],
+                }
+                await apiService.createMessage(2, 3, msgData);
+                console.log('Create message successfully.');
+
+            } catch (e) {
+                console.log(e);
+            }
+
         });
     }
 

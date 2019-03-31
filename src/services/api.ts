@@ -60,6 +60,17 @@ class APIService {
         });
     }
 
+    createMessage(userId: number, guestId: number, msgData: any): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await firebaseWebService.createMessage(userId, guestId, msgData);
+                resolve();
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
     /**
     |--------------------------------------------------
     | Function for test
@@ -94,13 +105,12 @@ class APIService {
 
     async createMsgExample() {
         try {
-            const customKey = '2_3';
             const msgData = {
                 userId: 2,
                 message: `${helper.randomString(10)} from 2`,
                 createdAt: helper.getTime(), 
             };
-            await firebaseWebService.createMessage(customKey, msgData);
+            await firebaseWebService.createMessage(2, 3, msgData);
             console.log('Create message successfully.');
         } catch(e) {
             console.log(e);
