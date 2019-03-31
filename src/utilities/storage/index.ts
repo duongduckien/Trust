@@ -8,7 +8,7 @@ class Storage {
                 resolve();
             }).catch(() => {
                 reject();
-            })
+            });
         });
     }
 
@@ -18,7 +18,17 @@ class Storage {
                 resolve(value);
             }).catch(() => {
                 reject();
-            })
+            });
+        });
+    }
+
+    removeItem(key: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            AsyncStorage.removeItem(key).then((value: any) => {
+                resolve();
+            }).catch(() => {
+                reject();
+            });
         });
     }
 

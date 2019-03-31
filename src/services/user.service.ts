@@ -49,19 +49,12 @@ class UserService {
     /**
      * Function get current user
      */
-    getCurrentUser(): Promise<any> {
+    getCurrentUser(email: string): Promise<any> {
         return new Promise(async (resolve, reject) => {
             try {
-
-                // const currentUser: any = firebaseSDKService.getCurrentUser();
-                // console.log(currentUser);
-                // const email = currentUser._user.email;
-                const userInfo = await firebaseSDKService.getWhere('users', 'email', 'test1@gmail.com');
-                console.log(userInfo);
-                resolve(userInfo);
-
+                const userInfo = await firebaseSDKService.getWhere('users', 'email', email);
+                resolve(userInfo[0]);
             } catch (e) {
-                console.log(e);
                 reject(e);
             }
         });

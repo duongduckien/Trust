@@ -21,8 +21,16 @@ export function* login(action: any) {
         yield put(showLoading(true));
         const params = action.payload.items;
         const data = yield call(authService.login, params);
-        console.log(data);
-        storage.setItem('user', JSON.stringify(data));
+        const userInfo = yield call(userService.getCurrentUser, data.user._user.email);
+
+        // Save user data to storage
+        const storeData = {
+            email: userInfo.email,
+            userId: userInfo.userId,
+            $key: userInfo.$key,
+        }
+        storage.setItem('user', JSON.stringify(storeData));
+
         yield put(showLoading(false));
 
         Actions.home();
@@ -44,6 +52,7 @@ export function* logout() {
     try {
 
         yield authService.logout();
+        storage.removeItem('user');
         Actions.login();
 
     } catch (e) {
