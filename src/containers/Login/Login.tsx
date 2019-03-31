@@ -25,8 +25,7 @@ import validation from '../../utilities/validation';
 
 interface IProps {
     actions: {
-        login: any;
-        common: any;
+        auth: any;
     }
 }
 
@@ -43,8 +42,10 @@ export class LoginScreen extends Component<IProps, IState> {
     loginEmail(params: any) {
 
         if (config['env'] === 'dev') {
-            params.email = 'duongduckien7590@gmail.com',
-            params.password = '@abc@123';
+            // params.email = 'duongduckien7590@gmail.com',
+            // params.password = '@abc@123';
+            params.email = 'test1@gmail.com',
+            params.password = '123456';
         }
 
         const rules = validation.loginValidations;
@@ -56,7 +57,7 @@ export class LoginScreen extends Component<IProps, IState> {
         } else if (passwordValidation.isErr) {
             helper.showAlert('warning', passwordValidation.msgErr);
         } else {
-            this.props.actions.login.login(params);
+            this.props.actions.auth.login(params);
         }
 
     }

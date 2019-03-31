@@ -56,7 +56,7 @@ export class ChatScreen extends Component<IProps, IState> {
 
     async getMessages() {
         try {
-            const guest = await apiService.getGuestInfo(3);
+            const guest = await apiService.getUserInfo(3);
             if (!Array.isArray(guest) || guest.length < 0) {
                 throw new Error('Cannot get the information of guest.');
             }

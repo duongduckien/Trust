@@ -9,6 +9,7 @@ interface Props {
     common: any;
     actions: {
         common: any;
+        auth: any;
     };
 }
 
@@ -32,7 +33,7 @@ export class AlertDialog extends Component<Props, State> {
         
         switch (type) {
             case 'logout': {
-                this.props.actions.common.logOut();
+                this.props.actions.auth.logout();
                 break;
             }
             default: {

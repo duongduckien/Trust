@@ -26,14 +26,9 @@ export class RightButton extends Component<IProps, IState> {
     }
 
     async handleVoiceCall() {
-        // console.log('handleVoiceCall');
-        // const res = apiService.getUserId();
-        // console.log(res);
         try {
-            // const res = await firebaseWebService.getUniqueId('users');
-            // console.log(res);
-
-            await apiService.createMsgExample();
+            // await apiService.createMsgExample();
+            await apiService.createUserExample();
         } catch (e) {
             console.log(e);
         }

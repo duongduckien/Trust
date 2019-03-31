@@ -4,51 +4,6 @@ import helper from '../utilities/helper';
 
 class APIService {
 
-    login(params: any): Promise<any> {
-        return new Promise((resolve, reject) => {
-            firebaseSDKService.auth(params.email, params.password).then((res: any) => {
-                resolve(res);
-            }).catch((err: any) => {
-                reject(err);
-            });
-        });
-    }
-
-    isLogged(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            firebaseSDKService.logged().then((res: any) => {
-                resolve(res);
-            }).catch((err: any) => {
-                reject(err);
-            });
-        });
-    }
-
-    logout(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            firebaseSDKService.signOut().then(() => {
-                resolve();
-            }).catch(() => {
-                reject();
-            });
-        });
-    }
-
-    createAccount(params: any): Promise<any> {
-        return new Promise((resolve, reject) => {
-            firebaseSDKService.createUser(params.email, params.password).then((res: any) => {
-                resolve(res);
-            }).catch((err: any) => {
-                reject(err);
-            });
-        });
-    }
-
-    getUserId() {
-        const user: any = firebaseSDKService.getCurrentUser();
-        return user['uid'];
-    }
-
     getMessages(userId: number, guestId: number, guestInfo: any): Promise<any> {
         return new Promise(async (resolve, reject) => {
             try {
@@ -71,17 +26,6 @@ class APIService {
         });
     }
 
-    getGuestInfo(guestId: number): Promise<any> {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const guest = await firebaseWebService.getWhere('users', 'userId', guestId);
-                resolve(guest);
-            } catch (e) {
-                console.log(e);
-            }
-        });
-    }
-
     /**
     |--------------------------------------------------
     | Function for test
@@ -100,10 +44,10 @@ class APIService {
     async createUserExample() {
         try {
             const userData = {
-                email: 'test2@gmail.com',
-                password: '123456',
-                firstName: 'The',
-                lastName: 'Test2',
+                email: 'duongduckien7590@gmail.com',
+                password: '@abc@123',
+                firstName: 'Duong',
+                lastName: 'Kien',
                 phone: '',
                 avatar: '',
             }

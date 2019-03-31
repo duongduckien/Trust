@@ -33,7 +33,7 @@ import config from './src/assets/data/config.json';
 import { mainStyles } from './src/styles';
 
 // Services
-import apiService from './src/services/api';
+import authService from './src/services/auth.service';
 
 // Create store
 const sagaMiddleware = createSagaMiddleware();
@@ -60,7 +60,7 @@ export default class App extends Component<IProps, IState> {
 
     async componentDidMount() {
         try {
-            await apiService.isLogged();
+            await authService.isLogged();
             this.setState({ logged: true });
         } catch (e) {
             this.setState({ logged: false });

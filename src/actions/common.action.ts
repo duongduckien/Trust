@@ -1,4 +1,8 @@
-import { SHOW_LOADING, SHOW_ALERT, LOGOUT, CHANGE_ROOT_SCREEN } from './types';
+import { 
+    SHOW_LOADING, 
+    SHOW_ALERT, 
+    CHANGE_ROOT_SCREEN,
+} from './types';
 
 export const showLoading = (data: boolean) => ({
     type: SHOW_LOADING,
@@ -8,10 +12,6 @@ export const showLoading = (data: boolean) => ({
 export const showAlert = (data: any) => ({
     type: SHOW_ALERT,
     data,
-});
-
-export const logOut = () => ({
-    type: LOGOUT,
 });
 
 export const changeRootScreen = (data: string) => ({

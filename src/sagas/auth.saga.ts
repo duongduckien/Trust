@@ -1,4 +1,4 @@
-import { put, call, fork, takeLatest } from 'redux-saga/effects';
+import { put, call, fork, takeLatest, takeEvery } from 'redux-saga/effects';
 import { Actions } from 'react-native-router-flux';
 import * as types from '../actions/types';
 import { showLoading } from '../actions/common.action';
@@ -38,8 +38,26 @@ export function* watchLogin() {
     yield takeLatest(types.LOGIN, login);
 }
 
-const loginSaga = [
+export function* logout() {
+
+    try {
+
+        yield authService.logout();
+        Actions.login();
+
+    } catch (e) {
+        console.log(e);
+    }
+
+}
+
+export function* watchLogout() {
+    yield takeEvery(types.LOGOUT, logout);
+}
+
+const authSaga = [
     fork(watchLogin),
+    fork(watchLogout),
 ];
 
-export default loginSaga;
+export default authSaga;

@@ -21,26 +21,8 @@ export function* watchShowLoading() {
     yield takeEvery(types.SHOW_LOADING, showLoading);
 }
 
-export function* logOut() {
-
-    try {
-
-        yield apiService.logout();
-        Actions.login();
-
-    } catch (e) {
-        console.log(e);
-    }
-
-}
-
-export function* watchLogOut() {
-    yield takeEvery(types.LOGOUT, logOut);
-}
-
 const commonSaga = [
     fork(watchShowLoading),
-    fork(watchLogOut),
 ];
 
 export default commonSaga;
