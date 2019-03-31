@@ -1,5 +1,4 @@
-import firebaseWebService from './firebaseWeb.service';
-import helper from '../utilities/helper';
+import firebaseSDKService from './firebaseSDK.service';
 
 class UserService {
 
@@ -9,7 +8,7 @@ class UserService {
      */
     createAccount(params: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            firebaseWebService.createUser(params).then((res: any) => {
+            firebaseSDKService.createUser(params).then((res: any) => {
                 resolve(res);
             }).catch((err: any) => {
                 reject(err);
@@ -24,7 +23,7 @@ class UserService {
     getUserInfoByID(userId: number): Promise<any> {
         return new Promise(async (resolve, reject) => {
             try {
-                const user = await firebaseWebService.getWhere('users', 'userId', userId);
+                const user = await firebaseSDKService.getWhere('users', 'userId', userId);
                 resolve(user);
             } catch (e) {
                 reject(e);
@@ -39,7 +38,7 @@ class UserService {
     getUserInfoByEmail(email: string): Promise<any> {
         return new Promise(async (resolve, reject) => {
             try {
-                const user = await firebaseWebService.getWhere('users', 'email', email);
+                const user = await firebaseSDKService.getWhere('users', 'email', email);
                 resolve(user);
             } catch (e) {
                 reject(e);
@@ -57,7 +56,7 @@ class UserService {
                 // const currentUser: any = firebaseSDKService.getCurrentUser();
                 // console.log(currentUser);
                 // const email = currentUser._user.email;
-                const userInfo = await firebaseWebService.getWhere('users', 'email', 'test1@gmail.com');
+                const userInfo = await firebaseSDKService.getWhere('users', 'email', 'test1@gmail.com');
                 console.log(userInfo);
                 resolve(userInfo);
 

@@ -22,6 +22,7 @@ export function* login(action: any) {
         const params = action.payload.items;
         const data = yield call(authService.login, params);
         console.log(data);
+        storage.setItem('user', JSON.stringify(data));
         yield put(showLoading(false));
 
         Actions.home();

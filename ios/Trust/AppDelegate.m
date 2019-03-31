@@ -18,7 +18,7 @@
   NSURL *jsCodeLocation;
   
   [FIRApp configure];
-//  [FIRDatabase database].persistenceEnabled = YES;
+  [FIRDatabase database].persistenceEnabled = YES;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 

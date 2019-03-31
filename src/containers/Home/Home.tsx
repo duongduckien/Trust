@@ -58,7 +58,17 @@ export class HomeScreen extends Component<IProps, IState> {
     }
 
     componentDidMount() {
+        this.getCurrentUser();
+    }
 
+    async getCurrentUser() {
+        try {
+
+            const user = await userService.getCurrentUser();
+
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     render() {
