@@ -49,10 +49,10 @@ class APIService {
         return user['uid'];
     }
 
-    getMessages(userId: number, guestId: number): Promise<any> {
+    getMessages(userId: number, guestId: number, guestInfo: any): Promise<any> {
         return new Promise(async (resolve, reject) => {
             try {
-                const messages = await firebaseWebService.getMessages(userId, guestId);
+                const messages = await firebaseWebService.getMessages(userId, guestId, guestInfo);
                 resolve(messages);
             } catch (e) {
                 reject(e);
@@ -67,6 +67,17 @@ class APIService {
                 resolve();
             } catch (e) {
                 reject(e);
+            }
+        });
+    }
+
+    getGuestInfo(guestId: number): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const guest = await firebaseWebService.getWhere('users', 'userId', guestId);
+                resolve(guest);
+            } catch (e) {
+                console.log(e);
             }
         });
     }
@@ -106,8 +117,8 @@ class APIService {
     async createMsgExample() {
         try {
             const msgData = {
-                userId: 2,
-                message: `${helper.randomString(10)} from 2`,
+                userId: 3,
+                message: `${helper.randomString(10)} from user 3`,
                 createdAt: helper.getTime(), 
             };
             await firebaseWebService.createMessage(2, 3, msgData);

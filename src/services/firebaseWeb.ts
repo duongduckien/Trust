@@ -125,7 +125,7 @@ class FirebaseWebService {
         return new Promise((resolve, reject) => {
             firebase.database().ref(collection).orderByChild(param).equalTo(value).once('value', (res: any) => {
                 if (res.val()) {
-                    resolve(res.val());
+                    resolve(this.convertData(res.val()));
                 } else {
                     reject();
                 }
@@ -214,7 +214,7 @@ class FirebaseWebService {
      * @param  {number} userId
      * @param  {number} guestId
      */
-    getMessages(userId: number, guestId: number): Promise<any> {
+    getMessages(userId: number, guestId: number, guestInfo: any): Promise<any> {
         return new Promise((resolve, reject) => {
 
             if (helper.getKeyMessages(userId, guestId)) {
@@ -222,7 +222,7 @@ class FirebaseWebService {
                 const keyOfMsg = helper.getKeyMessages(userId, guestId);
                 firebase.database().ref('messages').child(keyOfMsg).once('value', res => {
                     if (res.val()) {
-                        resolve(this.convertMessages(res.val()));
+                        resolve(this.convertMessages(res.val(), guestInfo));
                     } else {
                         reject();
                     }
@@ -238,8 +238,9 @@ class FirebaseWebService {
     /**
      * Function convert messages data
      * @param  {any} data
+     * @param  {any} guestInfo
      */
-    convertMessages(data: any) {
+    convertMessages(data: any, guestInfo: any) {
         const result = [];
         if (Object.keys(data).length > 0) {
             for (const key in data) {
@@ -247,6 +248,8 @@ class FirebaseWebService {
 
                     const userSender: IUserGiftedChat = {
                         _id: data[key]['userId'],
+                        name: `${guestInfo['firstName']} ${guestInfo['lastName']}`,
+                        avatar: guestInfo['avatar'],
                     }
 
                     const obj: IMessageGiftedChat = {
@@ -262,6 +265,24 @@ class FirebaseWebService {
             }
         }
         return _.orderBy(result, 'createdAt', 'desc');
+    }
+
+    /**
+     * Function convert data to array before resolve
+     * @param  {any} data
+     */
+    convertData(data: any) {
+        const result = [];
+        if (Object.keys(data).length > 0) {
+            for (const key in data) {
+                if (data.hasOwnProperty(key)) {
+                    const obj = data[key];
+                    obj['$key'] = key;
+                    result.push(obj);
+                }
+            }
+        }
+        return result;
     }
 
 }

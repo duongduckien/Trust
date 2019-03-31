@@ -4,6 +4,7 @@ import { Content, Container } from 'native-base';
 import { Avatar } from 'react-native-elements';
 import { GiftedChat } from 'react-native-gifted-chat';
 import firebase from 'firebase';
+import _ from 'lodash';
 
 // Components
 import { AvatarDemo2 } from '../../components/Images/Images';
@@ -22,7 +23,7 @@ import config from '../../assets/data/config.json';
 import helper from '../../utilities/helper';
 
 // Interfaces
-import { IMessage } from '../../interfaces/chat.interface';
+import { IMessage, IMessageGiftedChat } from '../../interfaces/chat.interface';
 
 // Services
 import apiService from '../../services/api';
@@ -35,12 +36,14 @@ interface IProps {
 
 interface IState {
     messages: any;
+    guestInfo: any;
 }
 
 export class ChatScreen extends Component<IProps, IState> {
 
     state = {
         messages: [],
+        guestInfo: {},
     }
 
     constructor(props: any) {
@@ -53,17 +56,42 @@ export class ChatScreen extends Component<IProps, IState> {
 
     async getMessages() {
         try {
-            // this.props.actions.common.showLoading(true);
-            const msg = await apiService.getMessages(2, 3);
-            console.log(msg);
+            const guest = await apiService.getGuestInfo(3);
+            if (!Array.isArray(guest) || guest.length < 0) {
+                throw new Error('Cannot get the information of guest.');
+            }
+            const msg = await apiService.getMessages(2, 3, guest[0]);
             this.setState({
                 messages: msg,
+                guestInfo: guest,
+            }, () => {
+                this.handleOnNewMsg(2, 3, msg, guest[0]);
             });
         } catch (e) {
             console.log(e);
-        } finally {
-            // this.props.actions.common.showLoading(false);
         }
+    }
+
+    handleOnNewMsg(userId: number, guestId: number, msgData: any, guestInfo: any) {
+        const customKey = helper.getKeyMessages(userId, guestId);
+        firebase.database().ref('messages').child(customKey).limitToLast(20).on('child_added', (res: any) => {
+            if (!_.find(msgData, {_id: res.key}) && res.val().userId === guestInfo['userId']) {
+                const msgGiftedChat: IMessageGiftedChat[] = [{
+                    _id: res.key,
+                    text: res.val().message,
+                    createdAt: res.val().createdAt,
+                    image: res.val().image ? res.val().image : '',
+                    user: {
+                        _id: guestInfo['userId'],
+                        name: `${guestInfo['firstName']} ${guestInfo['lastName']}`,
+                        avatar: guestInfo['avatar'],
+                    }
+                }];
+                this.setState(previousState => ({
+                    messages: GiftedChat.append(previousState.messages, msgGiftedChat),
+                }));
+            }
+        });
     }
 
     onSend(messages = []) {
@@ -73,14 +101,12 @@ export class ChatScreen extends Component<IProps, IState> {
 
             try {
 
-                console.log(messages);
                 const msgData: IMessage = {
                     createdAt: new Date(messages[0]['createdAt']).getTime(),
                     message: messages[0]['text'],
                     userId: messages[0]['user']['_id'],
                 }
                 await apiService.createMessage(2, 3, msgData);
-                console.log('Create message successfully.');
 
             } catch (e) {
                 console.log(e);
@@ -90,21 +116,6 @@ export class ChatScreen extends Component<IProps, IState> {
     }
 
     componentDidMount() {
-
-        // this.setState({
-        //     messages: [
-        //         {
-        //             _id: 1,
-        //             text: 'First messages',
-        //             createdAt: new Date(),
-        //             user: {
-        //                 _id: 2,
-        //                 name: 'React Native',
-        //                 avatar: 'https://placeimg.com/140/140/any',
-        //             },
-        //         },
-        //     ],
-        // });
         
     }
 
@@ -121,7 +132,7 @@ export class ChatScreen extends Component<IProps, IState> {
                 loadEarlier={true}
                 onLoadEarlier={() => this.handleLoadEarlier()}
                 user={{
-                    _id: 1,
+                    _id: 2,
                 }}
             />
         );
