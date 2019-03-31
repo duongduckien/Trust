@@ -111,7 +111,7 @@ export default class App extends Component<IProps, IState> {
                             <Scene
                                 navigationBarStyle={mainStyles.navigationBar}
                                 key="home"
-                                component={ChatScreen}
+                                component={HomeScreen}
                                 title={strings('MESSAGES_SCREEN_TITLE')}
                                 initial={this.state.logged}
                                 hideNavBar={false}

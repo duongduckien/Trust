@@ -1,5 +1,5 @@
-import firebaseSDKService from './firebaseSDK';
-import firebaseWebService from './firebaseWeb';
+import firebaseSDKService from './firebaseSDK.service';
+import firebaseWebService from './firebaseWeb.service';
 import helper from '../utilities/helper';
 
 class UserService {
@@ -46,6 +46,31 @@ class UserService {
                 reject(e);
             }
         });
+    }
+
+    /**
+     * Function get current user
+     */
+    getCurrentUser(): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+
+                const currentUser: any = firebaseSDKService.getCurrentUser();
+                console.log(currentUser);
+                // const email = currentUser._user.email;
+                // const userInfo = await firebaseWebService.getWhere('users', 'email', email);
+                // console.log(userInfo);
+                resolve();
+
+            } catch (e) {
+                console.log(e);
+                reject(e);
+            }
+        });
+    }
+
+    getuserInfo() {
+
     }
 
 }

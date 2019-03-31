@@ -1,5 +1,5 @@
-import firebaseSDKService from './firebaseSDK';
-import firebaseWebService from './firebaseWeb';
+import firebaseSDKService from './firebaseSDK.service';
+import firebaseWebService from './firebaseWeb.service';
 import helper from '../utilities/helper';
 
 class APIService {

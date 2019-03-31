@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-import firebaseSDK from './firebaseSDK';
+import firebaseSDK from './firebaseSDK.service';
 import _ from 'lodash';
 
 // Utilities

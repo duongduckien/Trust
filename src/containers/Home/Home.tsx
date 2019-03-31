@@ -23,6 +23,9 @@ import configData from '../../assets/data/config.json';
 // Languages
 import { strings } from '../../utilities/i18n';
 
+// Services
+import userService from '../../services/user.service';
+
 interface IProps {
     common: any;
 }
@@ -52,6 +55,10 @@ export class HomeScreen extends Component<IProps, IState> {
             swapWidthAndHeight: true,
             channelName: 'channelTest'
         };
+    }
+
+    componentDidMount() {
+
     }
 
     render() {
