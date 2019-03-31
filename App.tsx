@@ -51,7 +51,7 @@ interface IState {
 export default class App extends Component<IProps, IState> {
 
     state = {
-        logged: true,
+        logged: false,
     }
 
     constructor(props: any) {
