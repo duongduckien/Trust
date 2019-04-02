@@ -10,7 +10,7 @@ target 'Trust' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
 
-  pod 'react-native-agora', :path => '../node_modules/react-native-agora'
+  # pod 'react-native-agora', :path => '../node_modules/react-native-agora'
 
 end
 

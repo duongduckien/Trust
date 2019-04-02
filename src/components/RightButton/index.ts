@@ -5,7 +5,7 @@ import * as commonActions from '../../actions/common.action';
 
 const mapStateToProps = (state: any) => {
     return {
-
+        common: state.common,
     };
 };
 

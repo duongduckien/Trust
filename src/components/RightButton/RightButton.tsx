@@ -9,10 +9,10 @@ import { mainStyles, colors } from '../../styles';
 
 // Services
 import apiService from '../../services/api';
-import firebaseWebService from '../../services/firebaseWeb';
 
 interface IProps {
     key: string;
+    common: any;
 }
 
 interface IState {
@@ -28,7 +28,8 @@ export class RightButton extends Component<IProps, IState> {
     async handleVoiceCall() {
         try {
             // await apiService.createMsgExample();
-            await apiService.createUserExample();
+            // await apiService.createUserExample();
+            console.log('handleVoiceCall');
         } catch (e) {
             console.log(e);
         }
@@ -38,7 +39,11 @@ export class RightButton extends Component<IProps, IState> {
         console.log('handleVideoCall');
     }
 
-    render() {
+    handleAddFriend() {
+        console.log('handleAddFriend');
+    }
+
+    renderChatScreen() {
         return (
             <View style={styleSheet.contentRight}>
                 <View>
@@ -65,7 +70,52 @@ export class RightButton extends Component<IProps, IState> {
                     </TouchableOpacity>
                 </View>
             </View>
-        )
+        );
+    }
+
+    renderContactScreen() {
+        return (
+            <View style={styleSheet.contentRight}>
+                <View>
+                    <TouchableOpacity
+                        onPress={() => this.handleAddFriend()}
+                    >
+                        <Icon
+                            name='user-plus'
+                            type='font-awesome'
+                            iconStyle={styleSheet.icon}
+                        />
+                    </TouchableOpacity>
+                </View>
+            </View>
+        );
+    }
+
+    render() {
+
+        const nameScreen = this.props.common.rootScreen;
+
+        switch (nameScreen) {
+            case 'MessagesScreen': {
+                return (
+                    this.renderChatScreen()
+                );
+            }
+            case 'SettingsScreen': {
+                return (
+                    <View></View>
+                );
+            }
+            case 'ContactScreen': {
+                return (
+                    this.renderContactScreen()
+                );
+            }
+            default: {
+                break;
+            }
+        }
+
     }
 
 }
