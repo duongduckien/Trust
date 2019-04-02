@@ -46,17 +46,48 @@
     "redux-saga": "^0.16.2"
   },
   "devDependencies": {
+    "@types/enzyme": "^3.9.1",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/react": "^16.7.18",
     "@types/react-native": "^0.57.25",
     "babel-jest": "23.6.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
     "jest": "23.6.0",
+    "jest-fetch-mock": "^2.1.1",
     "metro-react-native-babel-preset": "0.51.1",
     "react-devtools": "^3.6.1",
+    "react-dom": "^16.8.6",
     "react-native-typescript-transformer": "^1.2.11",
     "react-test-renderer": "16.6.3",
+    "ts-jest": "^24.0.1",
     "typescript": "^3.2.2"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js",
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "tsconfig.jest.json"
+      }
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "modulePaths": [
+      "<rootDir>"
+    ],
+    "setupFiles": [
+      "./tests/setup.js"
+    ]
   }
 }

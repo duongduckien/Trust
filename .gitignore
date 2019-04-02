@@ -57,3 +57,7 @@ buck-out/
 
 # Pods
 ios/Pods
+
+# Jest
+.jest/
+coverage/

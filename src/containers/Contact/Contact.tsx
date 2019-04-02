@@ -17,6 +17,9 @@ import { mainStyles, colors } from '../../styles';
 // Config
 import config from '../../assets/data/config.json';
 
+// Utilities
+import storage from '../../utilities/storage';
+
 interface IProps {
 
 }
@@ -29,6 +32,23 @@ export class ContactScreen extends Component<IProps, IState> {
 
     constructor(props: any) {
         super(props);
+    }
+
+    componentDidMount() {
+        this.getUserInfo();
+    }
+
+    getListFriends() {
+        
+    }
+
+    async getUserInfo() {
+        try {
+            const userInfo = await storage.getItem('user');
+            console.log(JSON.parse(userInfo));
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     goToChat(id: string) {
