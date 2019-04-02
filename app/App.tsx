@@ -6,34 +6,34 @@ import { Router, Scene, Drawer } from 'react-native-router-flux';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import reducers from './src/reducers';
-import rootSaga from './src/sagas/rootSaga';
+import reducers from '../src/reducers';
+import rootSaga from '../src/sagas/rootSaga';
 
 // Languages
-import { strings } from './src/utilities/i18n';
+import { strings } from '../src/utilities/i18n';
 
 // Screens
-import HomeScreen from './src/containers/Home';
-import LoginScreen from './src/containers/Login';
-import ChatScreen from './src/containers/Chat';
+import HomeScreen from '../src/containers/Home';
+import LoginScreen from '../src/containers/Login';
+import ChatScreen from '../src/containers/Chat';
 
 // Components
-import Loading from './src/components/Loading';
-import Statusbar from './src/components/Statusbar';
-import AlertDialog from './src/components/AlertDialog';
-import SideMenu from './src/components/SideMenu';
-import MenuButton from './src/components/MenuButton';
-import BackButton from './src/components/BackButton';
-import RightButton from './src/components/RightButton';
+import Loading from '../src/components/Loading';
+import Statusbar from '../src/components/Statusbar';
+import AlertDialog from '../src/components/AlertDialog';
+import SideMenu from '../src/components/SideMenu';
+import MenuButton from '../src/components/MenuButton';
+import BackButton from '../src/components/BackButton';
+import RightButton from '../src/components/RightButton';
 
 // Config
-import config from './src/assets/data/config.json';
+import config from '../src/assets/data/config.json';
 
 // Styles
-import { mainStyles } from './src/styles';
+import { mainStyles } from '../src/styles';
 
 // Services
-import authService from './src/services/auth.service';
+import authService from '../src/services/auth.service';
 
 // Create store
 const sagaMiddleware = createSagaMiddleware();
