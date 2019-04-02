@@ -40,7 +40,7 @@ export class RightButton extends Component<IProps, IState> {
     }
 
     handleAddFriend() {
-        console.log('handleAddFriend');
+        Actions.addFriends();
     }
 
     renderChatScreen() {

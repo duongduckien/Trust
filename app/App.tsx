@@ -16,6 +16,7 @@ import { strings } from '../src/utilities/i18n';
 import HomeScreen from '../src/containers/Home';
 import LoginScreen from '../src/containers/Login';
 import ChatScreen from '../src/containers/Chat';
+import AddFriendsScreen from '../src/containers/AddFriends';
 
 // Components
 import Loading from '../src/components/Loading';
@@ -69,7 +70,7 @@ export default class App extends Component<IProps, IState> {
     }
 
     componentDidMount() {
-       
+
     }
 
     renderMenuButton(key: string) {
@@ -125,13 +126,22 @@ export default class App extends Component<IProps, IState> {
                                 titleStyle={mainStyles.titleHeader}
                             />
                         </Scene>
-                        
+
                         <Scene
                             navigationBarStyle={mainStyles.navigationBar}
                             key="chat"
                             component={ChatScreen}
                             hideNavBar={false}
                             renderLeftButton={() => this.renderBackButton('chat')}
+                            titleStyle={mainStyles.titleHeader}
+                        />
+
+                        <Scene
+                            navigationBarStyle={mainStyles.navigationBar}
+                            key="addFriends"
+                            component={AddFriendsScreen}
+                            hideNavBar={false}
+                            renderLeftButton={() => this.renderBackButton('addFriends')}
                             titleStyle={mainStyles.titleHeader}
                         />
                     </Drawer>
