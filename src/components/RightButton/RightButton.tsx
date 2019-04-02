@@ -9,6 +9,7 @@ import { mainStyles, colors } from '../../styles';
 
 // Services
 import apiService from '../../services/api';
+import fakerService from '../../services/faker.service'; 
 
 interface IProps {
     key: string;
@@ -39,8 +40,16 @@ export class RightButton extends Component<IProps, IState> {
         console.log('handleVideoCall');
     }
 
-    handleAddFriend() {
-        Actions.addFriends();
+    async handleAddFriends() {
+        try {
+
+            Actions.addFriends();
+            // await fakerService.addUsersFake();
+            // console.log('Add success.');
+
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     renderChatScreen() {
@@ -78,7 +87,7 @@ export class RightButton extends Component<IProps, IState> {
             <View style={styleSheet.contentRight}>
                 <View>
                     <TouchableOpacity
-                        onPress={() => this.handleAddFriend()}
+                        onPress={() => this.handleAddFriends()}
                     >
                         <Icon
                             name='user-plus'

@@ -1,4 +1,4 @@
-import firebaseWebService from './firebaseWeb.service';
+import firebaseSDKService from './firebaseSDK.service';
 import helper from '../utilities/helper';
 
 class APIService {
@@ -6,7 +6,7 @@ class APIService {
     getMessages(userId: number, guestId: number, guestInfo: any): Promise<any> {
         return new Promise(async (resolve, reject) => {
             try {
-                const messages = await firebaseWebService.getMessages(userId, guestId, guestInfo);
+                const messages = await firebaseSDKService.getMessages(userId, guestId, guestInfo);
                 resolve(messages);
             } catch (e) {
                 reject(e);
@@ -17,7 +17,7 @@ class APIService {
     createMessage(userId: number, guestId: number, msgData: any): Promise<any> {
         return new Promise(async (resolve, reject) => {
             try {
-                await firebaseWebService.createMessage(userId, guestId, msgData);
+                await firebaseSDKService.createMessage(userId, guestId, msgData);
                 resolve();
             } catch (e) {
                 reject(e);
@@ -32,7 +32,7 @@ class APIService {
     */
     createLastId(collectionName: string): Promise<any> {
         return new Promise((resolve, reject) => {
-            firebaseWebService.insertWithCustomKey('lastId', collectionName, 1).then(() => {
+            firebaseSDKService.insertWithCustomKey('lastId', collectionName, 1).then(() => {
                 resolve('Create lastID for collection successfully.');
             }).catch((err: any) => {
                 reject(err);
@@ -50,7 +50,7 @@ class APIService {
                 phone: '',
                 avatar: '',
             }
-            const result = await firebaseWebService.createUser(userData);
+            const result = await firebaseSDKService.createUser(userData);
             console.log(result);
         } catch (e) {
             console.log(e);
@@ -64,7 +64,7 @@ class APIService {
                 message: `${helper.randomString(10)} from user 3`,
                 createdAt: helper.getTime(), 
             };
-            await firebaseWebService.createMessage(2, 3, msgData);
+            await firebaseSDKService.createMessage(2, 3, msgData);
             console.log('Create message successfully.');
         } catch(e) {
             console.log(e);

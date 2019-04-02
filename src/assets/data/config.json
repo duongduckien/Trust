@@ -30,5 +30,6 @@
         "projectId": "trust-1ef94",
         "storageBucket": "trust-1ef94.appspot.com",
         "messagingSenderId": "711226319400"
-    }
+    },
+    "fakerApi": "https://randomuser.me/api"
 }
