@@ -1,4 +1,5 @@
 PODS:
+  - AgoraRtcEngine_iOS (2.3.3)
   - Firebase/Auth (5.15.0):
     - Firebase/CoreOnly
     - FirebaseAuth (= 5.2.0)
@@ -66,14 +67,30 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - React (0.59.2):
+    - React/Core (= 0.59.2)
+  - react-native-agora (2.3.3-alpha.7):
+    - AgoraRtcEngine_iOS (= 2.3.3)
+    - React
+    - react-native-agora/AgoraRtcCryptoLoader (= 2.3.3-alpha.7)
+  - react-native-agora/AgoraRtcCryptoLoader (2.3.3-alpha.7):
+    - AgoraRtcEngine_iOS (= 2.3.3)
+    - React
+  - React/Core (0.59.2):
+    - yoga (= 0.59.2.React)
+  - yoga (0.59.2.React)
 
 DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core (~> 5.15.0)
   - Firebase/Database
+  - React (from `../node_modules/react-native`)
+  - react-native-agora (from `../node_modules/react-native-agora`)
+  - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AgoraRtcEngine_iOS
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -87,7 +104,16 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
 
+EXTERNAL SOURCES:
+  React:
+    :path: "../node_modules/react-native"
+  react-native-agora:
+    :path: "../node_modules/react-native-agora"
+  yoga:
+    :path: "../node_modules/react-native/ReactCommon/yoga"
+
 SPEC CHECKSUMS:
+  AgoraRtcEngine_iOS: 8ad4b58dafed2cec5df03fa1f0ddbdad2c9ff958
   Firebase: 8bb9268bff82374f2cbaaabb143e725743c316ae
   FirebaseAnalytics: c06f9d70577d79074214700a71fd5d39de5550fb
   FirebaseAuth: 02e969ff430e156d99d4cb842d77b806b71ad7bb
@@ -100,7 +126,10 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  React: 1d605e098d69bdf08960787f3446f0a9dc2e2ccf
+  react-native-agora: 749ff4aadd5c8125139c82787c378de7e304805d
+  yoga: 128daf064cacaede0c3bb27424b6b4c71052e6cd
 
-PODFILE CHECKSUM: 1ddb6853e16d51a437da47a136ff8ae120b7d65b
+PODFILE CHECKSUM: 46c64f687b6170728b09a7f215bd61672d4f0ae6
 
 COCOAPODS: 1.5.3

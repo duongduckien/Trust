@@ -47,6 +47,7 @@
 		52959A6659EE4D2884795173 /* RobotoCondensed-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8F4BC2E82174A44BC33D287 /* RobotoCondensed-LightItalic.ttf */; };
 		5BE5C4F4C3214DB89D49F1C7 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37EBCCD48AA8458AAA1DA154 /* Feather.ttf */; };
 		63B33DF6CB284D49808A6E9A /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB28E36ADFAB403E9A9F73AC /* libRNVectorIcons.a */; };
+		645294A42254C2FD005E1547 /* libRCTAgora.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 645294782254C2B1005E1547 /* libRCTAgora.a */; };
 		647B40A11BAA4E01853A350E /* RobotoCondensed-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE9818FCF0AC4FFA80F04334 /* RobotoCondensed-BoldItalic.ttf */; };
 		64A27D3E225133C200F5AFAD /* libRNI18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64A27D39225133AD00F5AFAD /* libRNI18n.a */; };
 		64A27D45225134D100F5AFAD /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64A27D44225134CC00F5AFAD /* libRNCAsyncStorage.a */; };
@@ -319,6 +320,13 @@
 			remoteGlobalIDString = A39873CE1EA65EE60051E01A;
 			remoteInfo = "RNVectorIcons-tvOS";
 		};
+		645294772254C2B1005E1547 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 645294722254C2B1005E1547 /* RCTAgora.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 23AF281C1EEFECD800D771AB;
+			remoteInfo = RCTAgora;
+		};
 		64A27D2D225133AD00F5AFAD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
@@ -428,6 +436,7 @@
 		55FD577E1DD043E4903A12E8 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		631CA51F048047A0B1C68CA5 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; };
+		645294722254C2B1005E1547 /* RCTAgora.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAgora.xcodeproj; path = "../node_modules/react-native-agora/ios/RCTAgora.xcodeproj"; sourceTree = "<group>"; };
 		64A27D04225133AD00F5AFAD /* RNI18n.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNI18n.xcodeproj; path = "../node_modules/react-native-i18n/ios/RNI18n.xcodeproj"; sourceTree = "<group>"; };
 		64A27D3F225134CC00F5AFAD /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCAsyncStorage.xcodeproj; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; };
 		64A27E012251668C00F5AFAD /* AgoraRtcEngineKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AgoraRtcEngineKit.framework; path = Pods/AgoraRtcEngine_iOS/AgoraRtcEngineKit.framework; sourceTree = "<group>"; };
@@ -472,6 +481,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				645294A42254C2FD005E1547 /* libRCTAgora.a in Frameworks */,
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
@@ -687,6 +697,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		645294732254C2B1005E1547 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				645294782254C2B1005E1547 /* libRCTAgora.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		64A27D05225133AD00F5AFAD /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -716,6 +734,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				645294722254C2B1005E1547 /* RCTAgora.xcodeproj */,
 				64A27D3F225134CC00F5AFAD /* RNCAsyncStorage.xcodeproj */,
 				64A27D04225133AD00F5AFAD /* RNI18n.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -941,6 +960,10 @@
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
+				},
+				{
+					ProductGroup = 645294732254C2B1005E1547 /* Products */;
+					ProjectRef = 645294722254C2B1005E1547 /* RCTAgora.xcodeproj */;
 				},
 				{
 					ProductGroup = 5E91572E1DD0AC6500FF2AA8 /* Products */;
@@ -1243,6 +1266,13 @@
 			fileType = archive.ar;
 			path = "libRNVectorIcons-tvOS.a";
 			remoteRef = 641E8D4522382C190008AB8E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		645294782254C2B1005E1547 /* libRCTAgora.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTAgora.a;
+			remoteRef = 645294772254C2B1005E1547 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		64A27D2E225133AD00F5AFAD /* libjsi.a */ = {
@@ -1565,6 +1595,7 @@
 					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
 					"\"${PODS_ROOT}/GoogleAppMeasurement/Frameworks\"",
+					"$(PROJECT_DIR)/Pods/AgoraRtcEngine_iOS",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1598,6 +1629,7 @@
 					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
 					"\"${PODS_ROOT}/GoogleAppMeasurement/Frameworks\"",
+					"$(PROJECT_DIR)/Pods/AgoraRtcEngine_iOS",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
