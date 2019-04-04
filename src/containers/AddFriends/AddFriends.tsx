@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { Container, Content } from 'native-base';
+import _ from 'lodash';
 
 // Styles
 import { styleSheet, styles } from './styles';
 import { mainStyles } from '../../styles';
 
-interface IProps {
+// Languages
+import { strings } from '../../utilities/i18n';
 
+interface IProps {
+    actions: {
+        friends: any;
+    }
 }
 
 interface IState {
@@ -23,6 +29,7 @@ export class AddFriendsScreen extends Component<IProps, IState> {
 
     constructor(props: any) {
         super(props);
+        this.onChangeTextDelay = _.debounce(this.onChangeTextDelay, 2000);
     }
 
     componentWillMount() {
@@ -33,8 +40,12 @@ export class AddFriendsScreen extends Component<IProps, IState> {
         this.setState({
             searchValue: val
         }, () => {
-            console.log(this.state.searchValue);
+            this.onChangeTextDelay(this.state.searchValue);
         });
+    }
+
+    onChangeTextDelay(text: string) {
+        this.props.actions.friends.searchFriends(text);
     }
 
     onClearText() {
@@ -47,7 +58,7 @@ export class AddFriendsScreen extends Component<IProps, IState> {
                 <Content>
                     <View style={styleSheet.searchContent}>
                         <SearchBar
-                            placeholder="Type Here..."
+                            placeholder={strings('PLACEHOLDER_TYPE_SEARCH')}
                             onChangeText={(val) => this.onChangeSearch(val)}
                             value={this.state.searchValue}
                             clearIcon={styles.clearIcon}

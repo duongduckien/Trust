@@ -21,5 +21,6 @@
     "MESSAGES_SCREEN_TITLE": "Messages",
     "SETTINGS_SCREEN_TITLE": "Settings",
     "CONTACT_SCREEN_TITLE": "Contact",
-    "PLACEHOLDER_TYPE_MESSAGE": "Type a message..."
+    "PLACEHOLDER_TYPE_MESSAGE": "Type a message...",
+    "PLACEHOLDER_TYPE_SEARCH": "Type here..."
 }

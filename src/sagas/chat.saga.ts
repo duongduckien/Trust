@@ -11,7 +11,7 @@ export function* getMessages(action: any) {
 
         console.log(action);
         const data = action.data;
-        const result = yield apiService.getMessages(data.userId, data.guestId);
+        // const result = yield apiService.getMessages(data.userId, data.guestId);
         return true;
 
     } catch (err) {
