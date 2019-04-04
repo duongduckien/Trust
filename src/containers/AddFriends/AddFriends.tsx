@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { SearchBar } from 'react-native-elements';
-import { Container, Content } from 'native-base';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { SearchBar, Icon } from 'react-native-elements';
+import { Container, Content, List } from 'native-base';
 import _ from 'lodash';
 
 // Styles
 import { styleSheet, styles } from './styles';
 import { mainStyles } from '../../styles';
 
+// Components
+import { AvatarDefault } from '../../components/Images/Images';
+
 // Languages
 import { strings } from '../../utilities/i18n';
 
 interface IProps {
+    friends: any;
     actions: {
         friends: any;
     }
@@ -49,7 +53,37 @@ export class AddFriendsScreen extends Component<IProps, IState> {
     }
 
     onClearText() {
-        console.log('onClearText');
+        this.props.actions.friends.clearSearchFriends();
+    }
+
+    addFriend(id: number) {
+        console.log(id);
+    }
+
+    renderListFriends() {
+        const listFriends = this.props.friends.listFriends;
+        if (listFriends.length > 0) {
+            return listFriends.map((item: any, index: number) => {
+                return (
+                    <View style={styleSheet.listItem} key={index}>
+                        <TouchableOpacity onPress={() => this.addFriend(item.userId)}>
+                            <View style={styleSheet.listItem}>
+                                <View style={styleSheet.itemLeft}>
+                                    <Image
+                                        style={styleSheet.itemAvatar}
+                                        source={(item.picture && item.picture.large) ? {uri: item.picture.large} : AvatarDefault()}
+                                    ></Image>
+                                </View>
+
+                                <View style={styleSheet.itemCenter}>
+                                    <Text style={styleSheet.nameContact}>{item.firstName} {item.lastName}</Text>
+                                </View>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                );
+            });
+        }
     }
 
     render() {
@@ -63,8 +97,13 @@ export class AddFriendsScreen extends Component<IProps, IState> {
                             value={this.state.searchValue}
                             clearIcon={styles.clearIcon}
                             onClearText={() => this.onClearText()}
+                            autoCapitalize='none'
                         />
                     </View>
+
+                    <List>
+                        {this.renderListFriends()}
+                    </List>
                 </Content>
             </Container>
         );

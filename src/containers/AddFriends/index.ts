@@ -5,7 +5,7 @@ import * as friendsActions from '../../actions/friends.action';
 
 const mapStateToProps = (state: any) => {
     return {
-        
+        friends: state.friends,
     };
 };
 

@@ -283,6 +283,24 @@ class FirebaseSDKService {
     }
 
     /**
+     * Function search substring in value
+     * @param  {string} collection
+     * @param  {string} childName
+     * @param  {string} text
+     */
+    searchString(collection: string, childName: string, text: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            firebase.database().ref(collection).orderByChild(childName).startAt(text).endAt(`${text}\uf8ff`).once('value', (res: any) => {
+                if (res.val()) {
+                    resolve(this.convertData(res.val()));
+                } else {
+                    reject();
+                }
+            });
+        });
+    }
+
+    /**
      * Function convert messages data
      * @param  {any} data
      * @param  {any} guestInfo

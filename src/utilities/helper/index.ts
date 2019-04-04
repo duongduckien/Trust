@@ -2,6 +2,7 @@ import { Platform } from 'react-native';
 import { showMessage, hideMessage } from 'react-native-flash-message';
 import { Actions } from 'react-native-router-flux';
 import moment from 'moment';
+import { Keyboard } from 'react-native';
 
 // Languages
 import { strings } from '../../utilities/i18n';
@@ -149,6 +150,13 @@ class Helper {
             str += charset.charAt(Math.floor(Math.random() * charset.length));
         }
         return str;
+    }
+
+    /**
+     * Function to dismiss keyboard
+     */
+    dismissKeyboard() {
+        Keyboard.dismiss();
     }
 
 }
