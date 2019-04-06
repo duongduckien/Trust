@@ -25,12 +25,12 @@ export class ConfirmDialog extends Component<Props, State> {
     }
 
     handleCancel() {
-        this.props.actions.common.showAlert(false);
+        this.props.actions.common.showConfirmDialog(false);
     };
 
     handleConfirm(type: any) {
 
-        this.props.actions.common.showAlert(false);
+        this.props.actions.common.showConfirmDialog(false);
         
         switch (type.name) {
             case 'logout': {

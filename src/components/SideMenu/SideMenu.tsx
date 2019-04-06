@@ -39,7 +39,7 @@ export class SideMenu extends Component<Props, State> {
 
         try {
 
-            this.props.actions.common.showAlert({
+            this.props.actions.common.showConfirmDialog({
                 type: { name: 'logout', data: '' },
                 show: true,
                 showProgress: false,

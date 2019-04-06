@@ -17,7 +17,7 @@ export function commonReducer(state = COMMON_INITAL_STATE, action: any): ICommon
         case types.SHOW_LOADING: {
             return { ...state, ...{ showLoading: action.data } };
         }
-        case types.SHOW_ALERT: {
+        case types.SHOW_CONFIRM_DIALOG: {
             return { ...state, ...{ showAlert: action.data } };
         }
         case types.CHANGE_ROOT_SCREEN: {

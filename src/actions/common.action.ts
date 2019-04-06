@@ -1,6 +1,6 @@
 import { 
     SHOW_LOADING, 
-    SHOW_ALERT, 
+    SHOW_CONFIRM_DIALOG, 
     CHANGE_ROOT_SCREEN,
 } from './types';
 
@@ -9,8 +9,8 @@ export const showLoading = (data: boolean) => ({
     data,
 });
 
-export const showAlert = (data: any) => ({
-    type: SHOW_ALERT,
+export const showConfirmDialog = (data: any) => ({
+    type: SHOW_CONFIRM_DIALOG,
     data,
 });
 
