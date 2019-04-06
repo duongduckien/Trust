@@ -10,6 +10,7 @@ interface Props {
     actions: {
         common: any;
         auth: any;
+        friends: any;
     };
 }
 
@@ -37,7 +38,7 @@ export class AlertDialog extends Component<Props, State> {
                 break;
             }
             case 'addFriend': {
-                console.log(type.data);
+                this.props.actions.friends.addFriend(type.data);
                 break;
             }
             default: {

@@ -16,6 +16,9 @@ import authService from '../services/auth.service';
 import userService from '../services/user.service';
 import friendsService from '../services/friends.service';
 
+// Interfaces
+import { IFriendData } from '../interfaces/friend.interface';
+
 export function* searchFriends(action: any) {
 
     try {
@@ -47,8 +50,30 @@ export function* addFriend(action: any) {
 
     try {
 
-        console.log(action);
-        return true;
+        const userStored = yield storage.getItem('user');
+        const currentUser = JSON.parse(userStored);
+        const userID = action.data.id;
+        const keyUser = action.data.key;
+
+        const friendData = yield call(friendsService.getFriendData, keyUser);
+
+        const friendStore: IFriendData = {
+            keyData: keyUser,
+            userData: friendData,
+            requestUser: currentUser.userId,
+            accepted: 0,
+            timeRequest: helper.getTime(),
+            timeAccepted: 0,
+        }
+
+        const params = {
+            child: currentUser.userId,
+            subChild: keyUser,
+            data: friendStore,
+        }
+
+        yield call(friendsService.createFriend, params);
+        console.log('Create friend success');
 
     } catch (e) {
         console.log(e);

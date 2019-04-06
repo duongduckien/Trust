@@ -115,6 +115,43 @@ class FirebaseSDKService {
             });
         });
     }
+    
+    /**
+     * @param  {string} collection
+     * @param  {string} key
+     * @param  {any} data
+     * @returns Promise
+     */
+    setDataWhereChild(collection: string, key: string, data: any): Promise<any> {
+        return new Promise((resolve, reject) => {
+            firebase.database().ref(collection).child(key).set(data, (err: any) => {
+                if (!err) {
+                    resolve();
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
+    /**
+     * @param  {string} collection
+     * @param  {string} key1
+     * @param  {string} key2
+     * @param  {any} data
+     * @returns Promise
+     */
+    setDataWhereMultiChilds(collection: string, child: string, subChild: string, data: any): Promise<any> {
+        return new Promise((resolve, reject) => {
+            firebase.database().ref(collection).child(child).child(subChild).set(data, (err: any) => {
+                if (!err) {
+                    resolve();
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
 
     /**
      * @param  {string} collection
@@ -190,7 +227,26 @@ class FirebaseSDKService {
                 if (res.val()) {
                     resolve(this.convertData(res.val()));
                 } else {
-                    reject();
+                    reject('Can not retrieve data.');
+                }
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
+    /**
+     * @param  {string} collection
+     * @param  {string} key
+     */
+     getWhereKey(collection: string, key: string): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const result = await firebase.database().ref(collection).child(key).once('value');
+                if (result.val()) {
+                    resolve(result.val());
+                } else {
+                    reject('Can not retrieve data.');
                 }
             } catch (e) {
                 reject(e);
@@ -369,6 +425,18 @@ class FirebaseSDKService {
                 }
             }
         }
+        return result;
+    }
+
+    /**
+     * Function convert data to array before resolve (without key)
+     * @param  {any} data
+     * @param  {string} key
+     */
+     convertDataOfKey(data: any, key: string) {
+        const result = [];
+        data['$key'] = key;
+        result.push(data);
         return result;
     }
 
