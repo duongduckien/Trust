@@ -1,4 +1,4 @@
-import { AlertDialog } from './AlertDialog';
+import { ConfirmDialog } from './ConfirmDialog';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as authActions from '../../actions/auth.action';
@@ -21,4 +21,4 @@ const mapDispatchToProps = (dispatch: any) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AlertDialog);
+export default connect(mapStateToProps, mapDispatchToProps)(ConfirmDialog);

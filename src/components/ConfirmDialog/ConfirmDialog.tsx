@@ -18,7 +18,7 @@ interface State {
 
 }
 
-export class AlertDialog extends Component<Props, State> {
+export class ConfirmDialog extends Component<Props, State> {
 
     constructor(props: any) {
         super(props);

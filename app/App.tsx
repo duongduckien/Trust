@@ -21,7 +21,7 @@ import AddFriendsScreen from '../src/containers/AddFriends';
 // Components
 import Loading from '../src/components/Loading';
 import Statusbar from '../src/components/Statusbar';
-import AlertDialog from '../src/components/AlertDialog';
+import ConfirmDialog from '../src/components/ConfirmDialog';
 import SideMenu from '../src/components/SideMenu';
 import MenuButton from '../src/components/MenuButton';
 import BackButton from '../src/components/BackButton';
@@ -151,7 +151,7 @@ export default class App extends Component<IProps, IState> {
                     position={config['alert']['position']}
                 />
 
-                <AlertDialog />
+                <ConfirmDialog />
             </Provider >
         );
     }
