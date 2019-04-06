@@ -7,6 +7,6 @@ export const styleSheet = StyleSheet.create({
 
 export const styles = {
     btnOk: {
-        color: '#DD6B55'
-    }
+        color: colors.red,
+    },
 }

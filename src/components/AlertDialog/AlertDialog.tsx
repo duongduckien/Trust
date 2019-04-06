@@ -27,13 +27,17 @@ export class AlertDialog extends Component<Props, State> {
         this.props.actions.common.showAlert(false);
     };
 
-    handleConfirm(type: string) {
+    handleConfirm(type: any) {
 
         this.props.actions.common.showAlert(false);
         
-        switch (type) {
+        switch (type.name) {
             case 'logout': {
                 this.props.actions.auth.logout();
+                break;
+            }
+            case 'addFriend': {
+                console.log(type.data);
                 break;
             }
             default: {
@@ -63,9 +67,7 @@ export class AlertDialog extends Component<Props, State> {
                 onCancelPressed={() => {
                     this.handleCancel();
                 }}
-                onConfirmPressed={() => {
-                    this.handleConfirm(this.props.common.showAlert.type);
-                }}
+                onConfirmPressed={() => {this.handleConfirm(this.props.common.showAlert.type)}}
             />
         );
 

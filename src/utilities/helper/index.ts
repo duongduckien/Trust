@@ -159,6 +159,14 @@ class Helper {
         Keyboard.dismiss();
     }
 
+    /**
+     * Function uppercase first letter
+     * @param  {string} str
+     */
+    capitalizeFirstLetter(str: string) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
 }
 
 const helper = new Helper();

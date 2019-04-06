@@ -14,10 +14,17 @@ import { AvatarDefault } from '../../components/Images/Images';
 // Languages
 import { strings } from '../../utilities/i18n';
 
+// Utilities
+import helper from '../../utilities/helper';
+
+// Services
+import testService from '../../services/test.service';
+
 interface IProps {
     friends: any;
     actions: {
         friends: any;
+        common: any;
     }
 }
 
@@ -56,8 +63,21 @@ export class AddFriendsScreen extends Component<IProps, IState> {
         this.props.actions.friends.clearSearchFriends();
     }
 
-    addFriend(id: number) {
-        console.log(id);
+    addFriend(id: number, key: string) {
+        this.props.actions.common.showAlert({
+            type: { name: 'addFriend', data: { id, key } },
+            data: id,
+            show: true,
+            showProgress: false,
+            title: strings('ADD_FRIEND'),
+            message: strings('CONFIRM_ADD_FRIEND'),
+            closeOnTouchOutside: true,
+            closeOnHardwareBackPress: false,
+            showCancelButton: true,
+            showConfirmButton: true,
+            cancelText: strings('CANCEL'),
+            confirmText: strings('AGREE'),
+        });
     }
 
     renderListFriends() {
@@ -66,7 +86,7 @@ export class AddFriendsScreen extends Component<IProps, IState> {
             return listFriends.map((item: any, index: number) => {
                 return (
                     <View style={styleSheet.listItem} key={index}>
-                        <TouchableOpacity onPress={() => this.addFriend(item.userId)}>
+                        <TouchableOpacity onPress={() => this.addFriend(item.userId, item.$key)}>
                             <View style={styleSheet.listItem}>
                                 <View style={styleSheet.itemLeft}>
                                     <Image
@@ -76,7 +96,17 @@ export class AddFriendsScreen extends Component<IProps, IState> {
                                 </View>
 
                                 <View style={styleSheet.itemCenter}>
-                                    <Text style={styleSheet.nameContact}>{item.firstName} {item.lastName}</Text>
+                                    <Text style={styleSheet.nameContact}>
+                                        {helper.capitalizeFirstLetter(item.firstName)} {helper.capitalizeFirstLetter(item.lastName)}
+                                    </Text>
+                                </View>
+
+                                <View style={styleSheet.itemRight}>
+                                    <Icon
+                                        name='plus'
+                                        type='font-awesome'
+                                        iconStyle={styleSheet.itemIcon}
+                                    />
                                 </View>
                             </View>
                         </TouchableOpacity>
@@ -98,6 +128,7 @@ export class AddFriendsScreen extends Component<IProps, IState> {
                             clearIcon={styles.clearIcon}
                             onClearText={() => this.onClearText()}
                             autoCapitalize='none'
+                            inputStyle={styleSheet.inputText}
                         />
                     </View>
 

@@ -22,5 +22,7 @@
     "SETTINGS_SCREEN_TITLE": "Settings",
     "CONTACT_SCREEN_TITLE": "Contact",
     "PLACEHOLDER_TYPE_MESSAGE": "Type a message...",
-    "PLACEHOLDER_TYPE_SEARCH": "Type here..."
+    "PLACEHOLDER_TYPE_SEARCH": "Type here...",
+    "ADD_FRIEND": "Add Friend",
+    "CONFIRM_ADD_FRIEND": "Do you want add this friend?"
 }

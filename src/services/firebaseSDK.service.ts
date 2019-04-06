@@ -180,6 +180,28 @@ class FirebaseSDKService {
         });
     }
 
+    /**
+     * @param  {string} collection
+     */
+    get(collection: string): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const res = await firebase.database().ref(collection).once('value');
+                if (res.val()) {
+                    resolve(this.convertData(res.val()));
+                } else {
+                    reject();
+                }
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
+    /**
+     * @param  {string} collection
+     * @param  {string} customKey
+     */
     getWhereCustomKey(collection: string, customKey: string): Promise<any> {
         return new Promise((resolve, reject) => {
             firebase.database().ref(collection).orderByChild(customKey).once('value', (res: any) => {

@@ -40,7 +40,7 @@ export class SideMenu extends Component<Props, State> {
         try {
 
             this.props.actions.common.showAlert({
-                type: 'logout',
+                type: { name: 'logout', data: '' },
                 show: true,
                 showProgress: false,
                 title: strings('LOGOUT'),

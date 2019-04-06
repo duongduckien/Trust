@@ -45,6 +45,13 @@ export const styleSheet = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    inputText: {
+        fontSize: 15,
+        color: '#eee',
+    },
+    itemIcon: {
+        color: '#9f9f9f',
+    },
 });
 
 export const styles = {
