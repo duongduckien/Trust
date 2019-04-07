@@ -51,7 +51,17 @@ export const styleSheet = StyleSheet.create({
     },
     itemIcon: {
         color: '#9f9f9f',
-    }
+    },
+    noDataView: {
+        paddingTop: 20,
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    noDataViewText: {
+        fontFamily: mainFont,
+        fontSize: 18,
+    },
 });
 
 export const styles = {

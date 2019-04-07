@@ -2,7 +2,12 @@ import { put, call, fork, takeLatest, takeEvery } from 'redux-saga/effects';
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash';
 import * as types from '../actions/types';
-import { getFriendsSuccess, clearSearchFriends, removeFriendAddSuccess } from '../actions/friends.action';
+import { 
+    getFriendsSuccess,
+    clearSearchFriends,
+    removeFriendAddSuccess,
+    getListFriendsAddedSuccess,
+} from '../actions/friends.action';
 import { showLoading, showAlertDialog } from '../actions/common.action';
 
 // Languages
@@ -122,9 +127,38 @@ export function* watchAddFriend() {
     yield takeEvery(types.ADD_FRIEND, addFriend);
 }
 
+export function* getListFriendsAdded(action: any) {
+
+    try {
+
+        yield put(showLoading(true));
+
+        const userStored = yield storage.getItem('user');
+        const currentUser: ICurrentUser = JSON.parse(userStored);
+
+        // Get list friends
+        const friends = yield call(friendsService.getListFriends, currentUser.userId.toString());
+        const listFriends = friends[currentUser.userId.toString()];
+        const listFriendsAdded = helper.convertData(listFriends);
+
+        yield put(getListFriendsAddedSuccess(listFriendsAdded));
+
+    } catch (e) {
+        console.log(e);
+    } finally {
+        yield put(showLoading(false));
+    }
+
+}
+
+export function* watchGetListFriendsAdded() {
+    yield takeEvery(types.GET_LIST_FRIENDS_ADDED, getListFriendsAdded);
+}
+
 const friendsSaga = [
     fork(watchSearchFriends),
     fork(watchAddFriend),
+    fork(watchGetListFriendsAdded),
 ];
 
 export default friendsSaga;

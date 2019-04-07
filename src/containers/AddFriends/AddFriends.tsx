@@ -48,11 +48,7 @@ export class AddFriendsScreen extends Component<IProps, IState> {
     }
 
     componentDidMount() {
-        // this.props.actions.common.showAlertDialog({
-        //     show: true,
-        //     message: strings('ADD_FRIEND_SUCCESS'),
-        //     confirmText: strings('OK'),
-        // });
+
     }
 
     onChangeSearch(val: any) {
@@ -135,9 +131,7 @@ export class AddFriendsScreen extends Component<IProps, IState> {
     render() {
         return (
             <Container>
-                <Content 
-                    contentContainerStyle={styleSheet.searchContent}
-                >
+                <Content>
                     <View style={styleSheet.searchContent}>
                         <SearchBar
                             placeholder={strings('PLACEHOLDER_TYPE_SEARCH')}

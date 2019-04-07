@@ -167,6 +167,24 @@ class Helper {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
+    /**
+     * Function convert data to array before resolve
+     * @param  {any} data
+     */
+    convertData(data: any) {
+        const result = [];
+        if (Object.keys(data).length > 0) {
+            for (const key in data) {
+                if (data.hasOwnProperty(key)) {
+                    const obj = data[key];
+                    obj['$key'] = key;
+                    result.push(obj);
+                }
+            }
+        }
+        return result;
+    }
+
 }
 
 const helper = new Helper();

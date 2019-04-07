@@ -4,6 +4,8 @@ import {
     CLEAR_SEARCH_FRIENDS,
     ADD_FRIEND,
     REMOVE_FRIEND_ADD_SUCCESS,
+    GET_LIST_FRIENDS_ADDED,
+    GET_LIST_FRIENDS_ADDED_SUCCESS,
 } from './types';
 
 export const searchFriends = (data: any) => ({
@@ -27,5 +29,14 @@ export const addFriend = (data: any) => ({
 
 export const removeFriendAddSuccess = (data: any) => ({
     type: REMOVE_FRIEND_ADD_SUCCESS,
+    data,
+});
+
+export const getListFriendsAdded = () => ({
+    type: GET_LIST_FRIENDS_ADDED,
+});
+
+export const getListFriendsAddedSuccess = (data: any) => ({
+    type: GET_LIST_FRIENDS_ADDED_SUCCESS,
     data,
 });

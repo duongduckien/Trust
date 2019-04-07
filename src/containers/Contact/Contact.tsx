@@ -8,7 +8,7 @@ import { Actions } from 'react-native-router-flux';
 import { strings } from '../../utilities/i18n';
 
 // Components
-import { AvatarDemo1, AvatarDemo2, AvatarDemo3 } from '../../components/Images/Images';
+import { AvatarDefault } from '../../components/Images/Images';
 
 // Styles
 import { styleSheet, styles } from './styles';
@@ -19,9 +19,14 @@ import config from '../../assets/data/config.json';
 
 // Utilities
 import storage from '../../utilities/storage';
+import helper from '../../utilities/helper';
 
 interface IProps {
-
+    friends: any;
+    actions: {
+        common: any;
+        friends: any;
+    }
 }
 
 interface IState {
@@ -35,29 +40,73 @@ export class ContactScreen extends Component<IProps, IState> {
     }
 
     componentDidMount() {
-        this.getUserInfo();
-    }
-
-    getListFriends() {
-        
-    }
-
-    async getUserInfo() {
-        try {
-            const userInfo = await storage.getItem('user');
-            console.log(JSON.parse(userInfo));
-        } catch (e) {
-            console.log(e);
-        }
+        this.props.actions.friends.getListFriendsAdded();
     }
 
     goToChat(id: string) {
         console.log('Chat', id);
-        Actions.chat({ userId: id });
+        // Actions.chat({ userId: id });
     }
 
     videoCall(id: string) {
         console.log('Video call', id);
+    }
+
+    renderListFriendsAdded() {
+        const listFriendsAdded = this.props.friends.listFriendsAdded;
+        if (listFriendsAdded.length > 0) {
+            console.log(listFriendsAdded);
+            listFriendsAdded[0].accepted = 1;
+            return listFriendsAdded.map((item: any, index: number) => {
+                return (
+                    <View style={styleSheet.listItem} key={index}>
+                        <TouchableOpacity
+                            disabled={item.accepted === 0 ? true : false}
+                            onPress={() => this.goToChat(item.userData.userId)}>
+                            <View style={styleSheet.listItem}>
+                                <View style={styleSheet.itemLeft}>
+                                    <Image
+                                        style={styleSheet.itemAvatar}
+                                        source={(item.userData.picture.large && item.userData.picture.large !== '') ? { uri: item.userData.picture.large } : AvatarDefault()}
+                                    ></Image>
+                                </View>
+
+                                <View style={styleSheet.itemCenter}>
+                                    <Text style={styleSheet.nameContact}>
+                                        {helper.capitalizeFirstLetter(item.userData.firstName)} {helper.capitalizeFirstLetter(item.userData.lastName)}
+                                    </Text>
+                                </View>
+
+                                {item.accepted === 0 ?
+                                    <View style={styleSheet.itemRight}>
+                                        <Icon
+                                            name='share'
+                                            type='font-awesome'
+                                            iconStyle={styleSheet.itemIcon}
+                                        />
+                                    </View> : <View style={styleSheet.itemRight}></View>}
+                            </View>
+                        </TouchableOpacity>
+
+                        {/* <TouchableOpacity onPress={() => this.videoCall(item.userData.userId)}>
+                            <View style={styleSheet.itemRight}>
+                                <Icon
+                                    name='video-camera'
+                                    type='font-awesome'
+                                    iconStyle={styleSheet.itemIcon}
+                                />
+                            </View>
+                        </TouchableOpacity> */}
+                    </View>
+                );
+            });
+        } else {
+            return (
+                <View style={styleSheet.noDataView}>
+                    <Text style={styleSheet.noDataViewText}>{strings('NO_DATA_FOUND')}</Text>
+                </View>
+            );
+        }
     }
 
     render() {
@@ -65,67 +114,7 @@ export class ContactScreen extends Component<IProps, IState> {
             <Container>
                 <Content>
                     <List>
-                        <View style={styleSheet.listItem}>
-                            <TouchableOpacity onPress={() => this.goToChat('12')}>
-                                <View style={styleSheet.listItem}>
-                                    <View style={styleSheet.itemLeft}>
-                                        <Image style={styleSheet.itemAvatar} source={AvatarDemo1()}></Image>
-                                    </View>
-
-                                    <View style={styleSheet.itemCenter}>
-                                        <Text style={styleSheet.nameContact}>John Stone</Text>
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity onPress={() => this.videoCall('12')}>
-                                <View style={styleSheet.itemRight}>
-                                    <Icon
-                                        name='video-camera'
-                                        type='font-awesome'
-                                        iconStyle={styleSheet.itemIcon}
-                                    />
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={styleSheet.listItem}>
-                            <View style={styleSheet.itemLeft}>
-                                <Image style={styleSheet.itemAvatar} source={AvatarDemo2()}></Image>
-                            </View>
-
-                            <View style={styleSheet.itemCenter}>
-                                <Text style={styleSheet.nameContact}>Jessica May</Text>
-                                <Text note style={styleSheet.statusText}>Doing what you like will always keep you happy . .</Text>
-                            </View>
-
-                            <View style={styleSheet.itemRight}>
-                                <Icon
-                                    name='video-camera'
-                                    type='font-awesome'
-                                    iconStyle={styleSheet.itemIcon}
-                                />
-                            </View>
-                        </View>
-
-                        <View style={styleSheet.listItem}>
-                            <View style={styleSheet.itemLeft}>
-                                <Image style={styleSheet.itemAvatar} source={AvatarDemo3()}></Image>
-                            </View>
-
-                            <View style={styleSheet.itemCenter}>
-                                <Text style={styleSheet.nameContact}>Rebecca Lee</Text>
-                                <Text note style={styleSheet.statusText}>Doing what you like will always keep you happy . .</Text>
-                            </View>
-
-                            <View style={styleSheet.itemRight}>
-                                <Icon
-                                    name='video-camera'
-                                    type='font-awesome'
-                                    iconStyle={styleSheet.itemIcon}
-                                />
-                            </View>
-                        </View>
+                        {this.renderListFriendsAdded()}
                     </List>
                 </Content>
             </Container>

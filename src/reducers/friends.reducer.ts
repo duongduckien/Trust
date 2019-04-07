@@ -3,10 +3,12 @@ import * as types from '../actions/types';
 
 export interface IFriendsState {
     listFriends: any[];
+    listFriendsAdded: any[];
 }
 
 export const FRIENDS_INITAL_STATE: IFriendsState = {
     listFriends: [],
+    listFriendsAdded: [],
 };
 
 function removeFriendAddSuccess(state: any, action: any) {
@@ -29,6 +31,9 @@ export function friendsReducer(state = FRIENDS_INITAL_STATE, action: any): IFrie
         }
         case types.REMOVE_FRIEND_ADD_SUCCESS: {
             return removeFriendAddSuccess(state, action);
+        }
+        case types.GET_LIST_FRIENDS_ADDED_SUCCESS: {
+            return { ...state, ...{ listFriendsAdded: action.data } };
         }
         default: {
             return state;
