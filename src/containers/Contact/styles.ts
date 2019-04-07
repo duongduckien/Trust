@@ -17,6 +17,14 @@ export const styleSheet = StyleSheet.create({
         borderBottomColor: '#eee',
         borderBottomWidth: 1,
     },
+    listItemOpc: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        borderBottomColor: '#eee',
+        borderBottomWidth: 1,
+        opacity: 0.7,
+    },
     itemLeft: {
         width: (dimensions.fullWidth / 5) * 1,
         height: 60,

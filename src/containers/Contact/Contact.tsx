@@ -59,7 +59,10 @@ export class ContactScreen extends Component<IProps, IState> {
             listFriendsAdded[0].accepted = 1;
             return listFriendsAdded.map((item: any, index: number) => {
                 return (
-                    <View style={styleSheet.listItem} key={index}>
+                    <View
+                        style={item.accepted === 0 ? styleSheet.listItemOpc : styleSheet.listItem}
+                        key={index}
+                    >
                         <TouchableOpacity
                             disabled={item.accepted === 0 ? true : false}
                             onPress={() => this.goToChat(item.userData.userId)}>
