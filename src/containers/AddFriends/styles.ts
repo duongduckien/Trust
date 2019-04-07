@@ -3,7 +3,7 @@ import { colors, mainFont, dimensions } from '../../styles';
 
 export const styleSheet = StyleSheet.create({
     searchContent: {
-
+        flexGrow: 1,
     },
     listItem: {
         flex: 1,
@@ -52,6 +52,15 @@ export const styleSheet = StyleSheet.create({
     itemIcon: {
         color: '#9f9f9f',
     },
+    noDataView: {
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    noDataViewText: {
+        fontFamily: mainFont,
+        fontSize: 18,
+    }
 });
 
 export const styles = {

@@ -93,41 +93,51 @@ export class AddFriendsScreen extends Component<IProps, IState> {
         if (listFriends.length > 0) {
             return listFriends.map((item: any, index: number) => {
                 return (
-                    <View style={styleSheet.listItem} key={index}>
-                        <TouchableOpacity onPress={() => this.addFriend(item.userId, item.$key)}>
-                            <View style={styleSheet.listItem}>
-                                <View style={styleSheet.itemLeft}>
-                                    <Image
-                                        style={styleSheet.itemAvatar}
-                                        source={(item.picture && item.picture.large) ? {uri: item.picture.large} : AvatarDefault()}
-                                    ></Image>
-                                </View>
+                    <List>
+                        <View style={styleSheet.listItem} key={index}>
+                            <TouchableOpacity onPress={() => this.addFriend(item.userId, item.$key)}>
+                                <View style={styleSheet.listItem}>
+                                    <View style={styleSheet.itemLeft}>
+                                        <Image
+                                            style={styleSheet.itemAvatar}
+                                            source={(item.picture && item.picture.large) ? {uri: item.picture.large} : AvatarDefault()}
+                                        ></Image>
+                                    </View>
 
-                                <View style={styleSheet.itemCenter}>
-                                    <Text style={styleSheet.nameContact}>
-                                        {helper.capitalizeFirstLetter(item.firstName)} {helper.capitalizeFirstLetter(item.lastName)}
-                                    </Text>
-                                </View>
+                                    <View style={styleSheet.itemCenter}>
+                                        <Text style={styleSheet.nameContact}>
+                                            {helper.capitalizeFirstLetter(item.firstName)} {helper.capitalizeFirstLetter(item.lastName)}
+                                        </Text>
+                                    </View>
 
-                                <View style={styleSheet.itemRight}>
-                                    <Icon
-                                        name='plus'
-                                        type='font-awesome'
-                                        iconStyle={styleSheet.itemIcon}
-                                    />
+                                    <View style={styleSheet.itemRight}>
+                                        <Icon
+                                            name='plus'
+                                            type='font-awesome'
+                                            iconStyle={styleSheet.itemIcon}
+                                        />
+                                    </View>
                                 </View>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
+                            </TouchableOpacity>
+                        </View>
+                    </List>
                 );
             });
+        } else {
+            return (
+                <View style={styleSheet.noDataView}>
+                    <Text style={styleSheet.noDataViewText}>{strings('NO_DATA_FOUND')}</Text>
+                </View>
+            );
         }
     }
 
     render() {
         return (
             <Container>
-                <Content>
+                <Content 
+                    contentContainerStyle={styleSheet.searchContent}
+                >
                     <View style={styleSheet.searchContent}>
                         <SearchBar
                             placeholder={strings('PLACEHOLDER_TYPE_SEARCH')}
@@ -140,12 +150,14 @@ export class AddFriendsScreen extends Component<IProps, IState> {
                         />
                     </View>
 
-                    <List>
-                        {this.renderListFriends()}
-                    </List>
+                    {this.renderListFriends()}
                 </Content>
             </Container>
         );
+    }
+
+    componentWillUnmount() {
+        this.props.actions.friends.clearSearchFriends();
     }
 
 }

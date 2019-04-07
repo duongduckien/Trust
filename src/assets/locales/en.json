@@ -27,5 +27,6 @@
     "CONFIRM_ADD_FRIEND": "Do you want add this friend?",
     "ADD_FRIEND_SUCCESS": "Add friend successfully!",
     "SOMETHING_WENT_WRONG": "Something went wrong!",
-    "OK": "Ok"
+    "OK": "Ok",
+    "NO_DATA_FOUND": "No data found."
 }
