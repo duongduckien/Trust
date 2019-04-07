@@ -54,21 +54,21 @@ export class ConfirmDialog extends Component<Props, State> {
 
         return (
             <AwesomeAlert
-                show={this.props.common.showAlert.show}
-                showProgress={this.props.common.showAlert.showProgress}
-                title={this.props.common.showAlert.title}
-                message={this.props.common.showAlert.message}
-                closeOnTouchOutside={this.props.common.showAlert.closeOnTouchOutside}
-                closeOnHardwareBackPress={this.props.common.showAlert.closeOnHardwareBackPress}
-                showCancelButton={this.props.common.showAlert.showCancelButton}
-                showConfirmButton={this.props.common.showAlert.showConfirmButton}
-                cancelText={this.props.common.showAlert.cancelText}
-                confirmText={this.props.common.showAlert.confirmText}
+                show={this.props.common.showConfirmDialog.show}
+                showProgress={this.props.common.showConfirmDialog.showProgress}
+                title={this.props.common.showConfirmDialog.title}
+                message={this.props.common.showConfirmDialog.message}
+                closeOnTouchOutside={this.props.common.showConfirmDialog.closeOnTouchOutside}
+                closeOnHardwareBackPress={this.props.common.showConfirmDialog.closeOnHardwareBackPress}
+                showCancelButton={this.props.common.showConfirmDialog.showCancelButton}
+                showConfirmButton={this.props.common.showConfirmDialog.showConfirmButton}
+                cancelText={this.props.common.showConfirmDialog.cancelText}
+                confirmText={this.props.common.showConfirmDialog.confirmText}
                 confirmButtonColor={styles.btnOk.color}
                 onCancelPressed={() => {
                     this.handleCancel();
                 }}
-                onConfirmPressed={() => {this.handleConfirm(this.props.common.showAlert.type)}}
+                onConfirmPressed={() => {this.handleConfirm(this.props.common.showConfirmDialog.type)}}
             />
         );
 

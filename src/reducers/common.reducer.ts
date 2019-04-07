@@ -2,13 +2,13 @@ import * as types from '../actions/types';
 
 export interface ICommonState {
     showLoading: boolean;
-    showAlert: any;
+    showConfirmDialog: any;
     rootScreen: string;
 }
 
 export const COMMON_INITAL_STATE: ICommonState = {
     showLoading: false,
-    showAlert: {},
+    showConfirmDialog: {},
     rootScreen: 'ContactScreen'
 };
 
@@ -18,7 +18,7 @@ export function commonReducer(state = COMMON_INITAL_STATE, action: any): ICommon
             return { ...state, ...{ showLoading: action.data } };
         }
         case types.SHOW_CONFIRM_DIALOG: {
-            return { ...state, ...{ showAlert: action.data } };
+            return { ...state, ...{ showConfirmDialog: action.data } };
         }
         case types.CHANGE_ROOT_SCREEN: {
             return { ...state, ...{ rootScreen: action.data } };
