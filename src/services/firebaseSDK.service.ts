@@ -433,7 +433,7 @@ class FirebaseSDKService {
      * @param  {any} data
      * @param  {string} key
      */
-     convertDataOfKey(data: any, key: string) {
+    convertDataOfKey(data: any, key: string) {
         const result = [];
         data['$key'] = key;
         result.push(data);

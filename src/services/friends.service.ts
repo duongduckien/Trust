@@ -49,6 +49,17 @@ class FriendsService {
         });
     }
 
+    async getListFriends(id: string): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const result = await firebaseSDKService.getWhereCustomKey('friends', id);
+                resolve(result);
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
 }
 
 const friendsService = new FriendsService();

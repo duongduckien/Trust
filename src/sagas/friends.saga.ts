@@ -1,5 +1,6 @@
 import { put, call, fork, takeLatest, takeEvery } from 'redux-saga/effects';
 import { Actions } from 'react-native-router-flux';
+import _ from 'lodash';
 import * as types from '../actions/types';
 import { getFriendsSuccess, clearSearchFriends, removeFriendAddSuccess } from '../actions/friends.action';
 import { showLoading, showAlertDialog } from '../actions/common.action';
@@ -18,6 +19,7 @@ import friendsService from '../services/friends.service';
 
 // Interfaces
 import { IFriendData } from '../interfaces/friend.interface';
+import { ICurrentUser } from '../interfaces/user.interface';
 
 export function* searchFriends(action: any) {
 
@@ -26,9 +28,26 @@ export function* searchFriends(action: any) {
         yield put(showLoading(true));
 
         if (action.data.trim() !== '') {
+
+            // Get current user
+            const userStored = yield storage.getItem('user');
+            const currentUser: ICurrentUser = JSON.parse(userStored);
+
+            // Result of search data
             const result = yield call(friendsService.searchFriends, action.data);
-            console.log(result);
+
+            // Get list friends
+            const friends = yield call(friendsService.getListFriends, currentUser.userId.toString());
+            const listFriends = friends[currentUser.userId.toString()];
+
+            if (result.length > 0) {
+                _.remove(result, (el: any) => {
+                    return (listFriends[el.$key]);
+                });
+            }
+
             yield put(getFriendsSuccess(result));
+
         } else {
             yield put(clearSearchFriends());
         }
@@ -51,7 +70,7 @@ export function* addFriend(action: any) {
     try {
 
         const userStored = yield storage.getItem('user');
-        const currentUser = JSON.parse(userStored);
+        const currentUser: ICurrentUser = JSON.parse(userStored);
         const userID = action.data.id;
         const keyUser = action.data.key;
 

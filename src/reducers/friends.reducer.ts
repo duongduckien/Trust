@@ -15,7 +15,7 @@ function removeFriendAddSuccess(state: any, action: any) {
         _.remove(state.listFriends, (el: any) => {
             return el.userId === userId;
         });
-    }    
+    }
     return { ...state };
 }
 

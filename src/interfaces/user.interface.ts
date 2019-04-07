@@ -17,3 +17,9 @@ export interface IUserData {
     updatedAt: Date;
     deleted: number;
 }
+
+export interface ICurrentUser {
+    $key: string;
+    email: string;
+    userId: number;
+}
