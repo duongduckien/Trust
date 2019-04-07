@@ -1,7 +1,7 @@
 import { put, call, fork, takeLatest, takeEvery } from 'redux-saga/effects';
 import { Actions } from 'react-native-router-flux';
 import * as types from '../actions/types';
-import { getFriendsSuccess, clearSearchFriends } from '../actions/friends.action';
+import { getFriendsSuccess, clearSearchFriends, removeFriendAddSuccess } from '../actions/friends.action';
 import { showLoading, showAlertDialog } from '../actions/common.action';
 
 // Languages
@@ -73,19 +73,28 @@ export function* addFriend(action: any) {
         }
 
         yield call(friendsService.createFriend, params);
+
+        // Show alert add success
         yield put(showAlertDialog({
             show: true,
             message: strings('ADD_FRIEND_SUCCESS'),
             confirmText: strings('OK'),
         }));
 
+        // Remove user from list friend
+        yield put(removeFriendAddSuccess(userID));
+
     } catch (e) {
+
         console.log(e);
+
+        // Show alert error
         yield put(showAlertDialog({
             show: true,
             message: strings('SOMETHING_WENT_WRONG'),
             confirmText: strings('OK'),
         }));
+
     }
 
 }
