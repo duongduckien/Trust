@@ -47,6 +47,14 @@ export class AddFriendsScreen extends Component<IProps, IState> {
 
     }
 
+    componentDidMount() {
+        // this.props.actions.common.showAlertDialog({
+        //     show: true,
+        //     message: strings('ADD_FRIEND_SUCCESS'),
+        //     confirmText: strings('OK'),
+        // });
+    }
+
     onChangeSearch(val: any) {
         this.setState({
             searchValue: val
@@ -64,7 +72,7 @@ export class AddFriendsScreen extends Component<IProps, IState> {
     }
 
     addFriend(id: number, key: string) {
-        this.props.actions.common.showAlert({
+        this.props.actions.common.showConfirmDialog({
             type: { name: 'addFriend', data: { id, key } },
             data: id,
             show: true,

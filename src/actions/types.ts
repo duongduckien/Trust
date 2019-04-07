@@ -1,6 +1,7 @@
 // Common
 export const SHOW_LOADING = 'SHOW_LOADING';
 export const SHOW_CONFIRM_DIALOG = 'SHOW_CONFIRM_DIALOG';
+export const SHOW_ALERT_DIALOG = 'SHOW_ALERT_DIALOG';
 export const LOGOUT = 'LOGOUT';
 export const CHANGE_ROOT_SCREEN = 'CHANGE_ROOT_SCREEN';
 

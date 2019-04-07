@@ -24,5 +24,8 @@
     "PLACEHOLDER_TYPE_MESSAGE": "Type a message...",
     "PLACEHOLDER_TYPE_SEARCH": "Type here...",
     "ADD_FRIEND": "Add Friend",
-    "CONFIRM_ADD_FRIEND": "Do you want add this friend?"
+    "CONFIRM_ADD_FRIEND": "Do you want add this friend?",
+    "ADD_FRIEND_SUCCESS": "Add friend successfully!",
+    "SOMETHING_WENT_WRONG": "Something went wrong!",
+    "OK": "Ok"
 }
