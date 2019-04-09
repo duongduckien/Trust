@@ -70,144 +70,43 @@ class FirebaseSDKService {
     }
 
     /**
-     * @param  {string} collection
-     * @param  {any} data
-     */
-    insert(collection: string, data: any): Promise<any> {
-        return new Promise((resolve, reject) => {
-            firebase.database().ref(collection).push(data, (err: any) => {
-                if (!err) {
-                    resolve();
-                } else {
-                    reject(err);
-                }
-            });
-        });
-    }
-
-    /**
-     * @param  {string} collection
-     * @param  {string} key
-     * @param  {any} data
-     */
-    updateWhereKey(collection: string, key: string, data: any): Promise<any> {
-        return new Promise((resolve, reject) => {
-            firebase.database().ref(collection).child(key).update(data, (err: any) => {
-                if (!err) {
-                    resolve();
-                } else {
-                    reject(err);
-                }
-            })
-        });
-    }
-
-    /**
-     * @param  {string} collection
-     * @param  {string} key
-     * @param  {any} data
-     */
-    insertWithCustomKey(collection: string, key: string, data: any): Promise<any> {
-        return new Promise((resolve, reject) => {
-            firebase.database().ref(collection).child(key).set(data, (err: any) => {
-                if (!err) {
-                    resolve();
-                } else {
-                    reject(err);
-                }
-            });
-        });
-    }
-
-    /**
-     * @param  {string} collection
-     * @param  {string} key
-     * @param  {any} data
-     * @returns Promise
-     */
-    setDataWhereChild(collection: string, key: string, data: any): Promise<any> {
-        return new Promise((resolve, reject) => {
-            firebase.database().ref(collection).child(key).set(data, (err: any) => {
-                if (!err) {
-                    resolve();
-                } else {
-                    reject(err);
-                }
-            });
-        });
-    }
-
-    /**
-     * @param  {string} collection
-     * @param  {string} key1
-     * @param  {string} key2
-     * @param  {any} data
-     * @returns Promise
-     */
-    setDataWhereMultiChilds(collection: string, child: string, subChild: string, data: any): Promise<any> {
-        return new Promise((resolve, reject) => {
-            firebase.database().ref(collection).child(child).child(subChild).set(data, (err: any) => {
-                if (!err) {
-                    resolve();
-                } else {
-                    reject(err);
-                }
-            });
-        });
-    }
-
-    /**
-     * @param  {string} collection
-     */
-    getUniqueId(collection: string): Promise<any> {
-        return new Promise((resolve, reject) => {
-            firebase.database().ref('lastId').child(collection).once('value', async (res: any) => {
-                if (res.val()) {
-
-                    const lastId = res.val();
-
-                    if (Number.isInteger(lastId) && lastId > 0) {
-
-                        const nextId = lastId + 1;
-
-                        try {
-                            await this.setWhereKey('lastId', collection, nextId);
-                            resolve(nextId);
-                        } catch (e) {
-                            reject(e);
-                        }
-
-                    } else {
-                        reject();
-                    }
-
-                } else {
-                    reject();
-                }
-            });
-        });
-    }
-
-    /**
-     * @param  {string} collection
-     * @param  {string} key
-     * @param  {any} value
-     */
-    setWhereKey(collection: string, key: string, value: any): Promise<any> {
-        return new Promise((resolve, reject) => {
-            firebase.database().ref(collection).child(key).set(value).then((res: any) => {
-                resolve(res);
-            }).catch((err: any) => {
-                reject(err);
-            });
-        });
-    }
-
-    /**
     |--------------------------------------------------
     | CREATE DATA
     |--------------------------------------------------
     */
+    /**
+     * @param  {string} collection
+     * @param  {any} data
+     * @returns Promise
+     */
+    insert(collection: string, data: any): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await firebase.database().ref(collection).push(data);
+                resolve();
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
+    /**
+     * @param  {string} collection
+     * @param  {string} key
+     * @param  {any} data
+     * @returns Promise
+     */
+    insertWithCustomKey(collection: string, key: string, data: any): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await firebase.database().ref(collection).child(key).set(data);
+                resolve();
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
     /**
      * @param  {any} userData
      * @returns Promise
@@ -405,6 +304,80 @@ class FirebaseSDKService {
 
     /**
     |--------------------------------------------------
+    | UPDATE DATA
+    |--------------------------------------------------
+    */
+    /**
+     * @param  {string} collection
+     * @param  {string} key
+     * @param  {any} data
+     * @returns Promise
+     */
+    updateWhereKey(collection: string, key: string, data: any): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await firebase.database().ref(collection).child(key).update(data);
+                resolve();
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
+    /**
+     * @param  {string} collection
+     * @param  {string} key
+     * @param  {any} data
+     * @returns Promise
+     */
+    setDataWhereChild(collection: string, key: string, data: any): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await firebase.database().ref(collection).child(key).set(data);
+                resolve();
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
+    /**
+     * @param  {string} collection
+     * @param  {string} child
+     * @param  {string} subChild
+     * @param  {any} data
+     * @returns Promise
+     */
+    setDataWhereMultiChilds(collection: string, child: string, subChild: string, data: any): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await firebase.database().ref(collection).child(child).child(subChild).set(data);
+                resolve();
+            } catch(e) {
+                reject(e);
+            }
+        });
+    }
+
+    /**
+     * @param  {string} collection
+     * @param  {string} key
+     * @param  {any} value
+     * @returns Promise
+     */
+    setWhereKey(collection: string, key: string, value: any): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await firebase.database().ref(collection).child(key).set(value);
+                resolve();
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
+    /**
+    |--------------------------------------------------
     | UTILITIES
     |--------------------------------------------------
     */
@@ -438,6 +411,39 @@ class FirebaseSDKService {
             }
         }
         return _.orderBy(result, 'createdAt', 'desc');
+    }
+
+    /**
+     * @param  {string} collection
+     * @returns Promise
+     */
+    getUniqueId(collection: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            firebase.database().ref('lastId').child(collection).once('value', async (res: any) => {
+                if (res.val()) {
+
+                    const lastId = res.val();
+
+                    if (Number.isInteger(lastId) && lastId > 0) {
+
+                        const nextId = lastId + 1;
+
+                        try {
+                            await this.setWhereKey('lastId', collection, nextId);
+                            resolve(nextId);
+                        } catch (e) {
+                            reject(e);
+                        }
+
+                    } else {
+                        reject();
+                    }
+
+                } else {
+                    reject();
+                }
+            });
+        });
     }
 
 }
