@@ -17,9 +17,14 @@ class FirebaseSDKService {
     }
 
     /**
-     * Function authentication
+    |--------------------------------------------------
+    | AUTHENTICATION
+    |--------------------------------------------------
+    */
+    /**
      * @param  {string} email
      * @param  {string} password
+     * @returns Promise
      */
     auth(email: string, password: string): Promise<any> {
         return new Promise((resolve, reject) => {
@@ -32,7 +37,7 @@ class FirebaseSDKService {
     }
 
     /**
-     * Function check logged
+     * @returns Promise
      */
     logged(): Promise<any> {
         return new Promise((resolve, reject) => {
@@ -47,21 +52,19 @@ class FirebaseSDKService {
     }
 
     /**
-     * Function sign out
+     * @returns Promise
      */
     signOut(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            firebase.auth().signOut().then(() => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await firebase.auth().signOut();
                 resolve();
-            }).catch(() => {
-                reject();
-            });
+            } catch (e) {
+                reject(e);
+            }
         });
     }
 
-    /**
-     * Function get current user
-     */
     getCurrentUser() {
         return firebase.auth().currentUser;
     }
