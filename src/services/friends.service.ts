@@ -5,7 +5,7 @@ class FriendsService {
     async searchFriends(text: string): Promise<any> {
         return new Promise(async (resolve, reject) => {
             try {
-                const result = await firebaseSDKService.searchString('users', 'email', text);
+                const result = await firebaseSDKService.searchString('users', 'fullName', text);
                 resolve(result);
             } catch (e) {
                 reject(e);

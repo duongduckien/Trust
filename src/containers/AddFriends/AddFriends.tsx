@@ -87,38 +87,42 @@ export class AddFriendsScreen extends Component<IProps, IState> {
     renderListFriends() {
         const listFriends = this.props.friends.listFriends;
         if (listFriends.length > 0) {
-            return listFriends.map((item: any, index: number) => {
-                return (
-                    <List>
-                        <View style={styleSheet.listItem} key={index}>
-                            <TouchableOpacity onPress={() => this.addFriend(item.userId, item.$key)}>
-                                <View style={styleSheet.listItem}>
-                                    <View style={styleSheet.itemLeft}>
-                                        <Image
-                                            style={styleSheet.itemAvatar}
-                                            source={(item.picture && item.picture.large) ? {uri: item.picture.large} : AvatarDefault()}
-                                        ></Image>
-                                    </View>
+            return (
+                <List>
+                    {
+                        listFriends.map((item: any, index: number) => {
+                            return (
+                                <View style={styleSheet.listItem} key={index}>
+                                    <TouchableOpacity onPress={() => this.addFriend(item.userId, item.$key)}>
+                                        <View style={styleSheet.listItem}>
+                                            <View style={styleSheet.itemLeft}>
+                                                <Image
+                                                    style={styleSheet.itemAvatar}
+                                                    source={(item.picture && item.picture.large) ? { uri: item.picture.large } : AvatarDefault()}
+                                                ></Image>
+                                            </View>
 
-                                    <View style={styleSheet.itemCenter}>
-                                        <Text style={styleSheet.nameContact}>
-                                            {helper.capitalizeFirstLetter(item.firstName)} {helper.capitalizeFirstLetter(item.lastName)}
-                                        </Text>
-                                    </View>
+                                            <View style={styleSheet.itemCenter}>
+                                                <Text style={styleSheet.nameContact}>
+                                                    {helper.capitalizeFirstLetter(item.firstName)} {helper.capitalizeFirstLetter(item.lastName)}
+                                                </Text>
+                                            </View>
 
-                                    <View style={styleSheet.itemRight}>
-                                        <Icon
-                                            name='plus'
-                                            type='font-awesome'
-                                            iconStyle={styleSheet.itemIcon}
-                                        />
-                                    </View>
+                                            <View style={styleSheet.itemRight}>
+                                                <Icon
+                                                    name='plus'
+                                                    type='font-awesome'
+                                                    iconStyle={styleSheet.itemIcon}
+                                                />
+                                            </View>
+                                        </View>
+                                    </TouchableOpacity>
                                 </View>
-                            </TouchableOpacity>
-                        </View>
-                    </List>
-                );
-            });
+                            );
+                        })
+                    }
+                </List>
+            );
         } else {
             return (
                 <View style={styleSheet.noDataView}>

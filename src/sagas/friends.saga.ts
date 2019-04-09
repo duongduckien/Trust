@@ -1,5 +1,4 @@
 import { put, call, fork, takeLatest, takeEvery } from 'redux-saga/effects';
-import { Actions } from 'react-native-router-flux';
 import _ from 'lodash';
 import * as types from '../actions/types';
 import { 
@@ -18,8 +17,6 @@ import helper from '../utilities/helper';
 import storage from '../utilities/storage';
 
 // Services
-import authService from '../services/auth.service';
-import userService from '../services/user.service';
 import friendsService from '../services/friends.service';
 
 // Interfaces
@@ -43,12 +40,14 @@ export function* searchFriends(action: any) {
 
             // Get list friends
             const friends = yield call(friendsService.getListFriends, currentUser.userId.toString());
-            const listFriends = friends[currentUser.userId.toString()];
 
-            if (result.length > 0) {
-                _.remove(result, (el: any) => {
-                    return (listFriends[el.$key]);
-                });
+            if (friends.length > 0) {
+                const listFriends = friends[currentUser.userId.toString()];
+                if (result.length > 0) {
+                    _.remove(result, (el: any) => {
+                        return (listFriends[el.$key]);
+                    });
+                }
             }
 
             yield put(getFriendsSuccess(result));
@@ -127,7 +126,7 @@ export function* watchAddFriend() {
     yield takeEvery(types.ADD_FRIEND, addFriend);
 }
 
-export function* getListFriendsAdded(action: any) {
+export function* getListFriendsAdded() {
 
     try {
 
