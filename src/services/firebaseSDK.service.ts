@@ -115,7 +115,7 @@ class FirebaseSDKService {
             });
         });
     }
-    
+
     /**
      * @param  {string} collection
      * @param  {string} key
@@ -201,77 +201,13 @@ class FirebaseSDKService {
     }
 
     /**
-     * @param  {string} collection
-     * @param  {string} param
-     * @param  {any} value
-     */
-    getWhere(collection: string, param: string, value: any): Promise<any> {
-        return new Promise((resolve, reject) => {
-            firebase.database().ref(collection).orderByChild(param).equalTo(value).once('value', (res: any) => {
-                if (res.val()) {
-                    resolve(this.convertData(res.val()));
-                } else {
-                    reject();
-                }
-            });
-        });
-    }
-
-    /**
-     * @param  {string} collection
-     */
-    get(collection: string): Promise<any> {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const res = await firebase.database().ref(collection).once('value');
-                if (res.val()) {
-                    resolve(this.convertData(res.val()));
-                } else {
-                    reject('Can not retrieve data.');
-                }
-            } catch (e) {
-                reject(e);
-            }
-        });
-    }
-
-    /**
-     * @param  {string} collection
-     * @param  {string} key
-     */
-     getWhereKey(collection: string, key: string): Promise<any> {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const result = await firebase.database().ref(collection).child(key).once('value');
-                if (result.val()) {
-                    resolve(result.val());
-                } else {
-                    reject('Can not retrieve data.');
-                }
-            } catch (e) {
-                reject(e);
-            }
-        });
-    }
-
-    /**
-     * @param  {string} collection
-     * @param  {string} customKey
-     */
-    getWhereCustomKey(collection: string, customKey: string): Promise<any> {
-        return new Promise((resolve, reject) => {
-            firebase.database().ref(collection).orderByChild(customKey).once('value', (res: any) => {
-                if (res.val()) {
-                    resolve(res.val());
-                } else {
-                    reject();
-                }
-            });
-        });
-    }
-
+    |--------------------------------------------------
+    | CREATE DATA
+    |--------------------------------------------------
+    */
     /**
      * @param  {any} userData
+     * @returns Promise
      */
     createUser(userData: any): Promise<any> {
         return new Promise(async (resolve, reject) => {
@@ -313,12 +249,11 @@ class FirebaseSDKService {
      * @param  {number} userId
      * @param  {number} guestId
      * @param  {any} msgData
+     * @returns Promise
      */
     createMessage(userId: number, guestId: number, msgData: any): Promise<any> {
         return new Promise((resolve, reject) => {
-
             if (helper.getKeyMessages(userId, guestId)) {
-
                 const keyOfMsg = helper.getKeyMessages(userId, guestId);
                 firebase.database().ref('messages').child(keyOfMsg).push(msgData, (err: any) => {
                     if (!err) {
@@ -327,57 +262,149 @@ class FirebaseSDKService {
                         reject(err);
                     }
                 });
-
             } else {
                 reject('Cannot create key of message.');
             }
+        });
+    }
 
+    /**
+    |--------------------------------------------------
+    | READ DATA
+    |--------------------------------------------------
+    */
+    /**
+     * @param  {string} collection
+     * @returns Promise
+     */
+    get(collection: string): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const res = await firebase.database().ref(collection).once('value');
+                if (res.val()) {
+                    resolve(helper.convertData(res.val()));
+                } else {
+                    resolve([]);
+                }
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
+    /**
+     * @param  {string} collection
+     * @param  {string} param
+     * @param  {any} value
+     * @returns Promise
+     */
+    getWhere(collection: string, param: string, value: any): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const res = await firebase.database().ref(collection).orderByChild(param).equalTo(value).once('value');
+                if (res.val()) {
+                    resolve(helper.convertData(res.val()));
+                } else {
+                    resolve([]);
+                }
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
+    /**
+     * @param  {string} collection
+     * @param  {string} key
+     * @returns Promise
+     */
+    getWhereKey(collection: string, key: string): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const result = await firebase.database().ref(collection).child(key).once('value');
+                if (result.val()) {
+                    resolve(result.val());
+                } else {
+                    resolve([]);
+                }
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
+    /**
+     * @param  {string} collection
+     * @param  {string} customKey
+     * @returns Promise
+     */
+    getWhereCustomKey(collection: string, customKey: string): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const res = await firebase.database().ref(collection).orderByChild(customKey).once('value');
+                if (res.val()) {
+                    resolve(res.val());
+                } else {
+                    resolve([]);
+                }
+            } catch (e) {
+                reject(e);
+            }
         });
     }
 
     /**
      * @param  {number} userId
      * @param  {number} guestId
+     * @param  {any} guestInfo
+     * @returns Promise
      */
     getMessages(userId: number, guestId: number, guestInfo: any): Promise<any> {
-        return new Promise((resolve, reject) => {
-
-            if (helper.getKeyMessages(userId, guestId)) {
-
-                const keyOfMsg = helper.getKeyMessages(userId, guestId);
-                firebase.database().ref('messages').child(keyOfMsg).once('value', res => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                if (helper.getKeyMessages(userId, guestId)) {
+                    const keyOfMsg = helper.getKeyMessages(userId, guestId);
+                    const res = await firebase.database().ref('messages').child(keyOfMsg).once('value');
                     if (res.val()) {
                         resolve(this.convertMessages(res.val(), guestInfo));
                     } else {
-                        reject();
+                        resolve([]);
                     }
-                });
-
-            } else {
-                reject('Cannot create key of message.');
+                } else {
+                    throw new Error('Cannot create key of message.');
+                }
+            } catch (e) {
+                reject(e);
             }
-
         });
     }
 
     /**
-     * Function search substring in value
      * @param  {string} collection
      * @param  {string} childName
      * @param  {string} text
+     * @returns Promise
      */
     searchString(collection: string, childName: string, text: string): Promise<any> {
-        return new Promise((resolve, reject) => {
-            firebase.database().ref(collection).orderByChild(childName).startAt(text).endAt(`${text}\uf8ff`).once('value', (res: any) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const res = await firebase.database().ref(collection).orderByChild(childName).startAt(text).endAt(`${text}\uf8ff`).once('value');
                 if (res.val()) {
-                    resolve(this.convertData(res.val()));
+                    resolve(helper.convertData(res.val()));
                 } else {
-                    reject();
+                    resolve([]);
                 }
-            });
+            } catch (e) {
+                reject(e);
+            }
         });
     }
 
+    /**
+    |--------------------------------------------------
+    | UTILITIES
+    |--------------------------------------------------
+    */
     /**
      * Function convert messages data
      * @param  {any} data
@@ -408,36 +435,6 @@ class FirebaseSDKService {
             }
         }
         return _.orderBy(result, 'createdAt', 'desc');
-    }
-
-    /**
-     * Function convert data to array before resolve
-     * @param  {any} data
-     */
-    convertData(data: any) {
-        const result = [];
-        if (Object.keys(data).length > 0) {
-            for (const key in data) {
-                if (data.hasOwnProperty(key)) {
-                    const obj = data[key];
-                    obj['$key'] = key;
-                    result.push(obj);
-                }
-            }
-        }
-        return result;
-    }
-
-    /**
-     * Function convert data to array before resolve (without key)
-     * @param  {any} data
-     * @param  {string} key
-     */
-    convertDataOfKey(data: any, key: string) {
-        const result = [];
-        data['$key'] = key;
-        result.push(data);
-        return result;
     }
 
 }

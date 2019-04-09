@@ -185,6 +185,18 @@ class Helper {
         return result;
     }
 
+    /**
+     * Function convert data to array before resolve (without key)
+     * @param  {any} data
+     * @param  {string} key
+     */
+    convertDataOfKey(data: any, key: string) {
+        const result = [];
+        data['$key'] = key;
+        result.push(data);
+        return result;
+    }
+
 }
 
 const helper = new Helper();
