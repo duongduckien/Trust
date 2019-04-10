@@ -73,29 +73,48 @@ export function* addFriend(action: any) {
 
     try {
 
+        console.log(action);
+        const currentTime = helper.getTime();
+
         const userStored = yield storage.getItem('user');
         const currentUser: ICurrentUser = JSON.parse(userStored);
         const userID = action.data.id;
         const keyUser = action.data.key;
 
+        // Create data for current user
         const friendData = yield call(friendsService.getFriendData, keyUser);
-
         const friendStore: IFriendData = {
             keyData: keyUser,
             userData: friendData,
             requestUser: currentUser.userId,
             accepted: 0,
-            timeRequest: helper.getTime(),
+            timeRequest: currentTime,
             timeAccepted: 0,
         }
-
-        const params = {
+        const friendParams = {
             child: currentUser.userId,
             subChild: keyUser,
             data: friendStore,
         }
 
-        yield call(friendsService.createFriend, params);
+        // Create data for friend
+        const currentUserData = yield call(friendsService.getFriendData, currentUser.$key);
+        const currentUserStore: IFriendData = {
+            keyData: currentUser.$key,
+            userData: currentUserData,
+            requestUser: currentUser.userId,
+            accepted: 0,
+            timeRequest: currentTime,
+            timeAccepted: 0,
+        }
+        const currentUserParams = {
+            child: friendData.userId,
+            subChild: currentUser.$key,
+            data: currentUserStore,
+        }
+
+        yield call(friendsService.createFriend, friendParams);
+        yield call(friendsService.createFriend, currentUserParams);
 
         // Show alert add success
         yield put(showAlertDialog({
