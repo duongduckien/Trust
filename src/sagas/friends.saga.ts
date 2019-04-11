@@ -156,13 +156,7 @@ export function* getListFriendsAdded() {
 
         // Get list friends
         const friends = yield call(friendsService.getListFriends, currentUser.userId.toString());
-
-        if (friends.length > 0) {
-            const listFriends = friends[currentUser.userId.toString()];
-            yield put(getListFriendsAddedSuccess(helper.convertData(listFriends)));
-        } else {
-            yield put(getListFriendsAddedSuccess(friends));
-        }    
+        yield put(getListFriendsAddedSuccess(friends));
 
     } catch (e) {
         console.log(e);

@@ -243,9 +243,9 @@ class FirebaseSDKService {
     getWhereCustomKey(collection: string, customKey: string): Promise<any> {
         return new Promise(async (resolve, reject) => {
             try {
-                const res = await firebase.database().ref(collection).orderByChild(customKey).once('value');
+                const res = await firebase.database().ref(collection).child(customKey).once('value');
                 if (res.val()) {
-                    resolve(res.val());
+                    resolve(helper.convertData(res.val()));
                 } else {
                     resolve([]);
                 }
