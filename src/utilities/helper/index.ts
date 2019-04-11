@@ -197,6 +197,18 @@ class Helper {
         return result;
     }
 
+    getSubKeys(data: any) {
+        const result = [];
+        if (Object.keys(data).length > 0) {
+            for (const key in data) {
+                if (data.hasOwnProperty(key)) {
+                    result.push(key);
+                }
+            }
+        }
+        return result;
+    }
+
 }
 
 const helper = new Helper();

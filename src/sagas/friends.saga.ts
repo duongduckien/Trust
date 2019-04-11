@@ -37,15 +37,15 @@ export function* searchFriends(action: any) {
 
             // Result of search data
             const result = yield call(friendsService.searchFriends, action.data);
+            console.log(result);
 
             // Get list friends
-            const friends = yield call(friendsService.getListFriends, currentUser.userId.toString());
+            const friends = yield call(friendsService.getListKeysFriends, currentUser.userId.toString());
 
             if (friends.length > 0) {
-                const listFriends = friends[currentUser.userId.toString()];
                 if (result.length > 0) {
                     _.remove(result, (el: any) => {
-                        return (listFriends[el.$key]);
+                        return (friends.indexOf(el.$key) !== -1);
                     });
                 }
             }

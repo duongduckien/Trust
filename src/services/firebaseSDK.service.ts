@@ -256,6 +256,26 @@ class FirebaseSDKService {
     }
 
     /**
+     * @param  {string} collection
+     * @param  {string} customKey
+     * @returns Promise
+     */
+    getSubKeyWhereCustomKey(collection: string, customKey: string): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const res = await firebase.database().ref(collection).child(customKey).once('value');
+                if (res.val()) {
+                    resolve(helper.getSubKeys(res.val()));
+                } else {
+                    resolve([]);
+                }
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
+    /**
      * @param  {number} userId
      * @param  {number} guestId
      * @param  {any} guestInfo

@@ -56,7 +56,7 @@ export class ContactScreen extends Component<IProps, IState> {
         const listFriendsAdded = this.props.friends.listFriendsAdded;
         console.log(listFriendsAdded);
         if (listFriendsAdded.length > 0) {
-            listFriendsAdded[0].accepted = 1;
+            // listFriendsAdded[0].accepted = 1;
             return listFriendsAdded.map((item: any, index: number) => {
                 return (
                     <View
