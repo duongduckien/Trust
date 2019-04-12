@@ -37,7 +37,6 @@ export function* searchFriends(action: any) {
 
             // Result of search data
             const result = yield call(friendsService.searchFriends, action.data);
-            console.log(result);
 
             // Get list friends
             const friends = yield call(friendsService.getListKeysFriends, currentUser.userId.toString());
@@ -170,10 +169,30 @@ export function* watchGetListFriendsAdded() {
     yield takeEvery(types.GET_LIST_FRIENDS_ADDED, getListFriendsAdded);
 }
 
+export function* acceptFriend(action: any) {
+
+    try {
+
+        console.log(action);
+        return true;
+
+    } catch (e) {
+        console.log(e);
+    } finally {
+
+    }
+
+}
+
+export function* watchAcceptFriend() {
+    yield takeEvery(types.ACCEPT_FRIEND, acceptFriend);
+}
+
 const friendsSaga = [
     fork(watchSearchFriends),
     fork(watchAddFriend),
     fork(watchGetListFriendsAdded),
+    fork(watchAcceptFriend),
 ];
 
 export default friendsSaga;

@@ -6,6 +6,7 @@ import {
     REMOVE_FRIEND_ADD_SUCCESS,
     GET_LIST_FRIENDS_ADDED,
     GET_LIST_FRIENDS_ADDED_SUCCESS,
+    ACCEPT_FRIEND,
 } from './types';
 
 export const searchFriends = (data: any) => ({
@@ -38,5 +39,10 @@ export const getListFriendsAdded = () => ({
 
 export const getListFriendsAddedSuccess = (data: any) => ({
     type: GET_LIST_FRIENDS_ADDED_SUCCESS,
+    data,
+});
+
+export const acceptFriend = (data: any) => ({
+    type: ACCEPT_FRIEND,
     data,
 });

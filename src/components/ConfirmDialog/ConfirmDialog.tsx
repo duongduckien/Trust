@@ -41,6 +41,10 @@ export class ConfirmDialog extends Component<Props, State> {
                 this.props.actions.friends.addFriend(type.data);
                 break;
             }
+            case 'acceptFriend': {
+                this.props.actions.friends.acceptFriend(type.data);
+                break;
+            }
             default: {
                 break;
             }

@@ -21,6 +21,9 @@ import config from '../../assets/data/config.json';
 import storage from '../../utilities/storage';
 import helper from '../../utilities/helper';
 
+// Interfaces
+import { ICurrentUser } from '../../interfaces/user.interface';
+
 interface IProps {
     friends: any;
     actions: {
@@ -30,13 +33,35 @@ interface IProps {
 }
 
 interface IState {
-
+    currentUser: any;
 }
 
 export class ContactScreen extends Component<IProps, IState> {
 
+    state = {
+        currentUser: {
+            $key: '',
+            email: '',
+            userId: 0,
+        }
+    }
+
     constructor(props: any) {
         super(props);
+    }
+
+    componentWillMount() {
+        this.getCurrentUser();
+    }
+
+    async getCurrentUser() {
+        try {
+            const userStored = await storage.getItem('user');
+            const currentUser: ICurrentUser = JSON.parse(userStored);
+            this.setState({ currentUser });
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     componentDidMount() {
@@ -52,6 +77,64 @@ export class ContactScreen extends Component<IProps, IState> {
         console.log('Video call', id);
     }
 
+    handlePress(data: any) {
+        if (data.accepted === 0) {
+            if (data.requestUser === this.state.currentUser.userId) {
+                this.props.actions.common.showAlertDialog({
+                    show: true,
+                    message: strings('WAITTING_ACCEPT'),
+                    confirmText: strings('OK'),
+                });
+            } else {
+                this.props.actions.common.showConfirmDialog({
+                    type: { name: 'acceptFriend', data },
+                    show: true,
+                    showProgress: false,
+                    title: strings('ACCEPT_FRIEND'),
+                    message: strings('CONFIRM_ACCEPT_FRIEND'),
+                    closeOnTouchOutside: true,
+                    closeOnHardwareBackPress: false,
+                    showCancelButton: true,
+                    showConfirmButton: true,
+                    cancelText: strings('CANCEL'),
+                    confirmText: strings('AGREE'),
+                });
+            }
+        } else {
+            this.goToChat(data.userData.userId);
+        }
+    }
+
+    renderRightIcon(data: any) {
+        if (data.accepted === 0) {
+            if (data.requestUser === this.state.currentUser.userId) {
+                return (
+                    <View style={styleSheet.itemRight}>
+                        <Icon
+                            name='share'
+                            type='font-awesome'
+                            iconStyle={styleSheet.itemIcon}
+                        />
+                    </View>
+                );
+            } else {
+                return (
+                    <View style={styleSheet.itemRight}>
+                        <Icon
+                            name='reply'
+                            type='font-awesome'
+                            iconStyle={styleSheet.itemIcon}
+                        />
+                    </View>
+                );
+            }
+        } else {
+            return (
+                <View style={styleSheet.itemRight}></View>
+            );
+        }
+    }
+
     renderListFriendsAdded() {
         const listFriendsAdded = this.props.friends.listFriendsAdded;
         console.log(listFriendsAdded);
@@ -60,12 +143,13 @@ export class ContactScreen extends Component<IProps, IState> {
             return listFriendsAdded.map((item: any, index: number) => {
                 return (
                     <View
-                        style={item.accepted === 0 ? styleSheet.listItemOpc : styleSheet.listItem}
+                        style={(item.accepted === 0 && item.requestUser === this.state.currentUser.userId)
+                            ? styleSheet.listItemOpc
+                            : styleSheet.listItem}
                         key={index}
                     >
                         <TouchableOpacity
-                            disabled={item.accepted === 0 ? true : false}
-                            onPress={() => this.goToChat(item.userData.userId)}>
+                            onPress={() => this.handlePress(item)}>
                             <View style={styleSheet.listItem}>
                                 <View style={styleSheet.itemLeft}>
                                     <Image
@@ -80,26 +164,9 @@ export class ContactScreen extends Component<IProps, IState> {
                                     </Text>
                                 </View>
 
-                                {item.accepted === 0 ?
-                                    <View style={styleSheet.itemRight}>
-                                        <Icon
-                                            name='share'
-                                            type='font-awesome'
-                                            iconStyle={styleSheet.itemIcon}
-                                        />
-                                    </View> : <View style={styleSheet.itemRight}></View>}
+                                {this.renderRightIcon(item)}
                             </View>
                         </TouchableOpacity>
-
-                        {/* <TouchableOpacity onPress={() => this.videoCall(item.userData.userId)}>
-                            <View style={styleSheet.itemRight}>
-                                <Icon
-                                    name='video-camera'
-                                    type='font-awesome'
-                                    iconStyle={styleSheet.itemIcon}
-                                />
-                            </View>
-                        </TouchableOpacity> */}
                     </View>
                 );
             });
