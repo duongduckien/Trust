@@ -19,7 +19,7 @@ class Validation {
                     message: strings('EMAIL_REQUIRED'),
                 },
                 format: {
-                    pattern: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
+                    pattern: /^[a-zA-Z0-9\.]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
                     message: strings('EMAIL_FORMAT'),
                 }
             },
