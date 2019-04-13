@@ -71,6 +71,17 @@ class FriendsService {
         });
     }
 
+    async updateFriendData(data: any): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await firebaseSDKService.updateDataWhereMultiChilds('friends', data.child, data.subChild, data.value);
+                resolve();
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
 }
 
 const friendsService = new FriendsService();

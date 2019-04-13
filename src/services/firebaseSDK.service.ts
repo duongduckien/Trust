@@ -363,6 +363,23 @@ class FirebaseSDKService {
 
     /**
      * @param  {string} collection
+     * @param  {string} key
+     * @param  {any} data
+     * @returns Promise
+     */
+    updateDataWhereChild(collection: string, key: string, data: any): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await firebase.database().ref(collection).child(key).update(data);
+                resolve();
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
+    /**
+     * @param  {string} collection
      * @param  {string} child
      * @param  {string} subChild
      * @param  {any} data
@@ -372,6 +389,24 @@ class FirebaseSDKService {
         return new Promise(async (resolve, reject) => {
             try {
                 await firebase.database().ref(collection).child(child).child(subChild).set(data);
+                resolve();
+            } catch(e) {
+                reject(e);
+            }
+        });
+    }
+    
+    /**
+     * @param  {string} collection
+     * @param  {string} child
+     * @param  {string} subChild
+     * @param  {any} data
+     * @returns Promise
+     */
+    updateDataWhereMultiChilds(collection: string, child: string, subChild: string, data: any): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await firebase.database().ref(collection).child(child).child(subChild).update(data);
                 resolve();
             } catch(e) {
                 reject(e);

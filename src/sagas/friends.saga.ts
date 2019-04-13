@@ -6,6 +6,7 @@ import {
     clearSearchFriends,
     removeFriendAddSuccess,
     getListFriendsAddedSuccess,
+    acceptFriendSuccess,
 } from '../actions/friends.action';
 import { showLoading, showAlertDialog } from '../actions/common.action';
 
@@ -20,8 +21,10 @@ import storage from '../utilities/storage';
 import friendsService from '../services/friends.service';
 
 // Interfaces
-import { IFriendData } from '../interfaces/friend.interface';
-import { ICurrentUser } from '../interfaces/user.interface';
+import { 
+    IFriendData,
+    IFriendDataUpdateStore,
+} from '../interfaces/friend.interface';
 
 export function* searchFriends(action: any) {
 
@@ -32,8 +35,7 @@ export function* searchFriends(action: any) {
         if (action.data.trim() !== '') {
 
             // Get current user
-            const userStored = yield storage.getItem('user');
-            const currentUser: ICurrentUser = JSON.parse(userStored);
+            const currentUser = yield helper.getCurrentUser();
 
             // Result of search data
             const result = yield call(friendsService.searchFriends, action.data);
@@ -75,8 +77,7 @@ export function* addFriend(action: any) {
         console.log(action);
         const currentTime = helper.getTime();
 
-        const userStored = yield storage.getItem('user');
-        const currentUser: ICurrentUser = JSON.parse(userStored);
+        const currentUser = yield helper.getCurrentUser();
         const userID = action.data.id;
         const keyUser = action.data.key;
 
@@ -150,8 +151,7 @@ export function* getListFriendsAdded() {
 
         yield put(showLoading(true));
 
-        const userStored = yield storage.getItem('user');
-        const currentUser: ICurrentUser = JSON.parse(userStored);
+        const currentUser = yield helper.getCurrentUser();
 
         // Get list friends
         const friends = yield call(friendsService.getListFriends, currentUser.userId.toString());
@@ -173,12 +173,56 @@ export function* acceptFriend(action: any) {
 
     try {
 
-        console.log(action);
-        return true;
+        const currentTime = helper.getTime();
+        const currentUser = yield helper.getCurrentUser();
+        
+        // Update for current user
+        const dataOfCurrentUser = {
+            child: currentUser.userId,
+            subChild: action.data.$key,
+            value: {
+                accepted: 1,
+                timeAccepted: currentTime,
+            },
+        }
+        yield call(friendsService.updateFriendData, dataOfCurrentUser);
+
+        // Update for friend
+        const dataOfFriend = {
+            child: action.data.requestUser,
+            subChild: currentUser.$key,
+            value: {
+                accepted: 1,
+                timeAccepted: currentTime,
+            },
+        }
+        yield call(friendsService.updateFriendData, dataOfFriend);
+
+        // Update in store
+        const updateData: IFriendDataUpdateStore = {
+            key: action.data.$key,
+            accepted: 1,
+            timeAccepted: currentTime,
+        }
+        yield put(acceptFriendSuccess(updateData));
+
+        // Show alert add success
+        yield put(showAlertDialog({
+            show: true,
+            message: strings('ACCEPT_FRIEND_SUCCESS'),
+            confirmText: strings('OK'),
+        }));
 
     } catch (e) {
+
         console.log(e);
-    } finally {
+
+        // Show alert error
+        yield put(showAlertDialog({
+            show: true,
+            message: strings('SOMETHING_WENT_WRONG'),
+            confirmText: strings('OK'),
+        }));
 
     }
 

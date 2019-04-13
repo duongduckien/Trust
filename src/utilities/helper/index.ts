@@ -16,6 +16,12 @@ import { dimensions } from '../../styles';
 // Styles
 import { colors } from '../../styles';
 
+// Utilities
+import storage from '../storage';
+
+// Interfaces
+import { ICurrentUser } from '../../interfaces/user.interface';
+
 class Helper {
 
     isIOS() {
@@ -196,7 +202,11 @@ class Helper {
         result.push(data);
         return result;
     }
-
+    
+    /**
+     * Function get array of sub keys
+     * @param  {any} data
+     */
     getSubKeys(data: any) {
         const result = [];
         if (Object.keys(data).length > 0) {
@@ -207,6 +217,22 @@ class Helper {
             }
         }
         return result;
+    }
+    
+    /**
+     * Function get data of current user
+     * @returns Promise
+     */
+    getCurrentUser(): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const userStored = await storage.getItem('user');
+                const currentUser: ICurrentUser = JSON.parse(userStored);
+                resolve(currentUser);
+            } catch (e) {
+                reject(e);
+            }
+        });
     }
 
 }

@@ -31,5 +31,6 @@
     "NO_DATA_FOUND": "No data found.",
     "WAITTING_ACCEPT": "Waitting accept.",
     "ACCEPT_FRIEND": "Accept friend",
-    "CONFIRM_ACCEPT_FRIEND": "Do you want accept this friend?"
+    "CONFIRM_ACCEPT_FRIEND": "Do you want accept this friend?",
+    "ACCEPT_FRIEND_SUCCESS": "Accept friend successfully!"
 }
