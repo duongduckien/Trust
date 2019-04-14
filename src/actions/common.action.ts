@@ -3,6 +3,8 @@ import {
     SHOW_CONFIRM_DIALOG,
     SHOW_ALERT_DIALOG,
     CHANGE_ROOT_SCREEN,
+    GET_CURRENT_USER,
+    GET_CURRENT_USER_SUCCESS,
 } from './types';
 
 export const showLoading = (data: boolean) => ({
@@ -22,5 +24,14 @@ export const showAlertDialog = (data: any) => ({
 
 export const changeRootScreen = (data: string) => ({
     type: CHANGE_ROOT_SCREEN,
+    data,
+});
+
+export const getCurrentUser = () => ({
+    type: GET_CURRENT_USER,
+});
+
+export const getCurrentUserSuccess = (data: any) => ({
+    type: GET_CURRENT_USER_SUCCESS,
     data,
 });

@@ -26,13 +26,32 @@ interface Props {
 }
 
 interface State {
-
+    currentUserInfo: any;
+    avatarUser: string;
 }
 
 export class SideMenu extends Component<Props, State> {
 
+    state = {
+        currentUserInfo: {},
+        avatarUser: '',
+    }
+
     constructor(props: any) {
         super(props);
+    }
+
+    componentDidMount() {
+
+    }
+
+    componentWillReceiveProps(nextProps: any) {
+        if (nextProps.common.currentUser.$key) {
+            this.setState({
+                currentUserInfo: nextProps.common.currentUser,
+                avatarUser: nextProps.common.currentUser.picture.large,
+            });
+        }
     }
 
     logout() {
@@ -88,7 +107,7 @@ export class SideMenu extends Component<Props, State> {
                 <View style={styleSheet.avatarView}>
                     <Image
                         style={styleSheet.avatar}
-                        source={AvatarDefault()}
+                        source={this.state.avatarUser !== '' ? { uri: this.state.avatarUser } : AvatarDefault()}
                     />
                 </View>
 

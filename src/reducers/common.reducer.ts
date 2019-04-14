@@ -5,6 +5,7 @@ export interface ICommonState {
     showConfirmDialog: any;
     showAlertDialog: any;
     rootScreen: string;
+    currentUser: any;
 }
 
 export const COMMON_INITAL_STATE: ICommonState = {
@@ -12,6 +13,7 @@ export const COMMON_INITAL_STATE: ICommonState = {
     showConfirmDialog: {},
     showAlertDialog: {},
     rootScreen: 'ContactScreen',
+    currentUser: {},
 };
 
 export function commonReducer(state = COMMON_INITAL_STATE, action: any): ICommonState {
@@ -27,6 +29,9 @@ export function commonReducer(state = COMMON_INITAL_STATE, action: any): ICommon
         }
         case types.CHANGE_ROOT_SCREEN: {
             return { ...state, ...{ rootScreen: action.data } };
+        }
+        case types.GET_CURRENT_USER_SUCCESS: {
+            return { ...state, ...{ currentUser: action.data } };
         }
         default: {
             return state;

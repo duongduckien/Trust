@@ -11,7 +11,9 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-
+        actions: {
+            common: bindActionCreators(commonActions, dispatch),
+        }
     };
 };
 

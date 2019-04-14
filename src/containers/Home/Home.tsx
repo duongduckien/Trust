@@ -28,6 +28,9 @@ import userService from '../../services/user.service';
 
 interface IProps {
     common: any;
+    actions: {
+        common: any;
+    };
 }
 
 interface IState {
@@ -55,6 +58,10 @@ export class HomeScreen extends Component<IProps, IState> {
             swapWidthAndHeight: true,
             channelName: 'channelTest'
         };
+    }
+
+    componentWillMount() {
+        this.props.actions.common.getCurrentUser();
     }
 
     componentDidMount() {
