@@ -26,9 +26,11 @@ import { ICurrentUser } from '../../interfaces/user.interface';
 
 interface IProps {
     friends: any;
+    paramsScene: any;
     actions: {
         common: any;
         friends: any;
+        paramsScene: any;
     }
 }
 
@@ -69,8 +71,9 @@ export class ContactScreen extends Component<IProps, IState> {
     }
 
     goToChat(id: string) {
-        console.log('Chat', id);
-        // Actions.chat({ userId: id });
+        Actions.chat();
+        this.props.paramsScene.chat.guestId = id;
+        this.props.actions.paramsScene.updateParamsChatScene(this.props.paramsScene.chat);
     }
 
     videoCall(id: string) {
@@ -137,7 +140,7 @@ export class ContactScreen extends Component<IProps, IState> {
 
     renderListFriendsAdded() {
         const listFriendsAdded = this.props.friends.listFriendsAdded;
-        console.log(listFriendsAdded);
+        // console.log(listFriendsAdded);
         if (listFriendsAdded.length > 0) {
             // listFriendsAdded[0].accepted = 1;
             return listFriendsAdded.map((item: any, index: number) => {

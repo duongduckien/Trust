@@ -3,8 +3,9 @@ import { Text, View } from 'react-native';
 import { Content, Container } from 'native-base';
 import { Avatar } from 'react-native-elements';
 import { GiftedChat } from 'react-native-gifted-chat';
-import firebase from 'firebase';
+import firebase from 'react-native-firebase';
 import _ from 'lodash';
+import { Actions } from 'react-native-router-flux';
 
 // Components
 import { AvatarDemo2 } from '../../components/Images/Images';
@@ -24,6 +25,7 @@ import helper from '../../utilities/helper';
 
 // Interfaces
 import { IMessage, IMessageGiftedChat } from '../../interfaces/chat.interface';
+import { ICurrentUser } from '../../interfaces/user.interface';
 
 // Services
 import apiService from '../../services/api';
@@ -33,11 +35,13 @@ interface IProps {
     actions: {
         common: any;
     };
+    paramsScene: any;
 }
 
 interface IState {
     messages: any;
     guestInfo: any;
+    currentUser: ICurrentUser;
 }
 
 export class ChatScreen extends Component<IProps, IState> {
@@ -45,6 +49,11 @@ export class ChatScreen extends Component<IProps, IState> {
     state = {
         messages: [],
         guestInfo: {},
+        currentUser: {
+            $key: '',
+            email: '',
+            userId: 0,
+        },
     }
 
     constructor(props: any) {
@@ -52,21 +61,38 @@ export class ChatScreen extends Component<IProps, IState> {
     }
 
     componentWillMount() {
-        this.getMessages();
+        this.getCurrentUser();
     }
 
-    async getMessages() {
+    async getCurrentUser() {
         try {
-            const guest = await userService.getUserInfoByID(3);
+            const currentUser: ICurrentUser = await helper.getCurrentUser();
+            this.setState({ currentUser });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    componentDidMount() {
+        this.getMessages(this.props.paramsScene.chat.guestId);
+    }
+
+    componentWillReceiveProps(nextProps: any) {
+        // console.log(nextProps);
+    }
+
+    async getMessages(guestId: number) {
+        try {
+            const guest = await userService.getUserInfoByID(guestId);
             if (!Array.isArray(guest) || guest.length < 0) {
                 throw new Error('Cannot get the information of guest.');
             }
-            const msg = await apiService.getMessages(2, 3, guest[0]);
+            const msg = await apiService.getMessages(this.state.currentUser.userId, guestId, guest[0]);
             this.setState({
                 messages: msg,
-                guestInfo: guest,
+                guestInfo: guest[0],
             }, () => {
-                this.handleOnNewMsg(2, 3, msg, guest[0]);
+                this.handleOnNewMsg(this.state.currentUser.userId, guestId, msg, guest[0]);
             });
         } catch (e) {
             console.log(e);
@@ -107,17 +133,13 @@ export class ChatScreen extends Component<IProps, IState> {
                     message: messages[0]['text'],
                     userId: messages[0]['user']['_id'],
                 }
-                await apiService.createMessage(2, 3, msgData);
+                await apiService.createMessage(this.state.currentUser.userId, this.props.paramsScene.chat.guestId, msgData);
 
             } catch (e) {
                 console.log(e);
             }
 
         });
-    }
-
-    componentDidMount() {
-        
     }
 
     handleLoadEarlier() {
@@ -133,7 +155,7 @@ export class ChatScreen extends Component<IProps, IState> {
                 loadEarlier={true}
                 onLoadEarlier={() => this.handleLoadEarlier()}
                 user={{
-                    _id: 2,
+                    _id: this.state.currentUser.userId,
                 }}
             />
         );
