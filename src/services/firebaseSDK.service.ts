@@ -450,7 +450,7 @@ class FirebaseSDKService {
                     const userSender: IUserGiftedChat = {
                         _id: data[key]['userId'],
                         name: `${guestInfo['firstName']} ${guestInfo['lastName']}`,
-                        avatar: guestInfo['avatar'],
+                        avatar: guestInfo['picture']['large'],
                     }
 
                     const obj: IMessageGiftedChat = {

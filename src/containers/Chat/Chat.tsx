@@ -111,7 +111,7 @@ export class ChatScreen extends Component<IProps, IState> {
                     user: {
                         _id: guestInfo['userId'],
                         name: `${guestInfo['firstName']} ${guestInfo['lastName']}`,
-                        avatar: guestInfo['avatar'],
+                        avatar: guestInfo['picture']['large'],
                     }
                 }];
                 this.setState(previousState => ({

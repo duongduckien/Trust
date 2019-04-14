@@ -42,10 +42,10 @@ export class LoginScreen extends Component<IProps, IState> {
     loginEmail(params: any) {
 
         if (config['env'] === 'dev') {
-            // params.email = 'test1@gmail.com',
-            // params.password = '123456';
-            params.email = 'andrew.williamson@example.com';
+            params.email = 'test1@gmail.com',
             params.password = '123456';
+            // params.email = 'andrew.williamson@example.com';
+            // params.password = '123456';
         }
 
         const rules = validation.loginValidations;
