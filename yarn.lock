@@ -6281,6 +6281,11 @@ react-native-loading-spinner-overlay@^1.0.1:
   dependencies:
     prop-types "^15.6.2"
 
+react-native-maps@^0.24.0:
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.24.0.tgz#6627942e9357768c96ddd22bf66d7e88084d19b0"
+  integrity sha512-wfDdCMA09Xx8zHKD7+kzWfp7rQPCrYb2j4TWgCAjnFIhk9WZxqAKZSQF5olLBVF+Fhl7mTRoij8GTUOX3inoIg==
+
 react-native-parsed-text@^0.0.20:
   version "0.0.20"
   resolved "https://registry.yarnpkg.com/react-native-parsed-text/-/react-native-parsed-text-0.0.20.tgz#7bd35fec88c3ca0eb0e8250a98e24092b4ee7fef"

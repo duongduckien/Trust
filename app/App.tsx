@@ -36,6 +36,7 @@ import { mainStyles } from '../src/styles';
 
 // Services
 import authService from '../src/services/auth.service';
+import firebaseSDKService from '../src/services/firebaseSDK.service';
 
 // Create store
 const sagaMiddleware = createSagaMiddleware();
@@ -71,7 +72,20 @@ export default class App extends Component<IProps, IState> {
     }
 
     componentDidMount() {
+        this.checkPermission();
+    }
 
+    async checkPermission() {
+        try {
+            const enabled = await firebaseSDKService.getPermissionMessage();
+            if (enabled) {
+                await firebaseSDKService.getTokenMessage();
+            } else {
+                await firebaseSDKService.requestMessagePermission();
+            }
+        } catch (e) {
+            console.log(e);
+        }        
     }
 
     renderMenuButton(key: string) {
@@ -153,7 +167,7 @@ export default class App extends Component<IProps, IState> {
                 />
 
                 <ConfirmDialog />
-                
+
                 <AlertDialog />
             </Provider >
         );

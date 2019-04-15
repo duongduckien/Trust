@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 // Utilities
 import helper from '../utilities/helper';
+import storage from '../utilities/storage';
 
 // Config
 import config from '../assets/data/config.json';
@@ -425,6 +426,50 @@ class FirebaseSDKService {
             try {
                 await firebase.database().ref(collection).child(key).set(value);
                 resolve();
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
+    /**
+    |--------------------------------------------------
+    | PUSH NOTIFICATION
+    |--------------------------------------------------
+    */
+    getPermissionMessage(): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const enabled = await firebase.messaging().hasPermission();
+                resolve(enabled);
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
+    getTokenMessage(): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                let fcmToken = await storage.getItem('fcmToken');
+                if (!fcmToken) {
+                    fcmToken = await firebase.messaging().getToken();
+                    if (fcmToken) {
+                        await storage.setItem('fcmToken', fcmToken);
+                    }
+                }
+                resolve(fcmToken);
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
+    requestMessagePermission(): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await firebase.messaging().requestPermission();
+                await this.getTokenMessage();
             } catch (e) {
                 reject(e);
             }

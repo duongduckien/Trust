@@ -9,6 +9,7 @@ target 'Trust' do
   pod 'Firebase/Core', '~> 5.15.0'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'Firebase/Messaging'
 
   pod 'react-native-agora', :path => '../node_modules/react-native-agora'
   pod 'React', :path => '../node_modules/react-native'
